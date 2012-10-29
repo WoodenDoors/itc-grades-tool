@@ -61,6 +61,8 @@ class page {
             
         $main_tpl->fillin("NAVIGATION", '<ul>'.$nav_entry->get_template().'</ul>');    
         $this->template->fillin("MAINCONTENT", $main_tpl->get_template());
+        
+        $this->template->fillin("FOOTER", "Ein GDI2 Projekt");
     }
     
     function set_body_content($value)

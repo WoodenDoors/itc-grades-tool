@@ -1,15 +1,13 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Die Klasse page handhabt das ausgeben und modifizieren einer Seite
  *
  * @author Marius Rüter
  */
+require 'stringparser.class.php';
+require 'stringparser_bbcode.class.php';
+require 'template.class.php';
+
 class page {
     var $template;
     

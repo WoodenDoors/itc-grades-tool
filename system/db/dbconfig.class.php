@@ -10,7 +10,7 @@ class dbconfig {
     public $password;
     public $database;
 	
-    function __construct($hostname, $username, $password, $database) {
+    function __construct($hostname="localhost", $username="useritc", $password="itc2012", $database="ITC") {
         $this->hostname = $hostname;
         $this->username = $username;
         $this->password = $password;

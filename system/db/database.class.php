@@ -19,6 +19,7 @@ class database {
     public function openConnection() {
 	try {
             $this->connection = mysqli_connect($this->config->hostname, $this->config->username, $this->config->password);
+            $this->connection->set_charset("utf8");
             $this->db = mysqli_select_db($this->connection, $this->config->database);
 	} catch(exception $e){
             return $e;
@@ -49,15 +50,14 @@ class database {
     
     /* addslashes und mysqli_real_escape_string */
     public function ecapeString($string) {
-        return mysqli_real_escape_string($this->connection, addslashes($string));
-
+        return mysqli_real_escape_string($this->connection, addslashes($string) );
     }
     
     /* DB-Query */
     public function query($query) {
         try {
             $this->openConnection();
-            return mysqli_query($this->connection, $this->ecapeString($query));
+            return mysqli_query( $this->connection, $this->ecapeString($query) );
             $this->closeConnection();
             
         } catch (exception $e) {
@@ -68,8 +68,8 @@ class database {
 
     /* Prüft ob Reihen überhaupt vorhanden */
     public function hasRows($result) {
-        try {
-            if (mysqli_num_rows($result) > 0) {
+        try { 
+            if( mysqli_num_rows($result) > 0 ) {
                 return true;
             } else {
                 return false;

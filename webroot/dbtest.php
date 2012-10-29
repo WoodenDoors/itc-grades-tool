@@ -2,7 +2,7 @@
 
 require_once('../system/db/database.class.php');
 
-$config = new dbconfig("localhost", "useritc", "itc2012", "ITC");
+$config = new dbconfig();
 $db = new database($config);
 
 $db->openConnection();
@@ -17,8 +17,8 @@ $sql = $db->query("SELECT * FROM `itc-grades-tool_users`");
 echo "<br/>Es gibt " . ($db->hasRows($sql) ? "" : "keine") ." Reihen.";
 echo "<br/>Es gibt " . $db->countRows($sql) ." Reihe(n).";
 
+// Userdata ausgeben
 $result = $db->fetchAssoc($sql);
-
 echo "<pre>";
 print_r($result);
 echo "</pre>";

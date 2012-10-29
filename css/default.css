@@ -2,13 +2,32 @@
     Document   : default
     Created on : 26.10.2012, 14:02:45
     Author     : mwegmann
-    Description:
-        Purpose of the stylesheet follows.
+    Description: default stylesheet
 */
+
+/* reset & global styles */
+html, body, div, object, iframe, fieldset { 
+	margin: 0; 
+	padding: 0; 
+	border: 0;
+}
+header, footer, nav, section, article, hgroup, figure {
+	display: block;	
+}
 
 body {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300; 
+   font-weight: 300;
+   background: #fff;
+   color: #000;
+}
+
+a {
+    color: #e88900;
+    text-decoration: none;
+}
+a:hover, a:focus {
+    color: #fada5b;
 }
 
 /* header-strip */
@@ -20,14 +39,18 @@ header {
     padding-bottom: 20px;
 }
 header h1 { 
-    margin: 15px 0 0 20px; 
-    background: url('img/logo.png'); 
+    margin: 0 0 0 20px; 
+    width: 230px;
+    height: 60px;
+    font-size: 0;
+    background: url('../img/logo.png'); 
 }
 header section#user-control { 
     float: right; 
     margin: 20px 20px 0 0; 
     padding: 5px;
     background: #eee;
+    border-radius: 5px;
 }
 header section#user-control span.username { 
     font-weight: bold; 
@@ -39,11 +62,10 @@ section#main {
     margin: 80px 50px 50px 50px; 
     min-width: 560px; 
 }
-
 section#main nav { 
-    height: 25px;  
+    height: 25px; 
+    margin-bottom: -1px;  
 }
-
 section#main nav ul { 
     display: inline;
     padding: 0; 
@@ -51,7 +73,6 @@ section#main nav ul {
     list-style: none; 
     background-color: #F9F9F9;
 }
-
 section#main nav ul li { 
     display: inline;
     height: 25px;
@@ -59,32 +80,34 @@ section#main nav ul li {
     margin: 0 5px 0 0;
     border: 1px solid gainsboro;
     border-bottom-color: #F4F4F4;
+    border-top-right-radius: 10px;
 }
 
 section#main nav ul li:hover { 
     background-color: #F4F4F4; 
     border-bottom: 1px solid #F4F4F4; 
 }
-
 section#main nav ul li a:link,
 section#main nav ul li a:visited {
     height: 100%;
     display: inline-block;
     color: #000;
-    text-decoration: none;
 }
-
 section#main nav ul li a:hover { 
     color: #333; 
 }
-
 section#main nav ul li.active { 
     background-color: #F4F4F4; 
 }
 
+
 section#main article#content { 
     background-color: #F4F4F4;
-    padding: 5px;
+    padding: 10px;
+    border-color: gainsboro;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    border: 1px solid gainsboro;
 }
 
 /* footer */

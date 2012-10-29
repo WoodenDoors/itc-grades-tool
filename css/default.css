@@ -29,12 +29,21 @@ header section#user-control {
     padding: 5px;
     background: #eee;
 }
-header section#user-control span.username { font-weight: bold; }
+header section#user-control span.username { 
+    font-weight: bold; 
+}
 
 
 /* main */
-section#main { margin: 80px 50px 50px 50px; min-width: 560px; }
-section#main nav { height: 25px;  }
+section#main { 
+    margin: 80px 50px 50px 50px; 
+    min-width: 560px; 
+}
+
+section#main nav { 
+    height: 25px;  
+}
+
 section#main nav ul { 
     display: inline;
     padding: 0; 
@@ -42,6 +51,7 @@ section#main nav ul {
     list-style: none; 
     background-color: #F9F9F9;
 }
+
 section#main nav ul li { 
     display: inline;
     height: 25px;
@@ -51,7 +61,11 @@ section#main nav ul li {
     border-bottom-color: #F4F4F4;
 }
 
-section#main nav ul li:hover { background-color: #F4F4F4; border-bottom: 1px solid #F4F4F4; }
+section#main nav ul li:hover { 
+    background-color: #F4F4F4; 
+    border-bottom: 1px solid #F4F4F4; 
+}
+
 section#main nav ul li a:link,
 section#main nav ul li a:visited {
     height: 100%;
@@ -59,9 +73,14 @@ section#main nav ul li a:visited {
     color: #000;
     text-decoration: none;
 }
-section#main nav ul li a:hover { color: #333; }
-section#main nav ul li.active { background-color: #F4F4F4; }
 
+section#main nav ul li a:hover { 
+    color: #333; 
+}
+
+section#main nav ul li.active { 
+    background-color: #F4F4F4; 
+}
 
 section#main article#content { 
     background-color: #F4F4F4;

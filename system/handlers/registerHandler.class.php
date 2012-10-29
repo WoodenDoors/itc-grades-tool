@@ -1,10 +1,10 @@
 <?php
 /**
- * Description of registerHandler
+ * Handler register.php
  *
  * @author mwegmann
  */
-require_once('../database.class.php');
+require_once('../system/db/database.class.php');
 
 class registerHandler {
     private $db;
@@ -21,7 +21,7 @@ class registerHandler {
         $this->email = $email;
         $this->pass = $pass;
         
-        $config = new config("localhost", "root", "", "itc", "");
+        $config = new dbconfig("localhost", "root", "", "itc", "");
         $this->db = new database($config);
         $this->db->openConnection();
     }
@@ -30,7 +30,7 @@ class registerHandler {
         $this->db->closeConnection();
     }
     
-    function validateInput() {
+    public function validateInput() {
         if($this->username != "" ||
            $this->vorname != "" || 
            $this->nachname != "" ||
@@ -43,7 +43,7 @@ class registerHandler {
     }
     
     /* Einfacher Test */
-    function testInput() {
+    public function testInput() {
         return $this->username ." - ".
             $this->vorname." - ".
             $this->nachname." - ".

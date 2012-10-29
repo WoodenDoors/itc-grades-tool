@@ -1,7 +1,8 @@
 <?php
-require_once('../system/handlers/database.class.php');
 
-$config = new config("localhost", "root", "", "itc", "");
+require_once('../system/db/database.class.php');
+
+$config = new dbconfig("localhost", "useritc", "itc2012", "ITC");
 $db = new database($config);
 
 $db->openConnection();

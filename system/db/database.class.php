@@ -11,8 +11,8 @@ class database {
     private $connection;
     private $db;
     
-    function __construct($dbconfig) {
-        $this->dbconfig = $dbconfig;
+    function __construct($config) {
+        $this->config = $config;
     }
     
     /* Mit DB verbinden */

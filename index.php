@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<?php 
+require 'system/system.php';
+
+$page = new page();
+$page->setup_page();
+$page->set_body_content("test");
+echo $page->get_template();
+
+
+?>
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,4 +51,4 @@
             Ein GDI2 Projekt
         </footer>       
     </body>
-</html>
+</html> -->

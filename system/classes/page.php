@@ -70,7 +70,7 @@ class page {
         $this->template->fillin("CONTENT", $value);
     }
     
-    function get_template()
+    function get_page()
     {
         return $this->template->get_template();
     }

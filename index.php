@@ -14,7 +14,7 @@ $page->set_body_content('<p>
                 <p>
                 Aliquam egestas rutrum neque, sed dapibus nisi blandit ac. Fusce at nulla nulla. Nulla facilisi. Aliquam mattis malesuada augue, nec commodo nulla cursus porttitor. Nulla vel nisi purus, id dictum quam. Proin sit amet elit a nunc venenatis commodo nec in justo. Aenean nibh purus, pellentesque nec fringilla sit amet, luctus ut felis. Nullam accumsan felis ut elit feugiat sit amet pretium justo congue.
                 </p>');
-echo $page->get_template();
+echo $page->get_page();
 
 
 ?>

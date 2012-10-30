@@ -19,31 +19,37 @@ if(isset($_POST['submit2'])) {
 <head>
     <style>
         .msg { display:block; padding: 10px; margin: 10px 0 10px 0; background-color: tomato; }
-        label { display: block; }
+        label, input, button { display: block; }
+        input { margin-bottom: 10px; }
+        span.hint { font-size: 0.8em; }
     </style>
 </head>
 <body>
     <?php if(!empty($result_msg)) { echo '<span class="msg">' .$result_msg. '</span>'; }?>
     
-    <form action="register.php" method="post">
-        <label for="username">Username:</label> 
-        <input name="username" id="username" type="text" required autofocus />
+    <form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+        <fieldset>
+        <legend>Registrierung</legend>
+            <label for="username">Nutzername:</label> 
+            <input name="username" id="username" type="text" size="30" maxlength="30" required autofocus />
 
-        <label for="vorname">Vorname:</label> 
-        <input name="vorname" id="vorname" type="text" required />
+            <label for="vorname">Vorname:</label> 
+            <input name="vorname" id="vorname" type="text" size="30" maxlength="30" required />
 
-        <label for="nachname">Nachname:</label> 
-        <input name="nachname" id="nachname" type="text" required />
+            <label for="nachname">Nachname:</label> 
+            <input name="nachname" id="nachname" type="text" size="30" maxlength="30" required />
 
-        <label for="email">Email Adresse:</label> 
-        <input name="email" id="email" type="email" required />
+            <label for="email">Email Adresse:</label> 
+            <input name="email" id="email" type="email" size="30" maxlength="40" required />
 
-        <label for="pass">Password:</label> 
-        <input name="pass" id="pass" type="password" required />
+            <label for="pass">Password:</label> 
+            <input name="pass" id="pass" type="password" size="30" maxlength="50" required />
 
-        <!-- erster Button für deaktivierte Validation - später rausnehmen -->
-        <input type="submit" formnovalidate name="submit2" id="submit2" value="Test" />
-        <button name="submit" id="submit">Abschicken</button>
+            <span class="hint">Alle Felder sind Pflichtangaben</span>
+            <!-- erster Button für deaktivierte Validation - später rausnehmen -->
+            <input type="submit" formnovalidate name="submit2" id="submit2" value="Test" />
+            <button name="submit" id="submit">Abschicken</button>
+        </fieldset>
     </form>
 </body>
 </html>

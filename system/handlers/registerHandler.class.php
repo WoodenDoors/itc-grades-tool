@@ -1,21 +1,15 @@
 <?php
 /**
- * Handler register.php
+ * Handler for register.php
  *
  * @author mwegmann
  */
 require_once('../system/db/database.class.php');
+require_once('../system/general/Constants.class.php');
 
 class registerHandler {
     const DB_TABLE = "`itc-grades-tool_users`";
-    
-    // Braucht anständiges Error-Handling
-    const ERR_EMPTY_INPUT = "Bitte alle Felder ausfüllen.";
-    const ERR_USERNAME_EXISTS = "Dieser Nutzername existiert bereits.";
-    const ERR_EMAIL_EXISTS = "Es gibt bereits einen Nutzer mit dieser Email-Adresse.";
-    const ERR_EMAIL_INVALID = "Keine akteptierte Email-Adresse.";
-    const SUCCESS = "Nutzer erfolgreich angelegt.";
-    
+
     private $db;
     private $username;
     private $vorname;
@@ -42,7 +36,7 @@ class registerHandler {
     public function validateInput() {
         // Alle auf leer prüfen
         if(!$this->checkIfEmpty( array($this->username, $this->vorname, $this->nachname, $this->email, $this->pass) )) {
-            return registerHandler::ERR_EMPTY_INPUT;
+            return Constants::ERR_EMPTY_INPUT;
         }
         
         // Existiert Nutzername bereits?
@@ -51,7 +45,7 @@ class registerHandler {
                 " WHERE `username` = '" .$this->sanitizeInput($this->username). "'";  SELECT *
         $userExists = $this->db->query($string);
         if($this->db->hasRows($userExists)) {
-             return registerHandler::ERR_USERNAME_EXISTS." ".$string;
+             return Constants::ERR_USERNAME_EXISTS." ".$string;
         }
         
          // Existiert Email bereits?
@@ -59,20 +53,20 @@ class registerHandler {
                 "SELECT `email` FROM " .registerHandler::DB_TABLE. 
                 " WHERE `email` = '" .$this->sanitizeInput($this->email). "'");
         if($this->db->hasRows($mailExists)) {
-             return registerHandler::ERR_EMAIL_EXISTS;
+             return Constants::ERR_EMAIL_EXISTS;
         }
         
         // Gültige Email-Adresse prüfen
         if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            return registerHandler::ERR_EMAIL_INVALID;
+            return Constants::ERR_EMAIL_INVALID;
         }
         
-        // Sonst kein Fehler
-        return false;
+        // Wenn alles ok, an Submit-Funktion übergeben
+        return $this->submitInput();
     }
     
-    public function submitInput() {
-        
+    private function submitInput() {
+        return false;
     }
     
     private function sanitizeInput($string) {

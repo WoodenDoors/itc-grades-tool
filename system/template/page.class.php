@@ -15,7 +15,8 @@ class page {
     {
         $this->template = new Template();
         $this->template->readin("style/default/tpl/tpl_overall.html");
-        $this->template->fillin("STYLESHEET", '<link rel="stylesheet" type="text/css" href="style/default/css/default.css">');
+        $this->template->fillin("STYLESHEET", '<link rel="stylesheet" type="text/css" href="style/default/css/default.css">'."\n".
+                    '<link rel="shortcut icon" type="image/x-icon" href="style/default/img/favicon.ico">');
         $this->template->fillin("TITLE", "ITC-Grades-Tool");
         
         $header_tpl = new Template();

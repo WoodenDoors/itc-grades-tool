@@ -1,6 +1,7 @@
 <?php
 require_once('../system/handlers/loginHandler.class.php');
 
+
 if(isset($_POST['submit2'])) {
     $handler = new loginHandler( $_POST['login'], $_POST['pass'] );
 

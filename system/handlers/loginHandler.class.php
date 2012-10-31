@@ -4,13 +4,11 @@
  *
  * @author Mathias
  */
+require_once('pageHandler.class.php');
 require_once('../system/db/database.class.php');
-require_once('../system/general/Constants.class.php');
 
 class loginHandler extends pageHandler {
-    const DB_TABLE = "`itc-grades-tool_users`";
-    
-    const ERR_EMPTY_INPUT = "Bitte alle Felder ausfüllen.";
+    const DB_TABLE = "itc.`itc-grades-tool_users`";
     
     private $db;
     private $login;
@@ -31,26 +29,30 @@ class loginHandler extends pageHandler {
     
     public function validateInput() {
         if(!$this->checkIfEmpty( array($this->login, $this->pass) )) {
-            return self::ERR_EMPTY_INPUT;
+            return parent::ERR_EMPTY_INPUT;
         }
 
-        $query = $this->db->query(
-                "SELECT * FROM " .self::DB_TABLE.
-                " WHERE `username` = '" .$this->sanitizeInput($this->login). "'");
+        $sql=
+            "SELECT * FROM `itc-grades-tool_users` WHERE `username` = '.Mathes.'";
+           // "SELECT * FROM " .self::DB_TABLE. " WHERE `username` = '" .$this->sanitizeInput($this->login). "'";
+        ;
 
-        if(!$query) {
-            return Constants::ERR_INVALID_LOGIN;
+        if(!$query = $this->db->query($sql)) {
+            return parent::ERR_QUERY_RETURNS_FALSE;
         }
-//        if($this->db->hasRows($query)) {
-//             return Constants::ERR_INVALID_LOGIN;
-//        }
-//
-//        $result = $this->db->fetchAssoc($query);
-//        if(md5($this->pass) != $result['pass']) {
-//            return Constants::ERR_INVALID_PASS;
-//        }
 
-        return $this->login();
+        if($this->db->countRows($query) > 0) {
+             return parent::ERR_INVALID_LOGIN." - ".$this->db->countRows($query);
+        }
+
+        $result = $this->db->fetchAssoc($query);
+        if(md5($this->pass) != $result['pass']) {
+            return parent::ERR_INVALID_PASS;
+        }
+
+
+        return false;
+        //return $this->login();
     }
 
     private function login() {

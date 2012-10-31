@@ -4,8 +4,8 @@
  *
  * @author mwegmann
  */
+require_once('pageHandler.class.php');
 require_once('../system/db/database.class.php');
-require_once('../system/general/Constants.class.php');
 
 class registerHandler extends pageHandler {
     const DB_TABLE = "`itc-grades-tool_users`";
@@ -36,7 +36,7 @@ class registerHandler extends pageHandler {
     public function validateInput() {
         // Alle auf leer prüfen
         if(!$this->checkIfEmpty( array($this->username, $this->vorname, $this->nachname, $this->email, $this->pass) )) {
-            return Constants::ERR_EMPTY_INPUT;
+            return parent::ERR_EMPTY_INPUT;
         }
         
         // Existiert Nutzername bereits?
@@ -46,7 +46,7 @@ class registerHandler extends pageHandler {
 
         $userExists = $this->db->query($string);
         if($this->db->hasRows($userExists)) {
-             return Constants::ERR_USERNAME_EXISTS." ".$string;
+             return parent::ERR_USERNAME_EXISTS." ".$string;
         }
         
          // Existiert Email bereits?
@@ -54,12 +54,12 @@ class registerHandler extends pageHandler {
                 "SELECT `email` FROM " .self::DB_TABLE. 
                 " WHERE `email` = '" .$this->sanitizeInput($this->email). "'");
         if($this->db->hasRows($mailExists)) {
-             return Constants::ERR_EMAIL_EXISTS;
+             return parent::ERR_EMAIL_EXISTS;
         }
         
         // Gültige Email-Adresse prüfen
         if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            return Constants::ERR_EMAIL_INVALID;
+            return parent::ERR_EMAIL_INVALID;
         }
         
         // Wenn alles ok, an Submit-Funktion übergeben

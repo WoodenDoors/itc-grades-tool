@@ -17,13 +17,16 @@ class database {
     
     /* Mit DB verbinden */
     public function openConnection() {
-	try {
-            $this->connection = mysqli_connect($this->config->hostname, $this->config->username, $this->config->password);
-            $this->connection->set_charset("utf8");
-            $this->db = mysqli_select_db($this->connection, $this->config->database);
-	} catch(exception $e){
-            return $e;
-	}
+        $this->connection = new mysqli(
+            $this->config->getHostname(),
+            $this->config->getUsername(),
+            $this->config->getPassword(),
+            $this->config->getDatabase()
+        );
+        $this->connection->set_charset("utf8");
+        if($this->connection->connect_errno) {
+            die($this->connection->connect_error());
+        }
     }
     
     /* Verbindung schließen */
@@ -31,7 +34,7 @@ class database {
         try {
             mysqli_close($this->connection);
         } catch (exception $e) {
-            return $e;
+            die($this->connection->error());
         }
     }
     
@@ -44,24 +47,29 @@ class database {
                 return true;
             }
         } catch (exception $e) {
-            return $e;
+            die($this->connection->error());
         }
     }
     
     /* addslashes und mysqli_real_escape_string */
     public function escapeString($string) {
-        return mysqli_real_escape_string($this->connection, addslashes($string) );
+        return $this->connection->real_escape_string( addslashes($string) );
     }
     
     /* DB-Query */
     public function query($query) {
         try {
-            $this->openConnection();
-            return mysqli_query( $this->connection, $this->escapeString($query) );
-            $this->closeConnection();
-            
+            if(empty($this->connection)) {
+                $this->openConnection();
+                $result = $this->connection->query( $this->escapeString($query) );
+                $this->closeConnection();
+                return $result;
+
+            } else {
+                return $this->connection->query( $this->escapeString($query) );
+            }
         } catch (exception $e) {
-            return $e;
+            die($this->connection->error());
         }
     }
     
@@ -69,31 +77,31 @@ class database {
     /* Prüft ob Reihen überhaupt vorhanden */
     public function hasRows($result) {
         try {
-            if( mysqli_num_rows($result) > 0 ) {
+            if( $result->num_rows() > 0 ) {
                 return true;
             } else {
                 return false;
             }
         } catch (exception $e) {
-            return $e;
+            die($this->connection->error());
         }
     }
 
     /* Gibt Anzahl Reihen aus */
     public function countRows($result) {
         try {
-            return mysqli_num_rows($result);
+            return $result->num_rows();
         } catch (exception $e) {
-            return $e;
+            die($this->connection->error());
         }
     }
 
     /* Assoziativer Arrray mit Ergebnissen */
     public function fetchAssoc($result) {
         try {
-            return mysqli_fetch_assoc($result);
+            return $result->fetch_assoc();
         } catch (exception $e) {
-            return $e;
+            die($this->connection->error());
         }
     }
 

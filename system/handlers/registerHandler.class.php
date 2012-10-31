@@ -7,7 +7,7 @@
 require_once('../system/db/database.class.php');
 require_once('../system/general/Constants.class.php');
 
-class registerHandler {
+class registerHandler extends pageHandler {
     const DB_TABLE = "`itc-grades-tool_users`";
 
     private $db;
@@ -42,7 +42,8 @@ class registerHandler {
         // Existiert Nutzername bereits?
         $string=
                 "SELECT `username` FROM " .self::DB_TABLE.
-                " WHERE `username` = '" .$this->sanitizeInput($this->username). "'";  SELECT *
+                " WHERE `username` = '" .$this->sanitizeInput($this->username). "'";
+
         $userExists = $this->db->query($string);
         if($this->db->hasRows($userExists)) {
              return Constants::ERR_USERNAME_EXISTS." ".$string;
@@ -70,18 +71,7 @@ class registerHandler {
     }
     
     private function sanitizeInput($string) {
-        return $this->db->ecapeString($string);
-    }
-    
-    private function sanitizeOutput($string) {
-        return htmlspecialchars($string);
-    }
-    
-    private function checkIfEmpty($input) {
-        foreach($input as $item) {
-            if($item == "") return false;
-        }
-        return true; // nur wahr wenn kein Item leer
+        return $this->db->escapeString($string);
     }
 }
 ?>

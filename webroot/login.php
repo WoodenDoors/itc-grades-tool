@@ -11,7 +11,13 @@ if(isset($_POST['submit2'])) {
 <html>
 <head>
     <style>
-        .msg { display:block; padding: 10px; margin: 10px 0 10px 0; background-color: tomato; }
+        .msg {
+            display:block;
+            padding: 10px;
+            margin: 10px;
+            background-color: tomato;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>

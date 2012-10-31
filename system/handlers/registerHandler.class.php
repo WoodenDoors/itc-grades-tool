@@ -41,7 +41,7 @@ class registerHandler {
         
         // Existiert Nutzername bereits?
         $string=
-                "SELECT `username` FROM " .registerHandler::DB_TABLE.
+                "SELECT `username` FROM " .self::DB_TABLE.
                 " WHERE `username` = '" .$this->sanitizeInput($this->username). "'";  SELECT *
         $userExists = $this->db->query($string);
         if($this->db->hasRows($userExists)) {
@@ -50,7 +50,7 @@ class registerHandler {
         
          // Existiert Email bereits?
         $mailExists = $this->db->query(
-                "SELECT `email` FROM " .registerHandler::DB_TABLE. 
+                "SELECT `email` FROM " .self::DB_TABLE. 
                 " WHERE `email` = '" .$this->sanitizeInput($this->email). "'");
         if($this->db->hasRows($mailExists)) {
              return Constants::ERR_EMAIL_EXISTS;

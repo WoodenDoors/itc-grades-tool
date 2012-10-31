@@ -57,6 +57,10 @@ class loginHandler {
         return false;
     }
     
+    private function sanitizeInput($string) {
+        return $this->db->ecapeString($string);
+    }
+    
     private function checkIfEmpty($input) {
         foreach($input as $item) {
             if($item == "") return false;

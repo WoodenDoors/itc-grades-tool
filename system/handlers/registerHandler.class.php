@@ -8,7 +8,6 @@ require_once('pageHandler.class.php');
 require_once('../system/db/database.class.php');
 
 class registerHandler extends pageHandler {
-    const DB_TABLE = "`itc-grades-tool_users`";
 
     private $db;
     private $username;
@@ -29,9 +28,7 @@ class registerHandler extends pageHandler {
         $this->db->openConnection();
     }
     
-    function __destruct() {
-        $this->db->closeConnection();
-    }
+    function __destruct() { }
     
     public function validateInput() {
         // Alle auf leer prüfen
@@ -40,19 +37,13 @@ class registerHandler extends pageHandler {
         }
         
         // Existiert Nutzername bereits?
-        $string=
-                "SELECT `username` FROM " .self::DB_TABLE.
-                " WHERE `username` = '" .$this->sanitizeInput($this->username). "'";
-
-        $userExists = $this->db->query($string);
+        $userExists = $this->db->selectRows("*", parent::DB_TABLE_USERS, "username", $this->username);
         if($this->db->hasRows($userExists)) {
-             return parent::ERR_USERNAME_EXISTS." ".$string;
+             return parent::ERR_USERNAME_EXISTS;
         }
         
          // Existiert Email bereits?
-        $mailExists = $this->db->query(
-                "SELECT `email` FROM " .self::DB_TABLE. 
-                " WHERE `email` = '" .$this->sanitizeInput($this->email). "'");
+        $mailExists = $this->db->selectRows("*", parent::DB_TABLE_USERS, "email", $this->email);
         if($this->db->hasRows($mailExists)) {
              return parent::ERR_EMAIL_EXISTS;
         }
@@ -68,10 +59,6 @@ class registerHandler extends pageHandler {
     
     private function submitInput() {
         return false;
-    }
-    
-    private function sanitizeInput($string) {
-        return $this->db->escapeString($string);
     }
 }
 ?>

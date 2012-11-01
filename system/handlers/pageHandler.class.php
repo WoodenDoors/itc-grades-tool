@@ -5,7 +5,10 @@
  * @author mwegmann
  */
 class pageHandler {
+    // tables
+    const DB_TABLE_USERS = "itc-grades-tool_users";
 
+    // text
     const ERR_EMPTY_INPUT = "Bitte alle Felder ausfüllen.";
     const ERR_USERNAME_EXISTS = "Dieser Nutzername existiert bereits.";
     const ERR_EMAIL_EXISTS = "Es gibt bereits einen Nutzer mit dieser Email-Adresse.";
@@ -24,5 +27,9 @@ class pageHandler {
             if($item == "") return false;
         }
         return true; // nur wahr wenn kein Item leer
+    }
+
+    protected function checkIfLength($input, $length) {
+
     }
 }

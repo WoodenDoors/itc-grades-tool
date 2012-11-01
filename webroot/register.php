@@ -11,12 +11,12 @@ if(isset($_POST['submit2'])) {
     );
 
     $result_msg = $handler->validateInput();
-    $handler->submitInput();
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         .msg { display:block; padding: 10px; margin: 10px 0 10px 0; background-color: tomato; }
         label, input, button { display: block; }
@@ -31,19 +31,19 @@ if(isset($_POST['submit2'])) {
         <fieldset>
         <legend>Registrierung</legend>
             <label for="username">Nutzername:</label> 
-            <input name="username" id="username" type="text" size="30" maxlength="30" required autofocus />
+            <input name="username" id="username" type="text" size="30" maxlength="30" required autofocus value="aa" />
 
             <label for="vorname">Vorname:</label> 
-            <input name="vorname" id="vorname" type="text" size="30" maxlength="30" required />
+            <input name="vorname" id="vorname" type="text" size="30" maxlength="30" required value="cc" />
 
             <label for="nachname">Nachname:</label> 
-            <input name="nachname" id="nachname" type="text" size="30" maxlength="30" required />
+            <input name="nachname" id="nachname" type="text" size="30" maxlength="30" required value="bb" />
 
             <label for="email">Email Adresse:</label> 
-            <input name="email" id="email" type="email" size="30" maxlength="40" required />
+            <input name="email" id="email" type="email" size="30" maxlength="40" required value="dd" />
 
             <label for="pass">Password:</label> 
-            <input name="pass" id="pass" type="password" size="30" maxlength="50" required />
+            <input name="pass" id="pass" type="password" size="30" maxlength="50" required value="ee" />
 
             <span class="hint">Alle Felder sind Pflichtangaben</span>
             <!-- erster Button für deaktivierte Validation - später rausnehmen -->

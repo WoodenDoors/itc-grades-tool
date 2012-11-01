@@ -11,7 +11,7 @@ $db->openConnection();
 echo "Verbindung besteht" . ( $db->testServerConnection() ? "." : " NICHT!<br/>");
 
 // Test Query
-$sql = $db->query("SELECT * FROM `itc-grades-tool_users`");
+$sql = $db->selectRows("*", "itc-grades-tool_users", "username", "Mathes");
 
 // Tests
 echo "<br/>Es gibt " . ($db->hasRows($sql) ? "" : "keine") ." Reihen.";
@@ -22,7 +22,4 @@ $result = $db->fetchAssoc($sql);
 echo "<pre>";
 print_r($result);
 echo "</pre>";
-
-// Verbindung schließen
-$db->closeConnection();
 ?>

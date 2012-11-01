@@ -8,7 +8,6 @@ require_once('pageHandler.class.php');
 require_once('../system/db/database.class.php');
 
 class loginHandler extends pageHandler {
-    const DB_TABLE = "itc.`itc-grades-tool_users`";
     
     private $db;
     private $login;
@@ -23,48 +22,37 @@ class loginHandler extends pageHandler {
         $this->db->openConnection();
     }
     
-    function __destruct() {
-        $this->db->closeConnection();
-    }
+    function __destruct() { }
     
     public function validateInput() {
         if(!$this->checkIfEmpty( array($this->login, $this->pass) )) {
             return parent::ERR_EMPTY_INPUT;
         }
 
-        $sql=
-            "SELECT * FROM `itc-grades-tool_users` WHERE `username` = '.Mathes.'";
-           // "SELECT * FROM " .self::DB_TABLE. " WHERE `username` = '" .$this->sanitizeInput($this->login). "'";
-        ;
-
-        if(!$query = $this->db->query($sql)) {
-            return parent::ERR_QUERY_RETURNS_FALSE;
+        // First Test Username
+        $testUsername = $this->db->selectRows("*", parent::DB_TABLE_USER, "username", $this->login);
+        if(!$this->db->hasRows($testUsername)) {
+        // Then Test Email
+            $testEmail = $this->db->selectRows("*", parent::DB_TABLE_USER, "email", $this->login);
+            if(!$this->db->hasRows($testEmail)) {
+                return parent::ERR_INVALID_LOGIN;
+            }
         }
 
-        if($this->db->countRows($query) > 0) {
-             return parent::ERR_INVALID_LOGIN." - ".$this->db->countRows($query);
-        }
-
-        $result = $this->db->fetchAssoc($query);
+        $result = $this->db->fetchAssoc($testUsername);
         if(md5($this->pass) != $result['pass']) {
             return parent::ERR_INVALID_PASS;
         }
 
-
-        return false;
-        //return $this->login();
+        return $this->login($result); // send to login function
     }
 
-    private function login() {
+    private function login($result) {
         $hour = time() + 302400;
-        setcookie("username", "a", $hour);
-        setcookie("pass", "b", $hour);
+        setcookie("username", $result['username'], $hour);
+        setcookie("pass", $result['pass'], $hour);
 
-        return false;
-    }
-    
-    private function sanitizeInput($string) {
-        return $this->db->escapeString($string);
+        return false; // everything ok
     }
 }
 

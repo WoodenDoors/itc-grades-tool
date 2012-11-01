@@ -13,18 +13,25 @@ class database {
     
     function __construct($config) {
         $this->config = $config;
+        $this->openConnection();
     }
-    
+
+    function __destruct() {
+        $this->closeConnection();
+    }
+
     /* Mit DB verbinden */
     public function openConnection() {
-        $this->connection = new mysqli(
-            $this->config->getHostname(),
-            $this->config->getUsername(),
-            $this->config->getPassword(),
-            $this->config->getDatabase()
-        );
-        $this->connection->set_charset("utf8");
-        if($this->connection->connect_errno) {
+        try {
+            $this->connection = new mysqli(
+                $this->config->getHostname(),
+                $this->config->getUsername(),
+                $this->config->getPassword(),
+                $this->config->getDatabase()
+            );
+
+            $this->connection->set_charset("utf8");
+        } catch (exception $e) {
             die($this->connection->connect_error());
         }
     }
@@ -32,7 +39,9 @@ class database {
     /* Verbindung schließen */
     public function closeConnection() {
         try {
-            mysqli_close($this->connection);
+            if(!empty($this->connection)) {
+                $this->connection->close();
+            }
         } catch (exception $e) {
             die($this->connection->error());
         }
@@ -53,31 +62,43 @@ class database {
     
     /* addslashes und mysqli_real_escape_string */
     public function escapeString($string) {
-        return $this->connection->real_escape_string( addslashes($string) );
+        return $this->connection->real_escape_string( addslashes( $string ) );
     }
     
     /* DB-Query */
-    public function query($query) {
+    private function query($query) {
         try {
             if(empty($this->connection)) {
                 $this->openConnection();
-                $result = $this->connection->query( $this->escapeString($query) );
+                $result = $this->connection->query( $query );
                 $this->closeConnection();
                 return $result;
 
             } else {
-                return $this->connection->query( $this->escapeString($query) );
+                return $this->connection->query( $query );
             }
         } catch (exception $e) {
             die($this->connection->error());
         }
+    }
+
+    public function selectRows( $rows="*", $table, $whereField=NULL, $whereInput=NULL ) {
+        $sql = "SELECT ".$rows." FROM `".$table."` ";
+        if(!is_null($whereField) && !is_null($whereInput)) {
+            $sql .= "WHERE `".$whereField."` = '".$this->escapeString($whereInput)."'";
+        }
+        if(!$result = $this->query($sql)) {
+            die("Invalid Query");
+            //die("Invalid Query:" .$sql);
+        }
+        return $result;
     }
     
 
     /* Prüft ob Reihen überhaupt vorhanden */
     public function hasRows($result) {
         try {
-            if( $result->num_rows() > 0 ) {
+            if( $result->num_rows > 0 ) {
                 return true;
             } else {
                 return false;
@@ -90,7 +111,7 @@ class database {
     /* Gibt Anzahl Reihen aus */
     public function countRows($result) {
         try {
-            return $result->num_rows();
+            return $result->num_rows;
         } catch (exception $e) {
             die($this->connection->error());
         }

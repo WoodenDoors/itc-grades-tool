@@ -9,7 +9,6 @@ require_once('dbconfig.class.php');
 class database {
     private $config;
     private $connection;
-    private $db;
     
     function __construct($config) {
         $this->config = $config;
@@ -82,18 +81,37 @@ class database {
         }
     }
 
-    public function selectRows( $rows="*", $table, $whereField=NULL, $whereInput=NULL ) {
+    /* Einfacher SQL Select */
+    public function selectRows( $table, $rows="*", $whereField=NULL, $whereInput=NULL ) {
         $sql = "SELECT ".$rows." FROM `".$table."` ";
-        if(!is_null($whereField) && !is_null($whereInput)) {
-            $sql .= "WHERE `".$whereField."` = '".$this->escapeString($whereInput)."'";
+        if( !is_null( $whereField ) && !is_null( $whereInput ) ) {
+            $sql .= "WHERE `".$whereField."` = '".$this->escapeString( $whereInput )."'";
         }
+
         if(!$result = $this->query($sql)) {
             die("Invalid Query");
             //die("Invalid Query:" .$sql);
         }
         return $result;
     }
-    
+
+    /* Einfacher SQL Insert */
+    public function insertRow($table, $values, $rows=NULL) {
+        $sql = "INSERT INTO `".$table."` ";
+        if(!is_null($rows)) {
+            $sql .= "(". $rows .") ";
+        }
+        for( $i=0; $i < count( $values ); $i++ ) {
+            $values[$i] = "'". $this->escapeString( $values[$i] ) ."'";
+        }
+        $sql .= "VALUES (". implode(', ', $values). ")";
+
+        if(!$result = $this->query($sql)) {
+            die("Invalid Query");
+            //die("Invalid Query:" .$sql);
+        }
+        return $result;
+    }
 
     /* Prüft ob Reihen überhaupt vorhanden */
     public function hasRows($result) {

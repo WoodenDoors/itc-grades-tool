@@ -1,6 +1,7 @@
 <?php
 /**
  * General PageHandler
+ * Stellt gemeinsame Konstanten und Funktionen zur Verfügung
  *
  * @author mwegmann
  */
@@ -17,6 +18,14 @@ class pageHandler {
     const ERR_INVALID_LOGIN = "Kein gültiges Login.";
     const ERR_INVALID_PASS = "Kein gültiges Passwort.";
     const ERR_QUERY_RETURNS_FALSE = "Da ist wohl ein Fehler mit der Datenbank passiert.";
+    const ERR_INPUT_UNDERSIZED = "Alle Felder sollten mindestens 2 Zeichen lang sein.";
+
+
+    protected function checkIfLogin() {
+        if(isset($_COOKIE['username']) && isset($_COOKIE['pass'])) {
+            // TODO: Continue here tomorrow
+        }
+    }
 
     protected function sanitizeOutput($string) {
         return htmlspecialchars($string);
@@ -30,6 +39,9 @@ class pageHandler {
     }
 
     protected function checkIfLength($input, $length) {
-
+        foreach($input as $item) {
+            if(strlen( $item) < $length ) return false;
+        }
+        return true;
     }
 }

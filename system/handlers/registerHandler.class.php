@@ -31,25 +31,33 @@ class registerHandler extends pageHandler {
     function __destruct() { }
     
     public function validateInput() {
+        $dataArray =  array( $this->username, $this->vorname, $this->nachname, $this->email, $this->pass );
+
         // Alle auf leer prüfen
-        if(!$this->checkIfEmpty( array($this->username, $this->vorname, $this->nachname, $this->email, $this->pass) )) {
+        if(!$this->checkIfEmpty( $dataArray )) {
             return parent::ERR_EMPTY_INPUT;
+        }
+
+        // Alles mindestens 2 Zeichen lang
+        // TODO: ist das Sinnvoll?
+        if(!$this->checkIfLength( $dataArray, 2 )) {
+            return parent::ERR_INPUT_UNDERSIZED;
         }
         
         // Existiert Nutzername bereits?
-        $userExists = $this->db->selectRows("*", parent::DB_TABLE_USERS, "username", $this->username);
+        $userExists = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "username", $this->username);
         if($this->db->hasRows($userExists)) {
              return parent::ERR_USERNAME_EXISTS;
         }
         
          // Existiert Email bereits?
-        $mailExists = $this->db->selectRows("*", parent::DB_TABLE_USERS, "email", $this->email);
+        $mailExists = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "email", $this->email);
         if($this->db->hasRows($mailExists)) {
              return parent::ERR_EMAIL_EXISTS;
         }
         
         // Gültige Email-Adresse prüfen
-        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        if(!filter_var( $this->email, FILTER_VALIDATE_EMAIL )) {
             return parent::ERR_EMAIL_INVALID;
         }
         
@@ -58,6 +66,11 @@ class registerHandler extends pageHandler {
     }
     
     private function submitInput() {
+        $this->db->insertRow(
+            parent::DB_TABLE_USERS,
+            array( $this->username, $this->vorname, $this->nachname, $this->email, md5( $this->pass ) ),
+            "username, vorname, nachname, email, pass"
+        );
         return false;
     }
 }

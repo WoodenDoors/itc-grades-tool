@@ -2,7 +2,7 @@
 /**
  * Handler for login.php
  *
- * @author Mathias
+ * @author mwegmann
  */
 require_once('pageHandler.class.php');
 require_once('../system/db/database.class.php');
@@ -29,11 +29,11 @@ class loginHandler extends pageHandler {
             return parent::ERR_EMPTY_INPUT;
         }
 
-        // First Test Username
-        $testUsername = $this->db->selectRows("*", parent::DB_TABLE_USER, "username", $this->login);
+        // Erst Username testen
+        $testUsername = $this->db->selectRows("*", parent::DB_TABLE_USER, "*", "username", $this->login);
         if(!$this->db->hasRows($testUsername)) {
-        // Then Test Email
-            $testEmail = $this->db->selectRows("*", parent::DB_TABLE_USER, "email", $this->login);
+        // Dann Email Testen
+            $testEmail = $this->db->selectRows(parent::DB_TABLE_USER, "*", "email", $this->login);
             if(!$this->db->hasRows($testEmail)) {
                 return parent::ERR_INVALID_LOGIN;
             }

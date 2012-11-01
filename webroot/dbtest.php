@@ -11,7 +11,7 @@ $db->openConnection();
 echo "Verbindung besteht" . ( $db->testServerConnection() ? "." : " NICHT!<br/>");
 
 // Test Query
-$sql = $db->selectRows("*", "itc-grades-tool_users", "username", "Mathes");
+$sql = $db->selectRows("itc-grades-tool_users", "*", "username", "Mathes");
 
 // Tests
 echo "<br/>Es gibt " . ($db->hasRows($sql) ? "" : "keine") ." Reihen.";
@@ -22,4 +22,15 @@ $result = $db->fetchAssoc($sql);
 echo "<pre>";
 print_r($result);
 echo "</pre>";
+
+echo "<br/>Insert: </br>";
+
+/*
+ * Wird nach dem 1. aufrufen Fehler werfen, weil schon in DB
+$db->insertRow(
+    "itc-grades-tool_users",
+    array( "abcde", "defgh", "abc", "mathes@myopera.com", md5( "test" ) ),
+    "username, vorname, nachname, email, pass"
+);
+*/
 ?>

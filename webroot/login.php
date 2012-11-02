@@ -1,7 +1,7 @@
 <?php
 require_once('../system/handlers/loginHandler.class.php');
 
-
+$result_msg=NULL;
 if(isset($_POST['submit2'])) {
     $handler = new loginHandler( $_POST['login'], $_POST['pass'] );
 
@@ -13,17 +13,16 @@ if(isset($_POST['submit2'])) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
-        .msg {
-            display:block;
-            padding: 10px;
-            margin: 10px;
-            background-color: tomato;
-            border-radius: 5px;
-        }
+        .msg { display:block; padding: 10px; margin: 10px 0 10px 0; border-radius: 5px;  }
+        .errorMsg { background-color: tomato; }
+        .successMsg { background-color: #adff2f; }
     </style>
 </head>
 <body>
-    <?php if(!empty($result_msg)) { echo '<span class="msg">' .$result_msg. '</span>'; }?>
+    <?php
+    if(!empty($result_msg)) { echo '<span class="msg errorMsg">' .$result_msg. '</span>'; }
+    if($result_msg===false) { echo '<span class="msg successMsg">Erfolgreich eingeloggt!</span>';}
+    ?>
     
     <form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
         <fieldset>

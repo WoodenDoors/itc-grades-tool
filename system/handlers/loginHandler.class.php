@@ -5,11 +5,9 @@
  * @author mwegmann
  */
 require_once('pageHandler.class.php');
-require_once('../system/db/database.class.php');
 
 class loginHandler extends pageHandler {
-    
-    private $db;
+
     private $login;
     private $pass;
     
@@ -17,9 +15,7 @@ class loginHandler extends pageHandler {
         $this->login = $login;
         $this->pass = $pass;
 
-        $config = new dbconfig();
-        $this->db = new database($config);
-        $this->db->openConnection();
+        parent::__construct();
     }
     
     function __destruct() { }
@@ -30,10 +26,10 @@ class loginHandler extends pageHandler {
         }
 
         // Erst Username testen
-        $testUsername = $this->db->selectRows("*", parent::DB_TABLE_USER, "*", "username", $this->login);
+        $testUsername = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "username", $this->login);
         if(!$this->db->hasRows($testUsername)) {
         // Dann Email Testen
-            $testEmail = $this->db->selectRows(parent::DB_TABLE_USER, "*", "email", $this->login);
+            $testEmail = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "email", $this->login);
             if(!$this->db->hasRows($testEmail)) {
                 return parent::ERR_INVALID_LOGIN;
             }

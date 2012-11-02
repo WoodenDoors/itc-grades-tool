@@ -5,6 +5,8 @@
  *
  * @author mwegmann
  */
+require_once('../system/db/database.class.php');
+
 class pageHandler {
     // tables
     const DB_TABLE_USERS = "itc-grades-tool_users";
@@ -20,11 +22,20 @@ class pageHandler {
     const ERR_QUERY_RETURNS_FALSE = "Da ist wohl ein Fehler mit der Datenbank passiert.";
     const ERR_INPUT_UNDERSIZED = "Alle Felder sollten mindestens 2 Zeichen lang sein.";
 
+    protected $db;
+
+    function __construct() {
+        $config = new dbconfig();
+        $this->db = new database($config);
+        $this->db->openConnection();
+    }
 
     protected function checkIfLogin() {
         if(isset($_COOKIE['username']) && isset($_COOKIE['pass'])) {
             // TODO: Continue here tomorrow
+
         }
+        return false;
     }
 
     protected function sanitizeOutput($string) {

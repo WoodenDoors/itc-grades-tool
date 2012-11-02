@@ -1,6 +1,7 @@
 <?php
 require_once('../system/handlers/registerHandler.class.php');
 
+$result_msg=NULL;
 if(isset($_POST['submit2'])) {
     $handler = new registerHandler(
             $_POST['username'], 

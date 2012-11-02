@@ -5,11 +5,9 @@
  * @author mwegmann
  */
 require_once('pageHandler.class.php');
-require_once('../system/db/database.class.php');
 
 class registerHandler extends pageHandler {
 
-    private $db;
     private $username;
     private $vorname;
     private $nachname;
@@ -22,10 +20,8 @@ class registerHandler extends pageHandler {
         $this->nachname = $nachname;
         $this->email = $email;
         $this->pass = $pass;
-        
-        $config = new dbconfig();
-        $this->db = new database($config);
-        $this->db->openConnection();
+
+        parent::__construct();
     }
     
     function __destruct() { }

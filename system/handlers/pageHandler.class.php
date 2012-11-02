@@ -32,8 +32,21 @@ class pageHandler {
 
     protected function checkIfLogin() {
         if(isset($_COOKIE['username']) && isset($_COOKIE['pass'])) {
-            // TODO: Continue here tomorrow
 
+            $query = $this->db->selectRows(self::DB_TABLE_USERS, "*", "username", $_COOKIE['username']);
+
+            // Ungültiger Username Cookie
+            if(!$this->db->hasRows($query)) {
+                return false;
+            }
+
+            // ungültiger Password Cookie
+            $result = $this->db->fetchAssoc($query);
+            if(md5($this->pass) != $result['pass']) {
+                return false;
+            }
+            // Username und Passwort gültig
+            return true;
         }
         return false;
     }

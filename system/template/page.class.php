@@ -10,49 +10,50 @@ require 'template.class.php';
 
 class page {
     var $template;
+    var $style = "default";
     
     function setup_page()
     {
         $this->template = new Template();
-        $this->template->readin("style/default/tpl/tpl_overall.html");
-        $this->template->fillin("STYLESHEET", '<link rel="stylesheet" type="text/css" href="style/default/css/default.css">'."\n".
-                    '<link rel="shortcut icon" type="image/x-icon" href="style/default/img/favicon.ico">');
+        $this->template->readin("style/".$this->style."/tpl/tpl_overall.html");
+        $this->template->fillin("STYLESHEET", '<link rel="stylesheet" type="text/css" href="style/'.$this->style.'/css/default.css">'."\n".
+                    '<link rel="shortcut icon" type="image/x-icon" href="style/'.$this->style.'/img/favicon.ico">');
         $this->template->fillin("TITLE", "ITC-Grades-Tool");
         
         $header_tpl = new Template();
-        $header_tpl->readin("style/default/tpl/tpl_header.html");
+        $header_tpl->readin("style/".$this->style."/tpl/tpl_header.html");
         $header_tpl->fillin("USERNAME", "Kreisverkehr");
         $this->template->fillin("HEADCONTENT", $header_tpl->get_template());
         
         $main_tpl = new Template();
-        $main_tpl->readin("style/default/tpl/tpl_main.html");
+        $main_tpl->readin("style/".$this->style."/tpl/tpl_main.html");
             $nav_entry = new Template();
             
-            $nav_entry->readin("style/default/tpl/tpl_nav_entry.html");
+            $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", ' class="active"');
             $nav_entry->fillin("NAVID", "link-home");
             $nav_entry->fillin("NAVURL", "#");
             $nav_entry->fillin("NAVTITLE", "Startseite");
             
-            $nav_entry->readin("style/default/tpl/tpl_nav_entry.html");
+            $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", "");
             $nav_entry->fillin("NAVURL", "#");
             $nav_entry->fillin("NAVTITLE", "Notenübersicht");
             
-            $nav_entry->readin("style/default/tpl/tpl_nav_entry.html");
+            $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", "");
             $nav_entry->fillin("NAVURL", "#");
             $nav_entry->fillin("NAVTITLE", "Noten eintragen");
             
-            $nav_entry->readin("style/default/tpl/tpl_nav_entry.html");
+            $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", "");
             $nav_entry->fillin("NAVURL", "#");
             $nav_entry->fillin("NAVTITLE", "Grafen");
             
-            $nav_entry->readin("style/default/tpl/tpl_nav_entry.html");
+            $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", "");
             $nav_entry->fillin("NAVURL", "#");

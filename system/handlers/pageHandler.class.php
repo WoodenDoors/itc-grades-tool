@@ -30,7 +30,7 @@ class pageHandler {
         $this->db->openConnection();
     }
 
-    protected function checkIfLogin() {
+    public function checkIfLogin() {
         if(isset($_COOKIE['username']) && isset($_COOKIE['pass'])) {
 
             $query = $this->db->selectRows(self::DB_TABLE_USERS, "*", "username", $_COOKIE['username']);

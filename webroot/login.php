@@ -1,11 +1,12 @@
 <?php
 require_once('../system/handlers/loginHandler.class.php');
+$handler = new loginHandler();
+$login = $handler->checkIfLogin(); // Schon eingelogt?
 
+// Formular übermittelt
 $result_msg=NULL;
 if(isset($_POST['submit2'])) {
-    $handler = new loginHandler( $_POST['login'], $_POST['pass'] );
-
-    $result_msg = $handler->validateInput();
+    $result_msg = $handler->validateInput( $_POST['login'], $_POST['pass'] );
 }
 ?>
 <!DOCTYPE html>

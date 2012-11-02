@@ -8,28 +8,23 @@ require_once('pageHandler.class.php');
 
 class loginHandler extends pageHandler {
 
-    private $login;
-    private $pass;
-    
-    function __construct($login, $pass) {
-        $this->login = $login;
-        $this->pass = $pass;
-
+    function __construct() {
         parent::__construct();
     }
     
     function __destruct() { }
     
-    public function validateInput() {
-        if(!$this->checkIfEmpty( array($this->login, $this->pass) )) {
+    public function validateInput($login, $pass) {
+
+        if(!$this->checkIfEmpty( array($login, $pass) )) {
             return parent::ERR_EMPTY_INPUT;
         }
 
         // Erst Username testen
-        $testUsername = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "username", $this->login);
+        $testUsername = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "username", $login);
         if(!$this->db->hasRows($testUsername)) {
         // Dann Email Testen
-            $testEmail = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "email", $this->login);
+            $testEmail = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "email", $login);
             if(!$this->db->hasRows($testEmail)) {
                 return parent::ERR_INVALID_LOGIN;
             }

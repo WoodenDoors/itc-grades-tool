@@ -5,7 +5,7 @@ $login = $handler->checkIfLogin(); // Schon eingelogt?
 
 // Formular übermittelt
 $result_msg=NULL;
-if(isset($_POST['submit2'])) {
+if(isset( $_POST['submit2'] ) || isset( $_POST['submit'] )) {
     $result_msg = $handler->validateInput( $_POST['login'], $_POST['pass'] );
 }
 ?>
@@ -21,6 +21,7 @@ if(isset($_POST['submit2'])) {
 </head>
 <body>
     <?php
+    if ($login) { echo "Schon eingeloggt!"; }
     if(!empty($result_msg)) { echo '<span class="msg errorMsg">' .$result_msg. '</span>'; }
     if($result_msg===false) { echo '<span class="msg successMsg">Erfolgreich eingeloggt!</span>';}
     ?>

@@ -42,7 +42,7 @@ class pageHandler {
 
             // ungültiger Password Cookie
             $result = $this->db->fetchAssoc($query);
-            if(md5($this->pass) != $result['pass']) {
+            if(md5($_COOKIE['pass']) != $result['pass']) {
                 return false;
             }
             // Username und Passwort gültig

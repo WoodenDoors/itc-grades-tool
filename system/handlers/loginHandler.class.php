@@ -31,7 +31,7 @@ class loginHandler extends pageHandler {
         }
 
         $result = $this->db->fetchAssoc($testUsername);
-        if(md5($this->pass) != $result['pass']) {
+        if(md5($pass) != $result['pass']) {
             return parent::ERR_INVALID_PASS;
         }
 

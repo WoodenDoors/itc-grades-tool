@@ -7,27 +7,15 @@
 require_once('pageHandler.class.php');
 
 class registerHandler extends pageHandler {
-
-    private $username;
-    private $vorname;
-    private $nachname;
-    private $email;
-    private $pass;
     
-    function __construct($username, $vorname, $nachname, $email, $pass) {
-        $this->username = $username;
-        $this->vorname = $vorname;
-        $this->nachname = $nachname;
-        $this->email = $email;
-        $this->pass = $pass;
-
+    function __construct() {
         parent::__construct();
     }
     
     function __destruct() { }
     
-    public function validateInput() {
-        $dataArray =  array( $this->username, $this->vorname, $this->nachname, $this->email, $this->pass );
+    public function validateInput($username, $vorname, $nachname, $email, $pass) {
+        $dataArray =  array( $username, $vorname, $nachname, $email, $pass );
 
         // Alle auf leer prüfen
         if(!$this->checkIfEmpty( $dataArray )) {
@@ -41,30 +29,32 @@ class registerHandler extends pageHandler {
         }
         
         // Existiert Nutzername bereits?
-        $userExists = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "username", $this->username);
+        $userExists = $this->db->selectRows( parent::DB_TABLE_USERS, "*", "username", $username );
         if($this->db->hasRows($userExists)) {
              return parent::ERR_USERNAME_EXISTS;
         }
         
          // Existiert Email bereits?
-        $mailExists = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "email", $this->email);
+        $mailExists = $this->db->selectRows( parent::DB_TABLE_USERS, "*", "email", $email );
         if($this->db->hasRows($mailExists)) {
              return parent::ERR_EMAIL_EXISTS;
         }
         
         // Gültige Email-Adresse prüfen
-        if(!filter_var( $this->email, FILTER_VALIDATE_EMAIL )) {
+        if(!filter_var( $email, FILTER_VALIDATE_EMAIL )) {
             return parent::ERR_EMAIL_INVALID;
         }
         
         // Wenn alles ok, an Submit-Funktion übergeben
-        return $this->submitInput();
+        return $this->submitInput( $dataArray );
     }
     
-    private function submitInput() {
+    private function submitInput($dataArray) {
+        $dataArray[4] = md5($dataArray[4]); // Passwort in md5() wandeln
+
         $this->db->insertRow(
             parent::DB_TABLE_USERS,
-            array( $this->username, $this->vorname, $this->nachname, $this->email, md5( $this->pass ) ),
+            $dataArray,
             "username, vorname, nachname, email, pass"
         );
         return false;

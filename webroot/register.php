@@ -1,17 +1,16 @@
 <?php
 require_once('../system/handlers/registerHandler.class.php');
+$handler = new registerHandler();
 
 $result_msg=NULL;
-if(isset($_POST['submit2'])) {
-    $handler = new registerHandler(
-            $_POST['username'], 
-            $_POST['vorname'], 
-            $_POST['nachname'], 
-            $_POST['email'], 
-            $_POST['pass'] 
+if(isset( $_POST['submit2'] ) || isset( $_POST['submit2'] )) {
+    $result_msg = $handler->validateInput(
+        $_POST['username'],
+        $_POST['vorname'],
+        $_POST['nachname'],
+        $_POST['email'],
+        $_POST['pass']
     );
-
-    $result_msg = $handler->validateInput();
 }
 
 // TODO: CSS Auslagern (mit Login CSS) und Template erstellen

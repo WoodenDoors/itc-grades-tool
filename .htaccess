@@ -1,0 +1,6 @@
+# WHY DOESN'T THIS WORK FFS
+
+#Options +FollowSymLinks
+#RewriteEngine on
+#RewriteBase /
+#RewriteRule ^(.*)$ /webroot/$1

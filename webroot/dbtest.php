@@ -1,5 +1,4 @@
 <?php
-
 require_once('../system/db/database.class.php');
 
 $config = new dbconfig();
@@ -23,10 +22,9 @@ echo "<pre>";
 print_r($result);
 echo "</pre>";
 
-echo "<br/>Insert: </br>";
-
 /*
  * Wird nach dem 1. aufrufen Fehler werfen, weil schon in DB
+echo "<br/>Insert: </br>";
 $db->insertRow(
     "itc-grades-tool_users",
     array( "abcde", "defgh", "abc", "mathes@myopera.com", md5( "test" ) ),

@@ -1,6 +1,7 @@
 <?php
 require_once('../system/handlers/registerHandler.class.php');
 $handler = new registerHandler();
+$login = $handler->checkIfLogin();
 
 $result_msg=NULL;
 if(isset( $_POST['submit2'] ) || isset( $_POST['submit2'] )) {

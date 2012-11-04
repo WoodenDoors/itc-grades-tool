@@ -1,7 +1,7 @@
 <?php
 ini_set("display_errors", 1);
 ini_set("html_errors", 1);
-require 'system/template/page.class.php';
+require '../system/template/page.class.php';
 
 $page = new page();
 $page->setup_page();

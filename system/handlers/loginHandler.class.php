@@ -21,16 +21,16 @@ class loginHandler extends pageHandler {
         }
 
         // Erst Username testen
-        $testUsername = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "username", $login);
-        if(!$this->db->hasRows($testUsername)) {
+        $query = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "username", $login);
+        if(!$this->db->hasRows($query)) {
         // Dann Email Testen
-            $testEmail = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "email", $login);
-            if(!$this->db->hasRows($testEmail)) {
+            $query = $this->db->selectRows(parent::DB_TABLE_USERS, "*", "email", $login);
+            if(!$this->db->hasRows($query)) {
                 return parent::ERR_INVALID_LOGIN;
             }
         }
 
-        $result = $this->db->fetchAssoc($testUsername);
+        $result = $this->db->fetchAssoc($query);
         if(md5($pass) != $result['pass']) {
             return parent::ERR_INVALID_PASS;
         }

@@ -19,7 +19,7 @@ if(isset( $_POST['submit2'] ) || isset( $_POST['submit2'] )) {
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
+    <style>g
         .msg { display:block; padding: 10px; margin: 10px 0 10px 0;  }
         .errorMsg { background-color: tomato; }
         .successMsg { background-color: #adff2f; }
@@ -30,6 +30,7 @@ if(isset( $_POST['submit2'] ) || isset( $_POST['submit2'] )) {
 </head>
 <body>
     <?php
+    if ($login) { echo "Schon eingeloggt!"; }
     if(!empty($result_msg)) { echo '<span class="msg errorMsg">' .$result_msg. '</span>'; }
     if($result_msg===false) { echo '<span class="msg successMsg">Erfolgreich registriert!</span>';}
     ?>

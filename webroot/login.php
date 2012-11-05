@@ -1,32 +1,38 @@
 <?php
 require_once('../system/handlers/loginHandler.class.php');
+require_once '../system/template/page.class.php';
 $handler = new loginHandler();
 $login = $handler->checkIfLogin(); // Schon eingelogt?
 
 // Formular übermittelt
 $result_msg=NULL;
-if(isset( $_POST['submit2'] ) || isset( $_POST['submit'] )) {
+if(isset( $_POST['submit'] )) {
     $result_msg = $handler->validateInput( $_POST['login'], $_POST['pass'] );
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        .msg { display:block; padding: 10px; margin: 10px 0 10px 0; border-radius: 5px;  }
-        .errorMsg { background-color: tomato; }
-        .successMsg { background-color: #adff2f; }
-    </style>
-</head>
-<body>
-    <?php
-    if ($login) { echo '<span class="msg successMsg">Schon eingeloggt!</span>'; die(); }
-    if(!empty($result_msg)) { echo '<span class="msg errorMsg">' .$result_msg. '</span>'; }
-    if($result_msg===false) { echo '<span class="msg successMsg">Erfolgreich eingeloggt!</span>';}
-    ?>
-    
-    <form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+
+$content = ''; // Damit wir was dranhängen können
+// Schon vorher eingeloggt:
+if ($login) {
+    $content = '<span class="msg successMsg">Schon eingeloggt!</span>';
+}
+
+// Gerade (durch Form-Übermittlung) eingeloggt:
+if($result_msg===false) {
+    $content .= '<span class="msg successMsg">Erfolgreich eingeloggt!</span>';
+
+    // TODO Auf jeden Fall irgendwie auslagern!
+    $content .= '<script type="text/javascript">setTimeout(function () { window.location.href = "index.php"; }, 2000);</script>';
+
+// Nicht eingeloggt
+} else {
+    // Bei Fehler nach Übermittlung
+    if(!empty($result_msg)) {
+        $content .= '<span class="msg errorMsg">' .$result_msg. '</span>';
+    }
+
+    // Das Formular
+    $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';
+    $content .= '
         <fieldset>
             <legend>Login</legend>
             <label for="login">Nutzername oder Email:</label>
@@ -35,10 +41,13 @@ if(isset( $_POST['submit2'] ) || isset( $_POST['submit'] )) {
             <label for="pass">Passwort:</label>
             <input name="pass" id="pass" type="password" size="30" maxlength="50" required />
 
-            <!-- erster Button für deaktivierte Validation - später rausnehmen -->
-            <input type="submit" formnovalidate name="submit2" id="submit2" value="Test" />
-            <button name="submit" id="submit">Login</button>
+            <button name="submit" class="button fancyBtn" id="submit">Login</button>
         </fieldset>
-    </form>
-</body>
-</html>
+    </form>';
+}
+
+$page = new page();
+$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
+$page->set_body_content($content);
+echo $page->get_page();
+?>

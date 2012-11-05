@@ -11,6 +11,10 @@ require 'template.class.php';
 class page {
     var $template;
     var $style = "default";
+
+    function __construct() {
+        $this->setup_page();
+    }
     
     function setup_page() {
 
@@ -88,5 +92,4 @@ class page {
         return $this->template->get_template();
     }
 }
-
 ?>

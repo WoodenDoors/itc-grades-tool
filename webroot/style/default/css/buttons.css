@@ -1,0 +1,63 @@
+/*
+    Document   : buttons
+    Created on : 05.11.2012, 20:31
+    Author     : mwegmann
+    Description: default stylesheet
+*/
+
+/* Buttons */
+.button {
+    text-decoration: none;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+}
+.button:hover {
+    text-decoration: none;
+}
+
+.fancyBtn {
+    font-weight: bold;
+    padding: 4px 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+    color: #1f1200;
+    border: 1px solid #8e6100;
+    background: #f09114;
+    background: -moz-linear-gradient(top, #fee87d 0%, #f09114 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fee87d), color-stop(100%,#f09114)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fee87d 0%,#f09114 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fee87d 0%,#f09114 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fee87d 0%,#f09114 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #fee87d 0%,#f09114 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fee87d', endColorstr='#f09114',GradientType=0 ); /* IE6-9 */
+}
+
+.fancyBtn:hover {
+    background: #f0af14;
+}
+
+.subtleBtn {
+    padding: 2px;
+    margin-left: 10px;
+    border-radius: 3px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+
+    color: #333;
+    border: 1px solid #aaa;
+    background: #dddddd;
+    background: -moz-linear-gradient(top, #eeeeee 0%, #dddddd 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#dddddd)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #eeeeee 0%,#dddddd 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #eeeeee 0%,#dddddd 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #eeeeee 0%,#dddddd 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #eeeeee 0%,#dddddd 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dddddd',GradientType=0 ); /* IE6-9 */
+}
+.subtleBtn:hover {
+    background: #ffffff;
+}

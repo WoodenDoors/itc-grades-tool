@@ -3,11 +3,19 @@
  Author     : mwegmann
  Description: default script
  */
-
 $(document).ready(function(){
-    // Einfach nur so, weil ich es kann!
+
+    // Stand-alone Buttons
     $("button#logout").click(function(){
-        $("article#content").slideUp();
-        $("article#content").fadeIn();
+        window.location.href = "logout.php";
     });
+
+    $("button#login").click(function(){
+        window.location.href = "login.php";
+    });
+
+    $("button#register").click(function(){
+        window.location.href = "register.php";
+    });
+
 });

@@ -23,6 +23,7 @@ class pageHandler {
     const ERR_INPUT_UNDERSIZED = "Alle Felder sollten mindestens 2 Zeichen lang sein.";
 
     protected $db;
+    protected $username;
 
     function __construct() {
         $config = new dbconfig();
@@ -46,7 +47,15 @@ class pageHandler {
                 return false;
             }
             // Username und Passwort gültig
+            $this->username = $_COOKIE['username'];
             return true;
+        }
+        return false;
+    }
+
+    public function getUsername() {
+        if(isset($this->username)) {
+            return $this->username;
         }
         return false;
     }
@@ -68,4 +77,5 @@ class pageHandler {
         }
         return true;
     }
+
 }

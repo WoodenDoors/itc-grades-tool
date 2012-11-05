@@ -31,6 +31,8 @@ class page {
             '<script src="style/'.$this->style.'/js/default.js" type="text/javascript"></script>'
         );
         $this->template->fillin("TITLE", "ITC-Grades-Tool");
+        $this->template->fillin("ROTATOR",'<img src="style/'.$this->style.'/img/loader.gif"/>');
+
 
         $main_tpl = new Template();
         $main_tpl->readin("style/".$this->style."/tpl/tpl_main.html");

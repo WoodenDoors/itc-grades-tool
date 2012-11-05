@@ -31,7 +31,7 @@ if(isset( $_POST['submit2'] ) || isset( $_POST['submit2'] )) {
 </head>
 <body>
     <?php
-    if ($login) { echo "Schon eingeloggt!"; }
+    if ($login) { echo '<span class="msg successMsg">Schon eingeloggt!</span>'; die(); }
     if(!empty($result_msg)) { echo '<span class="msg errorMsg">' .$result_msg. '</span>'; }
     if($result_msg===false) { echo '<span class="msg successMsg">Erfolgreich registriert!</span>';}
     ?>

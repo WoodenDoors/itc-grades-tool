@@ -5,7 +5,7 @@
     Description: default stylesheet
 */
 
-/* reset & global styles */
+/* reset + global styles */
 html, body, div, object, iframe, fieldset { 
 	margin: 0; 
 	padding: 0; 
@@ -170,7 +170,7 @@ section#main nav ul li.active {
     background-color: #F4F4F4; 
 }
 
-
+/* content */
 section#main article#content { 
     background-color: #F4F4F4;
     padding: 10px;

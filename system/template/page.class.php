@@ -16,8 +16,16 @@ class page {
 
         $this->template = new Template();
         $this->template->readin("style/".$this->style."/tpl/tpl_overall.html");
-        $this->template->fillin("STYLESHEET", '<link rel="stylesheet" type="text/css" href="style/'.$this->style.'/css/default.css">'."\n".
-                    '<link rel="shortcut icon" type="image/x-icon" href="style/'.$this->style.'/img/favicon.ico">');
+        $this->template->fillin(
+            "STYLESHEET",
+            '<link rel="stylesheet" type="text/css" href="style/'.$this->style.'/css/default.css">'."\n".
+            '<link rel="shortcut icon" type="image/x-icon" href="style/'.$this->style.'/img/favicon.ico">'
+        );
+        $this->template->fillin(
+            "JAVASCRIPT",
+            '<script src="style/'.$this->style.'/js/jquery-1.8.2.min.js" type="text/javascript"></script>'."\n".
+            '<script src="style/'.$this->style.'/js/default.js" type="text/javascript"></script>'
+        );
         $this->template->fillin("TITLE", "ITC-Grades-Tool");
 
         $main_tpl = new Template();

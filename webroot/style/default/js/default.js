@@ -12,6 +12,12 @@ $(document).ready(function(){
     hideRotator();
 
     // Stand-alone Buttons
+    $("button#settings").click(function(){
+        window.location.href = "settings.php";
+        showRotator();
+    });
+
+
     $("button#logout").click(function(){
         window.location.href = "logout.php";
         showRotator();

@@ -23,7 +23,7 @@ class pageHandler {
     const ERR_INPUT_UNDERSIZED = "Alle Felder sollten mindestens 2 Zeichen lang sein.";
 
     protected $db;
-    protected $username;
+    private $result;
 
     function __construct() {
         $config = new dbconfig();
@@ -46,16 +46,37 @@ class pageHandler {
             if($_COOKIE['pass'] != $result['pass']) {
                 return false;
             }
-            // Username und Passwort gültig
-            $this->username = $_COOKIE['username'];
+            // wenn Username und Passwort gültig: $result verfügbar machen
+            $this->result = $result;
             return true;
         }
         return false;
     }
 
     public function getUsername() {
-        if(isset($this->username)) {
-            return $this->username;
+        if(isset($this->result)) {
+            return $this->result['username'];
+        }
+        return false;
+    }
+
+    public function getVorname() {
+        if(isset($this->result)) {
+            return $this->result['vorname'];
+        }
+        return false;
+    }
+
+    public function getNachname() {
+        if(isset($this->result)) {
+            return $this->result['nachname'];
+        }
+        return false;
+    }
+
+    public function getEmail() {
+        if(isset($this->result)) {
+            return $this->result['email'];
         }
         return false;
     }

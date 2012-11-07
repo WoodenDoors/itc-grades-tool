@@ -11,6 +11,7 @@ require_once 'template.class.php';
 class page {
     var $template;
     var $style = "default";
+    var $home_link = "index.php";
 
     function __construct() {
         $this->setup_page();
@@ -32,6 +33,7 @@ class page {
         );
         $this->template->fillin("TITLE", "ITC-Grades-Tool");
         $this->template->fillin("ROTATOR",'<img src="style/'.$this->style.'/img/loader.gif"/>');
+        $this->template->fillin("HOME_LINK", $this->home_link);
 
 
         $main_tpl = new Template();

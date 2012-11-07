@@ -39,10 +39,6 @@ if($result_msg===false) {
         $content .= '<span class="msg errorMsg">' .$result_msg. '</span>';
     }
 
-    if($result_msg===false) {
-        echo '<span class="msg successMsg">Erfolgreich registriert!</span>';
-    }
-
 // Das Formular
 //------------------------------------------------------------------------------------------------------------------
     $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';

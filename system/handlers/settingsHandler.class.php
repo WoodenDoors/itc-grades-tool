@@ -15,12 +15,18 @@ class settingsHandler extends pageHandler {
     function __destruct() { }
 
     function validateNameSettings($username, $vorname, $nachname, $email) {
-        // ...
+        if(!$this->checkIfEmpty( array($username, $vorname, $nachname, $email) )) {
+            return parent::ERR_EMPTY_INPUT;
+        }
+
         return false;
     }
 
     function validatePwSettings($oldPw, $newPw, $newPw2) {
-        // ...
+        if(!$this->checkIfEmpty( array($oldPw, $newPw, $newPw2) )) {
+            return parent::ERR_EMPTY_INPUT;
+        }
+
         return false;
     }
 }

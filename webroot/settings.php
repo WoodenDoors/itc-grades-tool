@@ -13,6 +13,7 @@ if(isset( $_POST['nameSettingsSubmit'] )) {
         $_POST['email']
     );
 }
+
 if(isset( $_POST['pwSettingsSubmit'] )) {
     $result_msg = $handler->validatePwSettings(
         $_POST['passAlt'],

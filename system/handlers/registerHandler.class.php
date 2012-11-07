@@ -17,15 +17,14 @@ class registerHandler extends pageHandler {
     public function validateInput($username, $vorname, $nachname, $email, $pass) {
         $dataArray =  array( $username, $vorname, $nachname, $email, $pass );
 
-        // Alle auf leer prüfen
-        if(!$this->checkIfEmpty( $dataArray )) {
+        // Benötigte Felder auf leer prüfen
+        if(!$this->checkIfEmpty( [$username, $email, $pass ] )) {
             return parent::ERR_EMPTY_INPUT;
         }
 
-        // Alles mindestens 2 Zeichen lang
-        // TODO: ist das Sinnvoll?
-        if(!$this->checkIfLength( $dataArray, 2 )) {
-            return parent::ERR_INPUT_UNDERSIZED;
+        // Username 4 Zeichen, Passwort 4 Zeichen Minimum
+        if(!$this->checkIfLength( [$username => 4, $pass => 4 ] )) {
+            return parent::ERR_INPUT_TOO_SHORT;
         }
         
         // Existiert Nutzername bereits?

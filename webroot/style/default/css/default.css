@@ -199,3 +199,9 @@ form button {
     float: right;
     margin-right: 28px;
 }
+
+form span.required {
+    font-size: 1.2em;
+    color: #8b0000;
+    margin-left: 6px;
+}

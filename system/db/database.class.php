@@ -113,6 +113,28 @@ class database {
         return $result;
     }
 
+
+    /* Einfacher SQL Update */
+    public function updateRow($table, $id, $update) {
+        $sql = "UPDATE `". $table ."` ";
+
+        $i=0;
+        $arraySize = count($update);
+        $sql .= "SET ";
+        foreach($update as $key => $value) {
+            $sql .= "`". $key ."` = '".$this->escapeString( $value )."'";
+            if($i != $arraySize-1) { $sql .=", "; } // Komma hinter jeder Angabe (außer der letzten)
+            $i++;
+        }
+        $sql .= "WHERE `". $table ."`.`ID` =".$id." ";
+
+        if(!$result = $this->query($sql)) {
+            //die("Invalid Query");
+            die("Invalid Query:" .$sql);
+        }
+    }
+
+
     /* Prüft ob Reihen überhaupt vorhanden */
     public function hasRows($result) {
         try {

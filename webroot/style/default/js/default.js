@@ -11,6 +11,11 @@ $(document).ready(function(){
     var rotator = $("div#rotator");
     hideRotator();
 
+
+    // Pflichtfelder mit * markieren
+    $("form input[required]")
+        .after('<span class="required">*</span>');
+
     // Stand-alone Buttons
     $("button#settings").click(function(){
         window.location.href = "settings.php";

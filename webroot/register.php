@@ -49,10 +49,10 @@ if($result_msg===false) {
             <input name="username" id="username" type="text" size="30" maxlength="30" required autofocus />
 
             <label for="vorname">Vorname:</label> 
-            <input name="vorname" id="vorname" type="text" size="30" maxlength="30" required />
+            <input name="vorname" id="vorname" type="text" size="30" maxlength="30" />
 
             <label for="nachname">Nachname:</label> 
-            <input name="nachname" id="nachname" type="text" size="30" maxlength="30" required />
+            <input name="nachname" id="nachname" type="text" size="30" maxlength="30" />
 
             <label for="email">Email Adresse:</label> 
             <input name="email" id="email" type="email" size="30" maxlength="40" required />
@@ -60,7 +60,7 @@ if($result_msg===false) {
             <label for="pass">Password:</label> 
             <input name="pass" id="pass" type="password" size="30" maxlength="50" required />
 
-            <span class="hint">Alle Felder sind Pflichtangaben</span>
+            <span class="hint">Alle mit * markierten Felder sind Pflichtangaben</span>
             <div style="clear:both"></div>
             <button name="submit" class="button fancyBtn" id="submit">Abschicken</button>
         </fieldset>

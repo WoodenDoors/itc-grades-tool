@@ -4,9 +4,9 @@
  *
  * @author Marius Rüter
  */
-require 'stringparser.class.php';
-require 'stringparser_bbcode.class.php';
-require 'template.class.php';
+require_once 'stringparser.class.php';
+require_once 'stringparser_bbcode.class.php';
+require_once 'template.class.php';
 
 class page {
     var $template;

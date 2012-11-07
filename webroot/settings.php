@@ -22,6 +22,11 @@ if(isset( $_POST['pwSettingsSubmit'] )) {
     );
 }
 
+// new page
+$page = new page();
+$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
+
+// build page content
 $content = '';
 if (!$login) {
     $content = '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
@@ -34,55 +39,20 @@ if (!$login) {
     if($result_msg===false) {
         $content .= '<span class="msg successMsg">Einstellungen erfolgreich geändert!</span>';
     }
-
-    // TODO über Template einbinden:
-    $username = $handler->getUsername();
-    $vorname = $handler->getVorname();
-    $nachname = $handler->getNachname();
-    $email = $handler->getEmail();
-
-// Das Formular
-//------------------------------------------------------------------------------------------------------------------
-    $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';
-    $content .= '
-        <fieldset id="nameSettings">
-            <legend>Einstellungen</legend>
-            <label for="username">Nutzername:</label>
-            <input name="username" id="username" type="text" size="30" maxlength="30" required autofocus />
-
-            <label for="vorname">Vorname:</label>
-            <input name="vorname" id="vorname" type="text" size="30" maxlength="30" />
-
-            <label for="nachname">Nachname:</label>
-            <input name="nachname" id="nachname" type="text" size="30" maxlength="30" />
-
-            <label for="email">Email Adresse:</label>
-            <input name="email" id="email" type="email" size="30" maxlength="40" required />
-
-            <button name="nameSettingsSubmit" class="button fancyBtn" id="nameSettingsSubmit">Abschicken</button>
-        </fieldset>
-        </form>';
-
-    $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';
-    $content .= '
-        <fieldset id="pwSettings">
-                <legend>Passwort ändern</legend>
-                <label for="passAlt">Altes Password:</label>
-                <input name="passAlt" id="passAlt" type="password" size="30" maxlength="50" required />
-
-                <label for="passNeu">Neues Password:</label>
-                <input name="passNeu" id="passNeu" type="password" size="30" maxlength="50" required />
-
-                <label for="passNeu2">Neues Password nochmal:</label>
-                <input name="passNeu2" id="passNeu2" type="password" size="30" maxlength="50" required />
-
-                <button name="pwSettingsSubmit" class="button fancyBtn" id="pwSettingsSubmit">Abschicken</button>
-            </fieldset>
-        </form>';
+    // Das Formular
+    $content .= $page->loadAdditionalTemplate(
+        "settings",
+        [
+            "SETTINGS_USERNAME" => $handler->getUsername(),
+            "SETTINGS_VORNAME" => $handler->getVorname(),
+            "SETTINGS_NACHNAME" => $handler->getNachname(),
+            "SETTINGS_EMAIL" => $handler->getEmail(),
+            "REQUEST_URI" => $_SERVER['REQUEST_URI']
+        ]
+    );
 }
 
-$page = new page();
-$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
+// set content and output
 $page->set_body_content($content);
 echo $page->get_page();
 ?>

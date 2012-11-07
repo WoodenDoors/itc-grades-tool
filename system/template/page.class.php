@@ -13,8 +13,11 @@ class page {
     var $style = "default";
     var $home_link = "index.php";
 
-    function __construct() {
-        $this->setup_page();
+    // setup page on default
+    function __construct($constructPage=TRUE) {
+        if($constructPage) {
+            $this->setup_page();
+        }
     }
     
     function setup_page() {
@@ -91,9 +94,24 @@ class page {
         $header_tpl->fillin("USERNAME", $username);
         $this->template->fillin("HEADCONTENT", $header_tpl->get_template());
     }
-    
+
+    function loadAdditionalTemplate($filename, $fillIn) {
+        $new_tpl = new Template();
+        $new_tpl->readin("style/". $this->style ."/tpl/tpl_". $filename .".html");
+
+        foreach($fillIn as $key => $value) {
+            $new_tpl->fillin($key, $value);
+        }
+
+        return $new_tpl->get_template();
+    }
+
     function get_page() {
         return $this->template->get_template();
+    }
+
+    function get_style() {
+        return $this->style;
     }
 }
 ?>

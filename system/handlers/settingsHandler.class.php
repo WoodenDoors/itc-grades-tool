@@ -13,4 +13,14 @@ class settingsHandler extends pageHandler {
     }
 
     function __destruct() { }
+
+    function validateNameSettings($username, $vorname, $nachname, $email) {
+        // ...
+        return false;
+    }
+
+    function validatePwSettings($oldPw, $newPw, $newPw2) {
+        // ...
+        return false;
+    }
 }

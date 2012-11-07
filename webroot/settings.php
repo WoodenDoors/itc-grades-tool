@@ -4,10 +4,35 @@ require_once '../system/template/page.class.php';
 $handler = new settingsHandler();
 $login = $handler->checkIfLogin();
 
+$result_msg=NULL;
+if(isset( $_POST['nameSettingsSubmit'] )) {
+    $result_msg = $handler->validateNameSettings(
+        $_POST['username'],
+        $_POST['vorname'],
+        $_POST['nachname'],
+        $_POST['email']
+    );
+}
+if(isset( $_POST['pwSettingsSubmit'] )) {
+    $result_msg = $handler->validatePwSettings(
+        $_POST['passAlt'],
+        $_POST['passNeu'],
+        $_POST['passNeu2']
+    );
+}
+
 $content = '';
 if (!$login) {
     $content = '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
 } else {
+
+    if(!empty($result_msg)) {
+        $content .= '<span class="msg errorMsg">' .$result_msg. '</span>';
+    }
+
+    if($result_msg===false) {
+        $content .= '<span class="msg successMsg">Einstellungen erfolgreich geändert!</span>';
+    }
 
     // TODO über Template einbinden:
     $username = $handler->getUsername();
@@ -33,7 +58,7 @@ if (!$login) {
             <label for="email">Email Adresse:</label>
             <input name="email" id="email" type="email" size="30" maxlength="40" required />
 
-            <button name="submit" class="button fancyBtn" id="nameSettingsSubmit">Abschicken</button>
+            <button name="nameSettingsSubmit" class="button fancyBtn" id="nameSettingsSubmit">Abschicken</button>
         </fieldset>
         </form>';
 
@@ -50,7 +75,7 @@ if (!$login) {
                 <label for="passNeu2">Neues Password nochmal:</label>
                 <input name="passNeu2" id="passNeu2" type="password" size="30" maxlength="50" required />
 
-                <button name="submit" class="button fancyBtn" id="pwSettingsSubmit">Abschicken</button>
+                <button name="pwSettingsSubmit" class="button fancyBtn" id="pwSettingsSubmit">Abschicken</button>
             </fieldset>
         </form>';
 }

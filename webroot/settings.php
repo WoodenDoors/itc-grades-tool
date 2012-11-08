@@ -2,6 +2,7 @@
 require_once('../system/handlers/settingsHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new settingsHandler();
+$handler->checkIfLogin(); // in Konstruktor?
 
 // Form 1 (IDs) übermittelt
 //------------------------------------------------------------------------------------------------------------------

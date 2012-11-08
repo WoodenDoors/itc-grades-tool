@@ -2,6 +2,7 @@
 require_once('../system/handlers/loginHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new loginHandler();
+$handler->checkIfLogin();
 
 // Formular übermittelt
 //------------------------------------------------------------------------------------------------------------------

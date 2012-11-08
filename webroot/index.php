@@ -1,10 +1,10 @@
 <?php
-require_once('../system/handlers/pageHandler.class.php');
-require '../system/template/page.class.php';
+//require_once('../system/handlers/pageHandler.class.php');
+require_once '../system/template/page.class.php';
 ini_set("display_errors", 1);
 ini_set("html_errors", 1);
 
-$handler = new pageHandler();
+//$handler = new pageHandler();
 
 $content = '<p>Lorem ipsum dolor sit <a href="#">amet</a>, consectetur adipiscing elit. Donec imperdiet lobortis pretium. Etiam dui felis, viverra at gravida nec, elementum ut purus. Aenean odio nunc, accumsan eget convallis blandit, vulputate sit amet tellus. Fusce in vulputate dui. Vestibulum non molestie sem. Cras congue, orci sit amet tincidunt rhoncus, lorem dui pellentesque purus, id mattis mi nunc eget elit. Mauris ut neque id ante pretium semper. Donec consequat pellentesque massa dignissim pretium. Mauris diam sapien, consectetur at rhoncus eget, porttitor vitae metus. Etiam convallis, est quis sagittis luctus, justo mauris cursus metus, accumsan faucibus risus sem sed felis.
                 </p>
@@ -18,7 +18,7 @@ $content = '<p>Lorem ipsum dolor sit <a href="#">amet</a>, consectetur adipiscin
 
 // TODO Auslagern / Vereinfachen / PageWrapper bauen
 $page = new page();
-$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
+//$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
 $page->set_body_content($content);
 echo $page->get_page();
 ?>

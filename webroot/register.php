@@ -21,7 +21,7 @@ if(isset( $_POST['submit'] )) {
 //------------------------------------------------------------------------------------------------------------------
 $page = new page();
 $login = $handler->checkIfLogin();
-$page->set_userControl_content($login, $handler->getUsername());
+//$page->set_userControl_content($login, $handler->getUsername());
 
 // Diverse Prüfungen
 //------------------------------------------------------------------------------------------------------------------

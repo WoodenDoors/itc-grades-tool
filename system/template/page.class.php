@@ -7,6 +7,8 @@
 require_once 'stringparser.class.php';
 require_once 'stringparser_bbcode.class.php';
 require_once 'template.class.php';
+require_once '../system/handlers/pageHandler.class.php';
+
 
 class page {
     var $template;
@@ -77,6 +79,18 @@ class page {
         $this->template->fillin("MAINCONTENT", $main_tpl->get_template());
         
         $this->template->fillin("FOOTER", "Ein GDI2 Projekt");
+        
+        $pageHandler = new pageHandler();
+        $header_tpl_file = "tpl_header"; // Not logged in
+        if($pageHandler->checkIfLogin()) {
+            $header_tpl_file = "tpl_header_user"; // Logged in
+        }
+
+        $header_tpl = new Template();
+        $header_tpl->readin("style/". $this->style ."/tpl/". $header_tpl_file .".html");
+        $header_tpl->fillin("USERNAME", $pageHandler->getUsername());
+        $this->template->fillin("HEADCONTENT", $header_tpl->get_template());
+
     }
     
     function set_body_content($value) {

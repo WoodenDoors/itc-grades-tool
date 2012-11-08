@@ -2,36 +2,43 @@
 require_once('../system/handlers/loginHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new loginHandler();
-$login = $handler->checkIfLogin(); // Schon eingelogt?
 
 // Formular übermittelt
+//------------------------------------------------------------------------------------------------------------------
 $result_msg=NULL;
 if(isset( $_POST['submit'] )) {
     $result_msg = $handler->validateInput( $_POST['login'], $_POST['pass'] );
 }
 
+// neue Seite
+//------------------------------------------------------------------------------------------------------------------
+$page = new page();
+$login = $handler->checkIfLogin(); // Schon eingelogt?
+$page->set_userControl_content($login, $handler->getUsername());
+
+// Diverse Prüfungen
+//------------------------------------------------------------------------------------------------------------------
 $content = ''; // Damit wir was dranhängen können
 // Schon vorher eingeloggt:
 if ($login) {
-    $content = '<span class="msg successMsg">Schon eingeloggt!</span>';
+    $content .= $page->buildResultMessage("successMsg", "Schon eingeloggt!");
 }
 
 // Gerade (durch Form-Übermittlung) eingeloggt:
 if($result_msg===false) {
-    $content .= '<span class="msg successMsg">Erfolgreich eingeloggt!</span>';
-
-    // TODO Auf jeden Fall irgendwie auslagern!
-    $content .= '<script type="text/javascript">setTimeout(function () { window.location.href = "index.php"; }, 2000);</script>';
+    $content .= $page->buildResultMessage("successMsg", "Erfolgreich eingeloggt!", true, "index.php"); // mit redirect
 
 // Nicht eingeloggt
 } else {
     // Bei Fehler nach Übermittlung
     if(!empty($result_msg)) {
-        $content .= '<span class="msg errorMsg">' .$result_msg. '</span>';
+        $content .= $page->buildResultMessage("errorMsg", $result_msg);
     }
 
-    // Das Formular
-    $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';
+// Das Formular
+//------------------------------------------------------------------------------------------------------------------
+    $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post"
+                    enctype="multipart/form-data" accept-charset="UTF-8">';
     $content .= '
         <fieldset>
             <legend>Login</legend>
@@ -46,8 +53,8 @@ if($result_msg===false) {
     </form>';
 }
 
-$page = new page();
-$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
+// Ausgabe
+//------------------------------------------------------------------------------------------------------------------
 $page->set_body_content($content);
 echo $page->get_page();
 ?>

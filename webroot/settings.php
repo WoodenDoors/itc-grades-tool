@@ -2,9 +2,9 @@
 require_once('../system/handlers/settingsHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new settingsHandler();
-$login = $handler->checkIfLogin();
 
 // Form 1 (IDs) übermittelt
+//------------------------------------------------------------------------------------------------------------------
 $result_msg=NULL;
 if(isset( $_POST['nameSettingsSubmit'] )) {
     $result_msg = $handler->validateNameSettings(
@@ -16,6 +16,7 @@ if(isset( $_POST['nameSettingsSubmit'] )) {
 }
 
 // Form 2 (PW) übermittelt
+//------------------------------------------------------------------------------------------------------------------
 if(isset( $_POST['pwSettingsSubmit'] )) {
     $result_msg = $handler->validatePwSettings(
         $_POST['passAlt'],
@@ -25,26 +26,30 @@ if(isset( $_POST['pwSettingsSubmit'] )) {
 }
 
 // neue Seite
+//------------------------------------------------------------------------------------------------------------------
 $page = new page();
-$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
+$login = $handler->checkIfLogin();
+$page->set_userControl_content($login, $handler->getUsername());
 
 // Seiten-Inhalt zusammen bauen
-$content = '';
+//------------------------------------------------------------------------------------------------------------------
+$content = "";
 if (!$login) {
-    $content = '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
+    $content .= $page->buildResultMessage("errorMsg", "Sie sind nicht eingeloggt! Bitte einloggen.");
 } else {
 
     // Fehler
     if(!empty($result_msg)) {
-        $content .= '<span class="msg errorMsg">' .$result_msg. '</span>';
+        $content .= $page->buildResultMessage("errorMsg", $result_msg);
     }
 
     // Erfolg
     if($result_msg===false) {
-        $content .= '<span class="msg successMsg">Einstellungen erfolgreich geändert!</span>';
+        $content .= $page->buildResultMessage("successMsg", "Einstellungen erfolgreich geändert!");
     }
 
-    // Das Formular
+// Das Formular
+//------------------------------------------------------------------------------------------------------------------
     $content .= $page->loadAdditionalTemplate(
         "settings",
         [
@@ -58,6 +63,7 @@ if (!$login) {
 }
 
 // Ausgabe
+//------------------------------------------------------------------------------------------------------------------
 $page->set_body_content($content);
 echo $page->get_page();
 ?>

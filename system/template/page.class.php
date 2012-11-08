@@ -106,6 +106,21 @@ class page {
         return $new_tpl->get_template();
     }
 
+    function buildResultMessage($msgType, $msgText, $redirect=false, $redirectTo=NULL) {
+        $new_tpl = new Template();
+        $new_tpl->readin("style/". $this->style ."/tpl/tpl_resultMsg.html");
+        $new_tpl->fillin("RESULT_MSG_TYPE", $msgType);
+
+        if($redirect) {
+            $redirect_tpl = new Template();
+            $redirect_tpl->readin("style/". $this->style ."/tpl/tpl_redirect.html");
+            $redirect_tpl->fillin("REDIRECT_HREF", $redirectTo);
+            $msgText .= $redirect_tpl->get_template();
+        }
+        $new_tpl->fillin("RESULT_MSG_TEXT", $msgText);
+        return $new_tpl->get_template();
+    }
+
     function get_page() {
         return $this->template->get_template();
     }

@@ -30,7 +30,6 @@ if(isset( $_POST['pwSettingsSubmit'] )) {
 //------------------------------------------------------------------------------------------------------------------
 $page = new page();
 $login = $handler->checkIfLogin();
-$page->set_userControl_content($login, $handler->getUsername());
 
 // Seiten-Inhalt zusammen bauen
 //------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,4 @@
 <?php
-//require_once('../system/handlers/pageHandler.class.php');
 require_once '../system/template/page.class.php';
 ini_set("display_errors", 1);
 ini_set("html_errors", 1);
@@ -18,7 +17,6 @@ $content = '<p>Lorem ipsum dolor sit <a href="#">amet</a>, consectetur adipiscin
 
 // TODO Auslagern / Vereinfachen / PageWrapper bauen
 $page = new page();
-//$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
 $page->set_body_content($content);
 echo $page->get_page();
 ?>

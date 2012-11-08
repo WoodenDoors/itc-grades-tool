@@ -15,7 +15,6 @@ if(isset( $_POST['submit'] )) {
 //------------------------------------------------------------------------------------------------------------------
 $page = new page();
 $login = $handler->checkIfLogin(); // Schon eingelogt?
-//$page->set_userControl_content($login, $handler->getUsername());
 
 // Diverse Prüfungen
 //------------------------------------------------------------------------------------------------------------------

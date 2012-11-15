@@ -48,19 +48,19 @@ class page {
             $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", ' class="active"');
             $nav_entry->fillin("NAVID", "link-home");
-            $nav_entry->fillin("NAVURL", "#");
+            $nav_entry->fillin("NAVURL", "index.php");
             $nav_entry->fillin("NAVTITLE", "Startseite");
             
             $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", "");
-            $nav_entry->fillin("NAVURL", "#");
+            $nav_entry->fillin("NAVURL", "viewGrades.php");
             $nav_entry->fillin("NAVTITLE", "Notenübersicht");
             
             $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", "");
-            $nav_entry->fillin("NAVURL", "#");
+            $nav_entry->fillin("NAVURL", "addGrades.php");
             $nav_entry->fillin("NAVTITLE", "Noten eintragen");
             
             $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
@@ -72,7 +72,7 @@ class page {
             $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", "");
-            $nav_entry->fillin("NAVURL", "#");
+            $nav_entry->fillin("NAVURL", "about.php");
             $nav_entry->fillin("NAVTITLE", "Über das Projekt");
             
         $main_tpl->fillin("NAVIGATION", '<ul>'.$nav_entry->get_template().'</ul>');    

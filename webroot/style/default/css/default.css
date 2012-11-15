@@ -179,12 +179,21 @@ form label {
     text-align: right;
 }
 
-form input {
+form input,
+form select {
     font-size: 1.2em;
     width: 250px;
+    margin: 10px 0 10px 0;
+}
+
+form input {
     height: 25px;
     padding: 2px 5px 2px 5px;
-    margin: 10px 0 10px 0;
+}
+
+form select {
+    height: 35px;
+    padding: 5px;
 }
 
 form span.hint {
@@ -204,4 +213,14 @@ form span.required {
     font-size: 1.2em;
     color: #8b0000;
     margin-left: 6px;
+}
+
+table.gradesView {
+    width: 400px;
+}
+table.gradesView th {
+    text-align: left;
+}
+table.gradesView td {
+
 }

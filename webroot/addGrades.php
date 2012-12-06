@@ -21,10 +21,14 @@ if (!$login) {
     
     $content.=
     '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
-        <input type="select">
-            <option name="MCI">MCI</option>
-            <option name="Programmierung1">Programmierung1</option>
-        </input>
+        <label for="course">Fach:</label>
+        <select name="course" id="course">
+            <option value="MCI">MCI</option>
+            <option value="Prog1">Programmierung 1</option>
+        </select><br/>
+        <label for="grade" id="grade">Note:</label>
+        <input name="grade" id="grade" value="1.0"/><br/>
+        <input type="submit" value="Absenden"/>
     </form>';
 }
 $page->set_body_content($content);

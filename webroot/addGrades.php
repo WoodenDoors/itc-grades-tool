@@ -4,7 +4,11 @@ require_once '../system/template/page.class.php';
 $handler = new addGradesHandler();
 $login = $handler->checkIfLogin();
 
-$content = '';
+// neue Seite
+//------------------------------------------------------------------------------------------------------------------
+$page = new page();
+$login = $handler->checkIfLogin();
+
 if (!$login) {
     $content = '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
 } else {
@@ -23,8 +27,6 @@ if (!$login) {
         </input>
     </form>';
 }
-$page = new page();
-$page->set_userControl_content($handler->checkIfLogin(), $handler->getUsername());
 $page->set_body_content($content);
 echo $page->get_page();
 ?>

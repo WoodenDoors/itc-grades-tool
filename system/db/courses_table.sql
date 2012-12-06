@@ -11,7 +11,7 @@
 CREATE TABLE IF NOT EXISTS `itc-grades-tool_courses` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `abbreviation` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `subject` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `course` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `credits` int(2) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `abbreviation` (`abbreviation`)
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `itc-grades-tool_courses` (
 -- Dumping data for table `itc-grades-tool_courses`
 --
 
-INSERT INTO `itc-grades-tool_courses` (`ID`, `abbreviation`, `subject`, `credits`) VALUES
+INSERT INTO `itc-grades-tool_courses` (`ID`, `abbreviation`, `course`, `credits`) VALUES
 (1, 'GDI1', 'Grundlagen der Infromatik 1', 5),
 (2, 'GDI2', 'Grundlagen der Infromatik 2', 5),
 (3, 'P1', 'Programmierung 1', 7),

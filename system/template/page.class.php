@@ -1,6 +1,6 @@
 <?php
 /**
- * Die Klasse page handhabt das ausgeben und modifizieren einer Seite
+ * Die Klasse page handhabt das Ausgeben und modifizieren einer Seite
  *
  * @author Marius Rüter
  */
@@ -14,28 +14,33 @@ class page {
     var $template;
     var $style = "default";
     var $home_link = "index.php";
+    var $config;
 
     // setup page on default
     function __construct($constructPage=TRUE) {
+        $this->validateconfig();
         if($constructPage) {
             $this->setup_page();
         }
     }
     
     function setup_page() {
-
+        $this->config = simplexml_load_file('style/'.$this->style.'/config.xml');
         $this->template = new Template();
         $this->template->readin("style/".$this->style."/tpl/tpl_overall.html");
-        $this->template->fillin(
-            "STYLESHEET",
-            '<link rel="stylesheet" type="text/css" href="style/'.$this->style.'/css/default.css">'."\n".
-            '<link rel="shortcut icon" type="image/x-icon" href="style/'.$this->style.'/img/favicon.ico">'
-        );
-        $this->template->fillin(
-            "JAVASCRIPT",
-            '<script src="style/'.$this->style.'/js/jquery-1.8.2.min.js" type="text/javascript"></script>'."\n".
-            '<script src="style/'.$this->style.'/js/default.js" type="text/javascript"></script>'
-        );
+
+        //Stylesheets einfügen
+        foreach($this->config->css as $csssheet) {
+            $this->template->fillin("STYLESHEET", '<link rel="stylesheet" type="text/css" href="style/'.$this->style.'/css/'.$csssheet.'">'."\n{STYLESHEET}");
+        }
+        $this->template->fillin("STYLESHEET",'');
+
+        //JavaScript einfügen
+        foreach($this->config->js as $jsfile) {
+            $this->template->fillin("JAVASCRIPT", '<script src="style/'.$this->style.'/js/'.$jsfile.'" type="text/javascript"></script>'."\n{JAVASCRIPT}");
+        }
+        $this->template->fillin("JAVASCRIPT",'');
+
         $this->template->fillin("TITLE", "ITC-Grades-Tool");
         $this->template->fillin("ROTATOR",'<img src="style/'.$this->style.'/img/loader.gif"/>');
         $this->template->fillin("HOME_LINK", $this->home_link);
@@ -43,6 +48,7 @@ class page {
 
         $main_tpl = new Template();
         $main_tpl->readin("style/".$this->style."/tpl/tpl_main.html");
+        $this->template->fillin("MAINCONTENT", $main_tpl->get_template());
             $nav_entry = new Template();
             
             $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
@@ -74,9 +80,8 @@ class page {
             $nav_entry->fillin("NAVID", "");
             $nav_entry->fillin("NAVURL", "about.php");
             $nav_entry->fillin("NAVTITLE", "Über das Projekt");
-            
-        $main_tpl->fillin("NAVIGATION", '<ul>'.$nav_entry->get_template().'</ul>');    
-        $this->template->fillin("MAINCONTENT", $main_tpl->get_template());
+
+        $this->template->fillin("NAVIGATION", '<ul>'.$nav_entry->get_template().'</ul>');
         
         $this->template->fillin("FOOTER", "Ein GDI2 Projekt");
         
@@ -141,6 +146,16 @@ class page {
 
     function get_style() {
         return $this->style;
+    }
+
+    private function validateconfig() {
+        libxml_use_internal_errors(true);
+        $xml = new DOMDocument();
+        $xml->load('style/'.$this->style.'/config.xml');
+
+        if (!$xml->schemaValidate('../system/template/config.xsd')) {
+            $this->style = "default";
+        }
     }
 }
 ?>

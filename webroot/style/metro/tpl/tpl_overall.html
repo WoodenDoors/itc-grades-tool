@@ -4,7 +4,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>{TITLE}</title>
         {STYLESHEET}
-        {JAVASCRIPT}
     </head>
     <body>
         <header id="nav-bar" class="container">
@@ -20,11 +19,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="top-info" class="pull-right">
-                        <a id="settings" class="pull-right" href="#">
-                            <b class="icon-settings"></b>
-                        </a>
-                    </div>
+                    {HEADCONTENT}
                 </div>
             </div>
         </header>
@@ -36,6 +31,7 @@
         
         <footer>
             {FOOTER}
-        </footer>       
+        </footer>
+        {JAVASCRIPT}
     </body>
 </html>

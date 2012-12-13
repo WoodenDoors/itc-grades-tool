@@ -81,20 +81,12 @@ class page {
             $nav_entry->fillin("NAVURL", "about.php");
             $nav_entry->fillin("NAVTITLE", "Über das Projekt");
 
-        $this->template->fillin("NAVIGATION", '<ul>'.$nav_entry->get_template().'</ul>');
+        $this->template->fillin("NAVIGATION", $nav_entry->get_template());
         
         $this->template->fillin("FOOTER", "Ein GDI2 Projekt");
         
         $pageHandler = new pageHandler();
-        $header_tpl_file = "tpl_header"; // Not logged in
-        if($pageHandler->checkIfLogin()) {
-            $header_tpl_file = "tpl_header_user"; // Logged in
-        }
-
-        $header_tpl = new Template();
-        $header_tpl->readin("style/". $this->style ."/tpl/". $header_tpl_file .".html");
-        $header_tpl->fillin("USERNAME", $pageHandler->getUsername());
-        $this->template->fillin("HEADCONTENT", $header_tpl->get_template());
+        $this->set_userControl_content($pageHandler->checkIfLogin(), $pageHandler->getUsername(), $pageHandler->getVorname(), $pageHandler->getNachname());
 
     }
     
@@ -102,7 +94,7 @@ class page {
         $this->template->fillin("CONTENT", $value);
     }
 
-    function set_userControl_content($login=false, $username=NULL) {
+    function set_userControl_content($login=false, $username=NULL, $firstname=NULL, $lastname=NULL) {
         $header_tpl_file = "tpl_header"; // Not logged in
         if($login) {
             $header_tpl_file = "tpl_header_user"; // Logged in
@@ -111,6 +103,8 @@ class page {
         $header_tpl = new Template();
         $header_tpl->readin("style/". $this->style ."/tpl/". $header_tpl_file .".html");
         $header_tpl->fillin("USERNAME", $username);
+        $header_tpl->fillin("FIRSTNAME", $firstname);
+        $header_tpl->fillin("LASTNAME", $lastname);
         $this->template->fillin("HEADCONTENT", $header_tpl->get_template());
     }
 

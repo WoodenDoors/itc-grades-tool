@@ -12,7 +12,7 @@ require_once '../system/handlers/pageHandler.class.php';
 
 class page {
     var $template;
-    var $style = "default";
+    var $style = "metro";
     var $home_link = "index.php";
     var $config;
 

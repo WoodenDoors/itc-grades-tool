@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<site>
+    <nav>
+        <navelement>
+            <id>link-home</id>
+            <title>Startseite</title>
+            <url>index.php</url>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Notenübersicht</title>
+            <url>viewGrades.php</url>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Noten eintragen</title>
+            <url>addGrades.php</url>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Grafen</title>
+            <url>#</url>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Über das Projekt</title>
+            <url>about.php</url>
+        </navelement>
+    </nav>
+</site>

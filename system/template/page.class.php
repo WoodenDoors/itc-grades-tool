@@ -12,13 +12,19 @@ require_once '../system/handlers/pageHandler.class.php';
 
 class page {
     var $template;
-    var $style = "metro";
+    var $style = "default";
     var $home_link = "index.php";
     var $config;
 
     // setup page on default
     function __construct($constructPage=TRUE) {
         $this->validateconfig();
+        if(!isset($_GET['PageMode'])) $_GET['PageMode'] = "";
+        if(isset($_COOKIE['style'])) $this->style = $_COOKIE['style'];
+        if(isset($_GET['style'])) {
+            setcookie('style', $_GET['style']);
+            $this->style = $_GET['style'];
+        }
         if($constructPage) {
             $this->setup_page();
         }
@@ -27,7 +33,7 @@ class page {
     function setup_page() {
         $this->config = simplexml_load_file('style/'.$this->style.'/config.xml');
         $this->template = new Template();
-        $this->template->readin("style/".$this->style."/tpl/tpl_overall.html");
+        $this->template->readin("style/".$this->style."/tpl/tpl_overall".$_GET['PageMode'].".html");
 
         //Stylesheets einfügen
         foreach($this->config->css as $csssheet) {
@@ -49,9 +55,18 @@ class page {
         $main_tpl = new Template();
         $main_tpl->readin("style/".$this->style."/tpl/tpl_main.html");
         $this->template->fillin("MAINCONTENT", $main_tpl->get_template());
-            $nav_entry = new Template();
-            
+
+        $nav_entry = new Template();
+        $site = simplexml_load_file("site.xml");
+        foreach($site->nav->navelement as $navelement) {
             $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
+            $nav_entry->fillin("ACTIVE", '');
+            $nav_entry->fillin("NAVID", $navelement->id);
+            $nav_entry->fillin("NAVURL", $navelement->url);
+            $nav_entry->fillin("NAVTITLE", $navelement->title);
+
+        }
+/*            $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
             $nav_entry->fillin("ACTIVE", ' class="active"');
             $nav_entry->fillin("NAVID", "link-home");
             $nav_entry->fillin("NAVURL", "index.php");
@@ -79,7 +94,7 @@ class page {
             $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", "");
             $nav_entry->fillin("NAVURL", "about.php");
-            $nav_entry->fillin("NAVTITLE", "Über das Projekt");
+            $nav_entry->fillin("NAVTITLE", "Über das Projekt");*/
 
         $this->template->fillin("NAVIGATION", $nav_entry->get_template());
         

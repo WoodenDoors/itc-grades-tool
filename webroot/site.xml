@@ -5,26 +5,36 @@
             <id>link-home</id>
             <title>Startseite</title>
             <url>index.php</url>
+            <icon>icon-home</icon>
+            <desc>Übersicht, Infos und mehr.</desc>
         </navelement>
         <navelement>
             <id></id>
             <title>Notenübersicht</title>
             <url>viewGrades.php</url>
+            <icon>icon-tag</icon>
+            <desc>Aktueller Stand, Übersicht, Details und mehr.</desc>
         </navelement>
         <navelement>
             <id></id>
             <title>Noten eintragen</title>
             <url>addGrades.php</url>
+            <icon>icon-pencil</icon>
+            <desc>Noten eintragen, bearbeiten</desc>
         </navelement>
         <navelement>
             <id></id>
             <title>Grafen</title>
             <url>#</url>
+            <icon>icon-stats-up</icon>
+            <desc>Grafische Übersicht der Noten, tendenzen usw.</desc>
         </navelement>
         <navelement>
             <id></id>
             <title>Über das Projekt</title>
             <url>about.php</url>
+            <icon>icon-info </icon>
+            <desc>Projektinfos, Sinn und Zweck des Projektes und niedliche Kätzchen.</desc>
         </navelement>
     </nav>
 </site>

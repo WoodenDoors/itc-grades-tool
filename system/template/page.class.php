@@ -11,10 +11,11 @@ require_once '../system/handlers/pageHandler.class.php';
 
 
 class page {
-    var $template;
-    var $style = "default";
-    var $home_link = "index.php";
-    var $config;
+    private $template;
+    private $style = "default";
+    private $home_link = "index.php";
+    private $config;
+    private $page_title;
 
     // setup page on default
     function __construct($constructPage=TRUE) {
@@ -60,14 +61,21 @@ class page {
         $site = simplexml_load_file("site.xml");
         foreach($site->nav->navelement as $navelement) {
             $nav_entry->readin("style/".$this->style."/tpl/tpl_nav_entry.html");
-            $nav_entry->fillin("ACTIVE", '');
             $nav_entry->fillin("NAVID", $navelement->id);
             $nav_entry->fillin("NAVURL", $navelement->url);
             $nav_entry->fillin("NAVTITLE", " ".$navelement->title);
             $nav_entry->fillin("ICON", $navelement->icon);
+            if(preg_match('/\S*'.$navelement->url.'\S*/i', $_SERVER['SCRIPT_FILENAME'])) {
+                $nav_entry->fillin('ACTIVE', ' class="active"');
+                $this->page_title = $navelement->title;
+            }
+            else {
+                $nav_entry->fillin("ACTIVE", '');
+            }
 
         }
         $this->template->fillin("NAVIGATION", $nav_entry->get_template());
+        $this->template->fillin("PAGE_TITLE", $this->page_title);
         
         $this->template->fillin("FOOTER", "Ein GDI2 Projekt");
         
@@ -84,6 +92,10 @@ class page {
         $header_tpl_file = "tpl_header"; // Not logged in
         if($login) {
             $header_tpl_file = "tpl_header_user"; // Logged in
+        }
+
+        if($firstname == "" && $lastname == "") {
+            $firstname = $username;
         }
 
         $header_tpl = new Template();

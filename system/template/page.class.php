@@ -102,8 +102,10 @@ class page
     function set_userControl_content($login = false, $username = NULL, $firstname = NULL, $lastname = NULL)
     {
         $header_tpl_file = "tpl_header"; // Not logged in
+        $settings_tpl_file = "tpl_settings";
         if ($login) {
             $header_tpl_file = "tpl_header_user"; // Logged in
+            $settings_tpl_file = "tpl_settings_user";
         }
 
         if ($firstname == "" && $lastname == "") {
@@ -116,6 +118,10 @@ class page
         $header_tpl->fillin("FIRSTNAME", $firstname);
         $header_tpl->fillin("LASTNAME", $lastname);
         $this->template->fillin("HEADCONTENT", $header_tpl->get_template());
+
+        $settings_tpl = new Template();
+        $settings_tpl->readin("style/" . $this->style . "/tpl/" . $settings_tpl_file . ".html");
+        $this->template->fillin("USER_SETTINGS", $settings_tpl->get_template());
     }
 
     function loadAdditionalTemplate($filename, $fillIn)

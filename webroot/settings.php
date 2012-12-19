@@ -51,7 +51,7 @@ if (!$login) {
 // Das Formular
 //------------------------------------------------------------------------------------------------------------------
     $content .= $page->loadAdditionalTemplate(
-        "settings",
+        "user_settings",
         [
             "SETTINGS_USERNAME" => $handler->getUsername(),
             "SETTINGS_VORNAME" => $handler->getVorname(),

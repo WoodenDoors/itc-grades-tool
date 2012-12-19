@@ -17,6 +17,7 @@ class page
     private $home_link = "index.php";
     private $config;
     private $page_title;
+    private $page_settings;
 
     // setup page on default
     function __construct($constructPage = TRUE)

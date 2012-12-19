@@ -7,6 +7,7 @@
             <url>index.php</url>
             <icon>icon-home</icon>
             <desc>Übersicht, Infos und mehr.</desc>
+            <login>false</login>
         </navelement>
         <navelement>
             <id></id>
@@ -14,6 +15,7 @@
             <url>viewGrades.php</url>
             <icon>icon-tag</icon>
             <desc>Aktueller Stand, Übersicht, Details und mehr.</desc>
+            <login>true</login>
         </navelement>
         <navelement>
             <id></id>
@@ -21,6 +23,7 @@
             <url>addGrades.php</url>
             <icon>icon-pencil</icon>
             <desc>Noten eintragen, bearbeiten</desc>
+            <login>true</login>
         </navelement>
         <navelement>
             <id></id>
@@ -28,6 +31,7 @@
             <url>#</url>
             <icon>icon-stats-up</icon>
             <desc>Grafische Übersicht der Noten, tendenzen usw.</desc>
+            <login>true</login>
         </navelement>
         <navelement>
             <id></id>
@@ -35,6 +39,7 @@
             <url>about.php</url>
             <icon>icon-info </icon>
             <desc>Projektinfos, Sinn und Zweck des Projektes und niedliche Kätzchen.</desc>
+            <login>false</login>
         </navelement>
     </nav>
 </site>

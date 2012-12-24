@@ -51,11 +51,11 @@ if (!$login) {
     $tplMain = false;
     $tplPassword = false;
     if (isset($_GET['mode'])) {
-        if ($_GET['mode'] == "main") {
-            $tplMain = true;
-        }
-        if ($_GET['mode'] == "password") {
-            $tplPassword = true;
+        switch ($_GET['mode']) {
+            case "main":
+                $tplMain = true;
+            case "password":
+                $tplPassword = true;
         }
     } else {
         $tplMain = true;
@@ -77,7 +77,7 @@ if (!$login) {
         );
     }
 
-    if($tplPassword) {
+    if ($tplPassword) {
         $content .= $page->loadAdditionalTemplate(
             "user_settings_password",
             [

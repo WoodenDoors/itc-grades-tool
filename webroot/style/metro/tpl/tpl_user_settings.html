@@ -1,0 +1,35 @@
+<form class="form-horizontal" action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    <fieldset id="nameSettings">
+        <legend>Einstellungen</legend>
+        <div class="control-group">
+            <label class="control-label" for="username">Nutzername:</label>
+            <div class="controls">
+                <input name="username" id="username" type="text" size="30" maxlength="30" value="{SETTINGS_USERNAME}"
+                       required autofocus/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="vorname">Vorname:</label>
+            <div class="controls">
+                <input name="vorname" id="vorname" type="text" size="30" maxlength="30" value="{SETTINGS_VORNAME}"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="nachname">Nachname:</label>
+            <div class="controls">
+                <input name="nachname" id="nachname" type="text" size="30" maxlength="30" value="{SETTINGS_NACHNAME}"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="email">Email Adresse:</label>
+            <div class="controls">
+                <input name="email" id="email" type="email" size="30" maxlength="40" value="{SETTINGS_EMAIL}" required/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button name="nameSettingsSubmit" class="btn btn-primary" id="nameSettingsSubmit">Abschicken</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

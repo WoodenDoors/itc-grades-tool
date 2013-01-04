@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>{TITLE}</title>
+        {STYLESHEET}
+    </head>
+    <body>
+        <header id="nav-bar" class="container">
+            <div class="row">
+                <div class="span12">
+                    <div id="header-container">
+                        <a id="backbutton" class="win-backbutton" href="./hub.html"></a>
+                        <h5>{TITLE}</h5>
+                        <div class="dropdown">
+                            <a class="header-dropdown dropdown-toggle accent-color" href="#" data-toggle="dropdown">{PAGE_TITLE}<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                {NAVIGATION}
+                            </ul>
+                        </div>
+                    </div>
+                    {HEADCONTENT}
+                </div>
+            </div>
+        </header>
+        <div class="container metro">
+            <div class="row">
+                <div class="span12">{MAINCONTENT}</div>
+            </div>
+        </div>
+        <div id="charms" class="win-ui-dark slide">
+
+            <div id="theme-charms-section" class="charms-section">
+                <div class="charms-header">
+                    <a href="#" class="close-charms win-backbutton"></a>
+                    <h2>Einstellungen</h2>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        {USER_SETTINGS}
+                        {PAGE_SETTINGS}
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        {FOOTER}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {JAVASCRIPT}
+    </body>
+</html>

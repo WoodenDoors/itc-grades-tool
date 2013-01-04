@@ -6,8 +6,8 @@ $handler->checkIfLogin(); // in Konstruktor?
 
 // Form 1 (IDs) übermittelt
 //------------------------------------------------------------------------------------------------------------------
-$result_msg=NULL;
-if(isset( $_POST['nameSettingsSubmit'] )) {
+$result_msg = NULL;
+if (isset($_POST['nameSettingsSubmit'])) {
     $result_msg = $handler->validateNameSettings(
         $_POST['username'],
         $_POST['vorname'],
@@ -18,7 +18,7 @@ if(isset( $_POST['nameSettingsSubmit'] )) {
 
 // Form 2 (PW) übermittelt
 //------------------------------------------------------------------------------------------------------------------
-if(isset( $_POST['pwSettingsSubmit'] )) {
+if (isset($_POST['pwSettingsSubmit'])) {
     $result_msg = $handler->validatePwSettings(
         $_POST['passAlt'],
         $_POST['passNeu'],
@@ -39,27 +39,54 @@ if (!$login) {
 } else {
 
     // Fehler
-    if(!empty($result_msg)) {
+    if (!empty($result_msg)) {
         $content .= $page->buildResultMessage("errorMsg", $result_msg);
     }
 
     // Erfolg
-    if($result_msg===false) {
+    if ($result_msg === false) {
         $content .= $page->buildResultMessage("successMsg", "Einstellungen erfolgreich geändert!");
+    }
+
+    $tplMain = false;
+    $tplPassword = false;
+    if (isset($_GET['mode'])) {
+        switch ($_GET['mode']) {
+            case "main":
+                $tplMain = true;
+                break;
+            case "password":
+                $tplPassword = true;
+                break;
+        }
+    } else {
+        $tplMain = true;
+        $tplPassword = true;
     }
 
 // Das Formular
 //------------------------------------------------------------------------------------------------------------------
-    $content .= $page->loadAdditionalTemplate(
-        "settings",
-        [
-            "SETTINGS_USERNAME" => $handler->getUsername(),
-            "SETTINGS_VORNAME" => $handler->getVorname(),
-            "SETTINGS_NACHNAME" => $handler->getNachname(),
-            "SETTINGS_EMAIL" => $handler->getEmail(),
-            "REQUEST_URI" => $_SERVER['REQUEST_URI']
-        ]
-    );
+    if ($tplMain) {
+        $content .= $page->loadAdditionalTemplate(
+            "user_settings",
+            [
+                "SETTINGS_USERNAME" => $handler->getUsername(),
+                "SETTINGS_VORNAME" => $handler->getVorname(),
+                "SETTINGS_NACHNAME" => $handler->getNachname(),
+                "SETTINGS_EMAIL" => $handler->getEmail(),
+                "REQUEST_URI" => $_SERVER['REQUEST_URI']
+            ]
+        );
+    }
+
+    if ($tplPassword) {
+        $content .= $page->loadAdditionalTemplate(
+            "user_settings_password",
+            [
+                "REQUEST_URI" => $_SERVER['REQUEST_URI']
+            ]
+        );
+    }
 }
 
 // Ausgabe

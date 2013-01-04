@@ -1,0 +1,18 @@
+<form action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    <fieldset id="nameSettings">
+        <legend>Einstellungen</legend>
+        <label for="username">Nutzername:</label>
+        <input name="username" id="username" type="text" size="30" maxlength="30" value="{SETTINGS_USERNAME}" required autofocus />
+
+        <label for="vorname">Vorname:</label>
+        <input name="vorname" id="vorname" type="text" size="30" maxlength="30" value="{SETTINGS_VORNAME}" />
+
+        <label for="nachname">Nachname:</label>
+        <input name="nachname" id="nachname" type="text" size="30" maxlength="30" value="{SETTINGS_NACHNAME}" />
+
+        <label for="email">Email Adresse:</label>
+        <input name="email" id="email" type="email" size="30" maxlength="40" value="{SETTINGS_EMAIL}" required />
+
+        <button name="nameSettingsSubmit" class="button fancyBtn" id="nameSettingsSubmit">Abschicken</button>
+    </fieldset>
+</form>

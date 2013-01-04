@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<site>
+    <nav>
+<!--        <navelement>
+            <id>link-home</id>
+            <title>Hub</title>
+            <url>index.php</url>
+            <icon>icon-home</icon>
+            <desc>Übersicht, Infos und mehr.</desc>
+            <login>false</login>
+        </navelement>-->
+        <navelement>
+            <id></id>
+            <title>Notenübersicht</title>
+            <url>viewGrades.php</url>
+            <icon>icon-tag</icon>
+            <desc>Aktueller Stand, Übersicht, Details und mehr.</desc>
+            <login>true</login>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Noten eintragen</title>
+            <url>addGrades.php</url>
+            <icon>icon-pencil</icon>
+            <desc>Noten eintragen, bearbeiten</desc>
+            <login>true</login>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Grafen</title>
+            <url>#</url>
+            <icon>icon-stats-up</icon>
+            <desc>Grafische Übersicht der Noten, tendenzen usw.</desc>
+            <login>true</login>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Über das Projekt</title>
+            <url>about.php</url>
+            <icon>icon-info </icon>
+            <desc>Projektinfos, Sinn und Zweck des Projektes und niedliche Kätzchen.</desc>
+            <login>false</login>
+        </navelement>
+        <navelement>
+            <id>seperator</id>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Startseite</title>
+            <url>../index.php</url>
+            <icon>icon-home</icon>
+            <login>false</login>
+        </navelement>
+    </nav>
+</site>

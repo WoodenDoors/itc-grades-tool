@@ -64,7 +64,6 @@ class page
 
         $nav_entry = new Template();
         $site = simplexml_load_file("site.xml");
-        print_r($site);
         foreach ($site->nav->navelement as $navelement) {
             $showElement = false;
             if ($navelement->login == "true" && $pageHandler->checkIfLogin()) {

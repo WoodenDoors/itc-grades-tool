@@ -1,14 +1,14 @@
 <?xml version='1.0'?>
 <site>
     <nav>
-        <navelement>
+<!--        <navelement>
             <id>link-home</id>
             <title>Hub</title>
             <url>index.php</url>
             <icon>icon-home</icon>
             <desc>Übersicht, Infos und mehr.</desc>
             <login>false</login>
-        </navelement>
+        </navelement>-->
         <navelement>
             <id></id>
             <title>Notenübersicht</title>

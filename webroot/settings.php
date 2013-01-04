@@ -54,8 +54,10 @@ if (!$login) {
         switch ($_GET['mode']) {
             case "main":
                 $tplMain = true;
+                break;
             case "password":
                 $tplPassword = true;
+                break;
         }
     } else {
         $tplMain = true;

@@ -3,7 +3,7 @@
     <nav>
         <navelement>
             <id>link-home</id>
-            <title>Startseite</title>
+            <title>Hub</title>
             <url>index.php</url>
             <icon>icon-home</icon>
             <desc>Übersicht, Infos und mehr.</desc>
@@ -39,6 +39,16 @@
             <url>about.php</url>
             <icon>icon-info </icon>
             <desc>Projektinfos, Sinn und Zweck des Projektes und niedliche Kätzchen.</desc>
+            <login>false</login>
+        </navelement>
+        <navelement>
+            <id>seperator</id>
+        </navelement>
+        <navelement>
+            <id></id>
+            <title>Startseite</title>
+            <url>../index.php</url>
+            <icon>icon-home</icon>
             <login>false</login>
         </navelement>
     </nav>

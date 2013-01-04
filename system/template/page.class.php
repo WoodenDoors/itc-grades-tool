@@ -64,6 +64,7 @@ class page
 
         $nav_entry = new Template();
         $site = simplexml_load_file("site.xml");
+        print_r($site);
         foreach ($site->nav->navelement as $navelement) {
             $showElement = false;
             if ($navelement->login == "true" && $pageHandler->checkIfLogin()) {
@@ -71,13 +72,16 @@ class page
             } elseif ($navelement->login == "false") {
                 $showElement = true;
             }
+            if ($navelement->id == "seperator") {
+                $nav_entry->readin("style/" . $this->style . "/tpl/tpl_nav_divider.html");
+            }
             if($showElement) {
                 $nav_entry->readin("style/" . $this->style . "/tpl/tpl_nav_entry.html");
                 $nav_entry->fillin("NAVID", $navelement->id);
                 $nav_entry->fillin("NAVURL", $navelement->url);
                 $nav_entry->fillin("NAVTITLE", " " . $navelement->title);
                 $nav_entry->fillin("ICON", $navelement->icon);
-                if (preg_match('/\S*' . $navelement->url . '\S*/i', $_SERVER['SCRIPT_FILENAME'])) {
+                if (preg_match('/\S*' . str_replace("/", "\/", $navelement->url) . '\S*/i', $_SERVER['SCRIPT_FILENAME'])) {
                     $nav_entry->fillin('ACTIVE', ' class="active"');
                     $this->page_title = $navelement->title;
                 } else {

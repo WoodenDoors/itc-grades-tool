@@ -92,7 +92,7 @@ class page
         $this->template->fillin("NAVIGATION", $nav_entry->get_template());
         $this->template->fillin("PAGE_TITLE", $this->page_title);
 
-        $this->template->fillin("FOOTER", "Ein GDI2 Projekt");
+        $this->template->fillin("FOOTER", "Ein GDI1 Projekt");
 
         $this->set_userControl_content($pageHandler->checkIfLogin(), $pageHandler->getUsername(), $pageHandler->getVorname(), $pageHandler->getNachname());
 

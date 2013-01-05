@@ -37,20 +37,9 @@ if($result_msg===false) {
 
 // Das Formular
 //------------------------------------------------------------------------------------------------------------------
-    $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post"
-                    enctype="multipart/form-data" accept-charset="UTF-8">';
-    $content .= '
-        <fieldset>
-            <legend>Login</legend>
-            <label for="login">Nutzername oder Email:</label>
-            <input name="login"id="login" type="text" size="30" maxlength="30" required autofocus />
-
-            <label for="pass">Passwort:</label>
-            <input name="pass" id="pass" type="password" size="30" maxlength="50" required />
-
-            <button name="submit" class="button fancyBtn" id="submit">Login</button>
-        </fieldset>
-    </form>';
+    $content .= $page->loadAdditionalTemplate(
+        "user_login", [ "REQUEST_URI" => $_SERVER['REQUEST_URI'] ]
+    );
 }
 
 // Ausgabe

@@ -9,6 +9,7 @@ require_once('pageHandler.class.php');
 class addGradesHandler extends pageHandler {
     private $course;
     private $grade;
+
     function __construct() {
         parent::__construct();
     }
@@ -26,9 +27,10 @@ class addGradesHandler extends pageHandler {
         $query = $this->db->selectRows('itc-grades-tool_users','ID','username',$pUser);
         return $this->db->fetchAssoc($query);
     }
-    function validateGrades($pUserID,$pGrade,$pCourse){
+
+    function validateGrades($pUserID, $pGrade, $pCourse){
         
-        if(($pGrade<1.0)||($pGrade>6.0)){
+        if( ($pGrade<1.0) || ($pGrade>6.0) ){
             return true;
         }
         //$this->submitGrades();

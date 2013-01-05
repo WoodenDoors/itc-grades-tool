@@ -8190,7 +8190,7 @@ article.tile-listviewitem-detail section {
 #charms p,
 #charms a,
 #charms label {
-  color: #19BFC9;
+  color: rgb(255, 255, 255);
 }
 
 #charms .charms-header a.win-backbutton {

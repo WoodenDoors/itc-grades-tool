@@ -7,8 +7,6 @@
 require_once('pageHandler.class.php');
 
 class addGradesHandler extends pageHandler {
-    private $course;
-    private $grade;
 
     function __construct() {
         parent::__construct();
@@ -23,19 +21,20 @@ class addGradesHandler extends pageHandler {
         return $this->db->fetchAssoc($query);
     }
     
-    function getUserID($pUser){
-        $query = $this->db->selectRows('itc-grades-tool_users','ID','username',$pUser);
-        return $this->db->fetchAssoc($query);
-    }
 
     function validateGrades($pUserID, $pGrade, $pCourse){
         
         if( ($pGrade<1.0) || ($pGrade>6.0) ){
             return true;
         }
-        //$this->submitGrades();
-        $this->db->insertRow('itc-grades-tool_grades', [$pUserID, $pGrade, $pCourse],"UserID, grade, CourseID");
-        return false;
+        //Überprüfung, ob Datensatz vorhanden
+        $query=$this->db->selectRows('itc-grades-tool_grades',"*",['UserID','CourseID'],[$pUserID,$pCourse]);
+        
+        //Einfügen nur, wenn für das Fach noch keine Note des Nutzers eingetragen ist
+        IF (!hasRows($query)){
+            $this->db->insertRow('itc-grades-tool_grades', [$pUserID, $pGrade, $pCourse],"UserID, grade, CourseID");
+            return false;
+        }
     }
 }
 ?>

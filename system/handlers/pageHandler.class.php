@@ -119,5 +119,9 @@ class pageHandler {
         }
         return true;
     }
-
+    
+    public function getUserID($pUser){
+        $query = $this->db->selectRows('itc-grades-tool_users','ID','username',$pUser);
+        return $this->db->fetchAssoc($query);
+    }
 }

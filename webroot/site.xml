@@ -1,14 +1,17 @@
 <?xml version='1.0'?>
 <site>
     <nav>
-<!--        <navelement>
+        <navelement>
             <id>link-home</id>
-            <title>Hub</title>
+            <title>Startseite</title>
             <url>index.php</url>
             <icon>icon-home</icon>
             <desc>Übersicht, Infos und mehr.</desc>
             <login>false</login>
-        </navelement>-->
+        </navelement>
+        <navelement>
+            <id>seperator</id>
+        </navelement>
         <navelement>
             <id></id>
             <title>Notenübersicht</title>
@@ -39,16 +42,6 @@
             <url>about.php</url>
             <icon>icon-info </icon>
             <desc>Projektinfos, Sinn und Zweck des Projektes und niedliche Kätzchen.</desc>
-            <login>false</login>
-        </navelement>
-        <navelement>
-            <id>seperator</id>
-        </navelement>
-        <navelement>
-            <id></id>
-            <title>Startseite</title>
-            <url>../index.php</url>
-            <icon>icon-home</icon>
             <login>false</login>
         </navelement>
     </nav>

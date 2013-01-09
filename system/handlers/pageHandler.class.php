@@ -120,6 +120,7 @@ class pageHandler {
         return true;
     }
     
+    //Generiert die UsrID aus dem Username
     public function getUserID($pUser){
         $query = $this->db->selectRows('itc-grades-tool_users','ID','username',$pUser);
         return $this->db->fetchAssoc($query);

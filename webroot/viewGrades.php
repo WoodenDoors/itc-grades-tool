@@ -19,6 +19,7 @@ if (!$login){
         $content.='<table name="view">
                <tr><th>Kürzel</th><th>Note</th></tr>';
         //getGrades
+        $handler->getGrades($username,$content);
         $content.='</table>';
     }
 }

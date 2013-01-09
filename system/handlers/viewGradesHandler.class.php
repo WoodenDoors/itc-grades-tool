@@ -11,12 +11,29 @@ class viewGradesHandler extends pageHandler{
     }
     
     function hasGrades($pUser){
-        $UserID=parent::getUserID($pUser);
-        $query=$this->db->selectRows('itc-grades-tool_grades','*','UserID',$UserID);
+        $UserID= parent::getUserID($pUser);
+        $query= $this->db->selectRows('itc-grades-tool_grades','*','UserID',$UserID);
         if (hasrows($query)){
-            exit(true);
+            return true;
         }
-        else exit(false);
+        else   return false;
+    }
+    
+   function getGrades($pUser, &$pString){
+        $pUser= parent::getUserID($pUser);
+        $query= $this->db->selectRows('itc-grades-tool_grades','*','UserID',$pUser);
+        $noOfRows= $this->db->countRows($query);
+        $query= $this->db->fetchAssoc($query);
+        
+        //Fächer werden mit Kürzel ausgelesen
+        for($i=0;$noOfRows;$i++){
+            $course= $this->db->selectRows(
+                    'itc-grades-tool_courses','Abbrevation',$query['CourseID'][$i],$pUser);
+            $course= $this->db->fetchAssoc($course);
+            $pString.= "<tr><td>$course<td>
+                        <td>".$query['grade'][$i]."</td></tr>";
+        }
+            
     }
 }
 ?>

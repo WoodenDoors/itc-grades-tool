@@ -16,4 +16,5 @@
     <js>holder.js</js>
     <js>bootstrap-datepicker.js</js>
     <js>daterangepicker.js</js>
+    <js>default.js</js>
 </style>

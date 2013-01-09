@@ -1,0 +1,20 @@
+<form action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    <fieldset>
+        <legend>Login</legend>
+        <div class="control-group">
+            <label class="control-label" for="login">Nutzername oder Email:</label>
+
+            <div class="controls">
+                <input name="login" id="login" type="text" size="30" maxlength="30" required autofocus/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="pass">Passwort:</label>
+
+            <div class="controls">
+                <input name="pass" id="pass" type="password" size="30" maxlength="50" required/>
+            </div>
+        </div>
+        <button name="submit" class="btn btn-primary" id="submit">Login</button>
+    </fieldset>
+</form>

@@ -94,6 +94,8 @@ class page
 
         $this->template->fillin("FOOTER", "Ein GDI1 Projekt");
 
+        $this->template->fillin("DIALOGS", file_get_contents("style/" . $this->style . "/tpl/tpl_dialogs.html"));
+
         $this->set_userControl_content($pageHandler->checkIfLogin(), $pageHandler->getUsername(), $pageHandler->getVorname(), $pageHandler->getNachname());
 
     }

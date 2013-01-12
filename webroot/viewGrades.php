@@ -4,19 +4,19 @@ require_once '../system/template/page.class.php';
 $handler = new viewGradesHandler();
 $login = $handler->checkIfLogin();
 
+$content = '';
 if (!$login){
-    $content = '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
-}else{
+    $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
+} else{
     $username = $handler->getUsername();
     $vorname = $handler->getVorname();
     $nachname = $handler->getNachname();
     $email = $handler->getEmail();
-    
+
     if(!$handler->hasGrades($username)){
-      $content = '<span class="msg errorMsg">Keine Noten eingetragen!</span>';  
-    }
-    else{
-        $content.='<table name="view">
+        $content .= '<span class="msg errorMsg">Keine Noten eingetragen!</span>';
+    } else {
+        $content .= '<table name="view">
                <tr><th>Kürzel</th><th>Note</th></tr>';
         //getGrades
         $handler->getGrades($username,$content);

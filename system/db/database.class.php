@@ -83,14 +83,15 @@ class database {
 
     /* Einfacher SQL Select */
     public function selectRows( $table, $rows="*", $whereField=NULL, $whereInput=NULL ) {
+        if($rows != "*") $rows = "`". $rows . "`";
         $sql = "SELECT ".$rows." FROM `".$table."` ";
         if( !is_null( $whereField ) && !is_null( $whereInput ) ) {
             $sql .= "WHERE `".$whereField."` = '".$this->escapeString( $whereInput )."'";
         }
 
         if(!$result = $this->query($sql)) {
-            die("Invalid Query");
-            //die("Invalid Query:" .$sql);
+            //die("Invalid Query");
+            die("Invalid Query:" .$sql);
         }
         return $result;
     }

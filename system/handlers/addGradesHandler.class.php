@@ -17,7 +17,7 @@ class addGradesHandler extends pageHandler {
    //     return false;            
    // }
     function getCourseID($pCourse){
-        $query = $this->db->selectRows('itc-grades-tool_courses','CourseID','Abbrevation',$pCourse);
+        $query = $this->db->selectRows('itc-grades-tool_courses', 'CourseID', 'Abbrevation', $pCourse);
         return $this->db->fetchAssoc($query);
     }
     
@@ -28,11 +28,11 @@ class addGradesHandler extends pageHandler {
             return true;
         }
         //Überprüfung, ob Datensatz vorhanden
-        $query=$this->db->selectRows('itc-grades-tool_grades',"*",['UserID','CourseID'],[$pUserID,$pCourse]);
+        $query=$this->db->selectRows( parent::DB_TABLE_GRADES, '*', ['UserID','CourseID'], [$pUserID, $pCourse] );
         
         //Einfügen nur, wenn für das Fach noch keine Note des Nutzers eingetragen ist
         IF (!hasRows($query)){
-            $this->db->insertRow('itc-grades-tool_grades', [$pUserID, $pGrade, $pCourse],"UserID, grade, CourseID");
+            $this->db->insertRow( parent::DB_TABLE_GRADES, [$pUserID, $pGrade, $pCourse], "UserID, grade, CourseID");
             return false;
         }
     }

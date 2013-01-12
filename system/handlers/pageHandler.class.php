@@ -10,6 +10,7 @@ require_once('../system/db/database.class.php');
 class pageHandler {
     // tables
     const DB_TABLE_USERS = "itc-grades-tool_users";
+    const DB_TABLE_GRADES = "itc-grades-tool_grades";
 
     // text
     const ERR_EMPTY_INPUT = "Bitte alle erforderlichen Felder ausfüllen.";
@@ -122,7 +123,8 @@ class pageHandler {
     
     //Generiert die UsrID aus dem Username
     public function getUserID($pUser){
-        $query = $this->db->selectRows('itc-grades-tool_users','ID','username',$pUser);
-        return $this->db->fetchAssoc($query);
+        $query = $this->db->selectRows(self::DB_TABLE_USERS, 'ID', 'username', $pUser);
+        $result = $this->db->fetchAssoc($query);
+        return $result['ID'];
     }
 }

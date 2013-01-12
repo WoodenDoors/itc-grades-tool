@@ -9,20 +9,22 @@ $login = $handler->checkIfLogin();
 $page = new page();
 $login = $handler->checkIfLogin();
 
+//------------------------------------------------------------------------------------------------------------------
+$content = '';
 if (!$login) {
-    $content = '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
-} else {
+    $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
 
-    // TODO über Template einbinden:
+} else {
     $username = $handler->getUsername();
     $vorname = $handler->getVorname();
     $nachname = $handler->getNachname();
     $email = $handler->getEmail();
     $UserID = $handler->getUserID($username);
-    
-    $content.=
-    '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
-         <fieldset id="hinzufuegen">   
+
+    // TODO über Template einbinden:
+    $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';
+    $content .=
+         '<fieldset id="hinzufuegen">
             <label for="course">Fach:</label>
             <select name="course" id="course">
                 <option value="MCI">MCI</option>
@@ -33,7 +35,8 @@ if (!$login) {
             <button class="button fancyBtn" id="name" name="submit">Absenden</button>
          </fieldset>
     </form>';
-    if(isset($_POST['submit'])) {
+
+    if( isset( $_POST['submit'] ) ) {
         $course = $_POST['course'];
         $course = $handler->getCourseID($course);
         $handler->validateGrades($UserID['ID'],$_POST['grade'], $course['CourseID']);

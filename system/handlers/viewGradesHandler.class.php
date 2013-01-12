@@ -27,11 +27,12 @@ class viewGradesHandler extends pageHandler{
         $query = $this->db->selectRows(parent::DB_TABLE_GRADES,'*','UserID',$pUser);
         $noOfRows = $this->db->countRows($query);
         $query = $this->db->fetchAssoc($query);
+        print_r($query);
         
         //Fächer werden mit Kürzel ausgelesen
-        for($i=0; $noOfRows; $i++){
+        for($i=0; $i<$noOfRows; $i++){
             $course= $this->db->selectRows(
-                    'itc-grades-tool_courses','Abbrevation', $query['CourseID'][$i], $pUser);
+                    'itc-grades-tool_courses','Abbrevation','CourseID', $query[$i]['CourseID']);
             $course= $this->db->fetchAssoc($course);
             $pString.= "<tr><td>$course<td>
                         <td>".$query['grade'][$i]."</td></tr>";

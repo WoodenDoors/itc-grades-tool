@@ -4,6 +4,8 @@ require_once '../system/template/page.class.php';
 $handler = new viewGradesHandler();
 $login = $handler->checkIfLogin();
 
+//neue Seite
+$page = new page();
 $content = '';
 if (!$login){
     $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
@@ -22,5 +24,7 @@ if (!$login){
         $handler->getGrades($username,$content);
         $content.='</table>';
     }
+$page->set_body_content($content);
+echo $page->get_page();
 }
 ?>

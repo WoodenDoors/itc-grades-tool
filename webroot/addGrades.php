@@ -14,10 +14,10 @@ $content = '';
 if (!$login) {
     $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
 } else {
-    if (isset($_GET["semester"]))
-        $semester = $_GET["semester"];
-    else
-        $semester = $handler->getSemester();
+    $semester = $handler->getSemester();
+    $display_semester = (isset($_GET["semester"]))
+        ? $_GET["semester"]
+        : $semester;
 
 // Submit
 //------------------------------------------------------------------------------------------------------------------
@@ -37,15 +37,14 @@ if (!$login) {
     // DONE Select für Semester, welches bei Änderung des Feldes sofort die Seite neuläd (mit geändertem Paramter)
     // getCourses nimmt als optionalen Parameter das Semester
     // Alle Semester von 1 - $semester dürfen angezeigt werden
-    $semesters = [1, 2, 3, 4, 5];
+
     $semester_string = "";
-    foreach ($semesters as $tmp_semester) {
-        $selected = "";
-        if($semester == $tmp_semester) $selected = ' selected="selected"';
-        $semester_string .= '<option value="' . $tmp_semester . '"'.$selected.'>' . $tmp_semester . '. Semester</option>';
+    for($i=1; $i<=$semester; $i++){
+        $selected = ($display_semester == $i) ? ' selected="selected"' : '';
+        $semester_string .= '<option value="' . $i . '"'.$selected.'>' . $i . '. Semester</option>';
     }
 
-    $courses = $handler->getCourses($semester);
+    $courses = $handler->getCourses($display_semester);
     $all_grades = '';
     foreach ($courses as $course) {
         $all_grades .= '<option value="' . $course['abbreviation'] . '">' . $course['course'] . '</option>

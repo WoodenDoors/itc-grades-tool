@@ -103,6 +103,13 @@ class pageHandler {
         return false;
     }
 
+    public function getSemester() {
+        if(isset($this->result)) {
+            return $this->result['semester'];
+        }
+        return false;
+    }
+
     // Zum einfacheren Testen zwischendurch
     public function print_r_test($test) {
         echo "<pre>";

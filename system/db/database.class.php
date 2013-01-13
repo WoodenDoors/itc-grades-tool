@@ -1,6 +1,9 @@
 <?php
 /**
  * DB Verbindung und Query Befehle etc.
+ * Wenn irgendwas nicht funktioniert einfach die "die("Invalid Query:" .$sql)" einschalten
+ * weil zu faul für debug-Modus
+ * Auf Produktion sollen die aber wieder raus
  *
  * @author mwegmann
  */
@@ -83,7 +86,7 @@ class database {
 
     /* Einfacher SQL Select */
     public function selectRows( $table, $rows="*", $whereField=NULL, $whereInput=NULL ) {
-        if($rows != "*") $rows = "`". $rows . "`";
+        //if($rows != "*") $rows = "`". $rows . "`";
         $sql = "SELECT ".$rows." FROM `".$table."` ";
         if( !is_null( $whereField ) && !is_null( $whereInput ) ) {
             $sql .= "WHERE `".$whereField."` = '".$this->escapeString( $whereInput )."'";

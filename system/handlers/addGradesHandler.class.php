@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Handler class for addGrades page
  * @author szier
@@ -21,13 +20,21 @@ class addGradesHandler extends pageHandler {
         return $this->db->fetchAssoc($query);
     }
 
+    function getCourses($semester=NULL){
+        if($semester==NULL) $semester = $this->getSemester();
+
+        $query = $this->db->selectRows(parent::DB_TABLE_COURSES, 'abbreviation, course', 'semester', $semester);
+        return $this->db->fetchAssoc($query);
+    }
+
+
     function validateGrades($pUserID, $pGrade, $pCourse){
         
         if( ($pGrade<1.0) || ($pGrade>6.0) ){
             return true;
         }
         //Überprüfung, ob Datensatz vorhanden
-        $query=$this->db->selectRows( parent::DB_TABLE_GRADES, '*', ['uesr_id','course_id'], [$pUserID, $pCourse] );
+        $query=$this->db->selectRows( parent::DB_TABLE_GRADES, '*', ['user_id', 'course_id'], [$pUserID, $pCourse] );
         
         //Einfügen nur, wenn für das Fach noch keine Note des Nutzers eingetragen ist
         IF (!hasRows($query)){

@@ -14,7 +14,6 @@ $content = '';
 if (!$login) {
     $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
 } else {
-
     $semester = $handler->getSemester();
 
 // Submit
@@ -34,6 +33,7 @@ if (!$login) {
 //------------------------------------------------------------------------------------------------------------------
     // TODO Select für Semester, welches bei Änderung des Feldes sofort die Seite neuläd (mit geändertem Paramter)
     // getCourses nimmt als optionalen Parameter das Semester
+    // Alle Semester von 1 - $semester dürfen angezeigt werden
     $courses = $handler->getCourses();
 
     $all_grades='';

@@ -161,7 +161,10 @@ class database {
     /* Assoziativer Arrray mit Ergebnissen */
     public function fetchAssoc($result) {
         try {
-            return $result->fetch_assoc();
+            while($row = $result->fetch_assoc()) {
+                $array[] = $row;
+            }
+            return $array;
         } catch (exception $e) {
             die($this->connection->error());
         }

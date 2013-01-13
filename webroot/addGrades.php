@@ -39,7 +39,7 @@ if (!$login) {
     if( isset( $_POST['submit'] ) ) {
         $course = $_POST['course'];
         $course = $handler->getCourseID($course);
-        $handler->validateGrades($UserID['ID'],$_POST['grade'], $course['CourseID']);
+        $handler->validateGrades($UserID['ID'],$_POST['grade'], $course['course_id']);
     }
 }
 $page->set_body_content($content);

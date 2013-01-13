@@ -11,6 +11,9 @@ class pageHandler {
     // tables
     const DB_TABLE_USERS = "itc-grades-tool_users";
     const DB_TABLE_GRADES = "itc-grades-tool_grades";
+    const DB_TABLE_COURSES = "itc-grades-tool_courses";
+    const DB_TABLE_PROJECTS = "itc-grades-tool_projects";
+    const DB_TABLE_PROJECT_PARTY = "itc-grades-tool_project_participants";
 
     // text
     const ERR_EMPTY_INPUT = "Bitte alle erforderlichen Felder ausfüllen.";
@@ -48,11 +51,11 @@ class pageHandler {
 
             // ungültiger Password Cookie
             $result = $this->db->fetchAssoc($query);
-            if($_COOKIE['pass'] != $result['pass']) {
+            if($_COOKIE['pass'] != $result[0]['pass']) {
                 return false;
             }
             // wenn Username und Passwort gültig: $result verfügbar machen
-            $this->result = $result;
+            $this->result = $result[0];
             return true;
         }
         return false;
@@ -100,6 +103,13 @@ class pageHandler {
         return false;
     }
 
+    // Zum einfacheren Testen zwischendurch
+    public function print_r_test($test) {
+        echo "<pre>";
+        print_r($test);
+        echo "</pre>";
+    }
+
     // Immer wenn wir UserInput als html ausgeben
     protected function sanitizeOutput($string) {
         return htmlspecialchars($string);
@@ -125,6 +135,6 @@ class pageHandler {
     public function getUserID($pUser){
         $query = $this->db->selectRows(self::DB_TABLE_USERS, 'ID', 'username', $pUser);
         $result = $this->db->fetchAssoc($query);
-        return $result['ID'];
+        return $result[0]['ID'];
     }
 }

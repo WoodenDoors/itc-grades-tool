@@ -18,11 +18,17 @@ if (!$login){
     if(!$handler->hasGrades($username)){
         $content .= '<span class="msg errorMsg">Keine Noten eingetragen!</span>';
     } else {
-        $content .= '<table name="view">
-               <tr><th>Kürzel</th><th>Note</th></tr>';
+
         //getGrades
-        $handler->getGrades($username,$content);
-        $content.='</table>';
+        $results = $handler->getGrades($username);
+
+        $content .= '<table name="view">';
+        $content .= '<tr><th>Kürzel</th><th>Note</th></tr>';
+
+        foreach($results as $result) {
+            $content .= "<tr><td>".$result['abbreviation']."<td><td>".$result['grade']."</td></tr>";
+        }
+        $content .= '</table>';
     }
 $page->set_body_content($content);
 echo $page->get_page();

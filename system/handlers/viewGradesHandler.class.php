@@ -10,20 +10,16 @@ class viewGradesHandler extends pageHandler{
         parent::__construct();
     }
     
-    function hasGrades($pUser){
-        $UserID = parent::getUserID($pUser);
-
-        $query = $this->db->selectRows(parent::DB_TABLE_GRADES, '*', 'user_id', $UserID);
+    function hasGrades(){
+        $query = $this->db->selectRows(parent::DB_TABLE_GRADES, '*', 'user_id', $this->getID());
         if ($this->db->hasRows($query)){
             return true;
         }
         else return false;
     }
     
-   function getGrades($pUser){
-        $pUser = parent::getUserID($pUser);
-
-        $query = $this->db->selectRows(parent::DB_TABLE_GRADES, '*', 'user_id', $pUser);
+   function getGrades(){
+        $query = $this->db->selectRows(parent::DB_TABLE_GRADES, '*', 'user_id', $this->getID());
         $noOfRows = $this->db->countRows($query);
         $grades = $this->db->fetchAssoc($query);
 
@@ -31,7 +27,7 @@ class viewGradesHandler extends pageHandler{
         for($i=0; $i<$noOfRows; $i++){
             $query = $this->db->selectRows(
                 parent::DB_TABLE_COURSES,
-                'abbreviation',
+                'abbreviation, semester',
                 'ID',
                 $grades[$i]['course_id']
             );
@@ -39,6 +35,7 @@ class viewGradesHandler extends pageHandler{
 
             // Ergebnis in Ausgabearray speichern
             $result[] = [
+                'semester' => $course[0]['semester'],
                 'abbreviation' => $course[0]['abbreviation'],
                 'grade' => $grades[$i]['grade']
             ];

@@ -44,5 +44,4 @@ class loginHandler extends pageHandler {
         return false; // everything ok
     }
 }
-
 ?>

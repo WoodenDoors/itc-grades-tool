@@ -107,7 +107,6 @@ class database {
             //die("Invalid Query");
             die("Invalid Query:" .$sql);
         }
-        echo $sql."       "; // TEST
         return $result;
     }
 

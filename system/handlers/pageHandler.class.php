@@ -30,6 +30,9 @@ class pageHandler {
     const ERR_PW_NOT_EQUAL = "Die eingegebenen Passwörter stimmen nicht überein.";
     const ERR_WRONG_OLD_PW = "Das eingegebene Passwort ist nicht richtig.";
 
+    const ERR_GRADES_WRONG_SYNTAX = "Die Eingegebene Note liegt nicht zwischen 1.0 und 6.0";
+    const ERR_GRADE_ALREADY_EXISTS = "Für dieses Fach ist bereits eine Note eingetragen.";
+
     protected $db;
     private $user;
 

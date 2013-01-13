@@ -25,21 +25,32 @@ class addGradesHandler extends pageHandler {
 
 
     function validateGrades($pGrade, $pCourse){
-        if( ($pGrade<1.0) || ($pGrade>6.0) ){
-            return false;
-        }
         $courseID = $this->getCourseID($pCourse);
+
+        // Note zwischen 1.0 und 6.0
+        if( ($pGrade<1.0) || ($pGrade>6.0) ){
+            return parent::ERR_GRADES_WRONG_SYNTAX;
+        }
+
+        // TODO
+        // Note darf nur bestimmte Werte
+
+        //Überprüfung, ob Datensatz vorhanden
+        // TODO Lieber nur eine Warnung bzw. ein "Wirklich ändern?" anzeigen
         $query = $this->db->selectRows(
             parent::DB_TABLE_GRADES, '*',
             ['user_id', 'course_id'],
             [$this->getID(), $courseID]
-        ); //Überprüfung, ob Datensatz vorhanden
+        );
+        if($this->db->hasRows($query)){
+            return parent::ERR_GRADE_ALREADY_EXISTS;
+        } else {
 
-        if(!$this->db->hasRows($query)){ //Einfügen nur, wenn für das Fach noch keine Note des Nutzers eingetragen ist
+            //Einfügen nur, wenn für das Fach noch keine Note des Nutzers eingetragen ist
             $this->submitGrades($pGrade, $courseID);
-            return false;
-        } else return false;
-        // TODO Lieber nur eine Warnung bzw. ein "Wirklich ändern?" anzeigen
+            return true;
+        }
+
     }
 
     private function submitGrades($grade, $courseID){

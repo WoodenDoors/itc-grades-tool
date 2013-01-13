@@ -20,9 +20,16 @@ if (!$login) {
 // Submit
 //------------------------------------------------------------------------------------------------------------------
     if( isset( $_POST['submit'] ) ) {
-
         $valid = $handler->validateGrades($_POST['grade'], $_POST['course']);
-        $content .= ($valid) ? "VALID" : "INVALID";
+
+        if($valid === true) {
+            $content .= $page->buildResultMessage(
+                "successMsg",
+                "Note ".$_POST['grade']." für den Kurs ".$_POST['course']." hinzugefügt."
+            );
+        } else {
+            $content .= $page->buildResultMessage("errorMsg", $valid);
+        }
     }
 //------------------------------------------------------------------------------------------------------------------
     // TODO Select für Semester, welches bei Änderung des Feldes sofort die Seite neuläd (mit geändertem Paramter)

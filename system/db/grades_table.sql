@@ -23,13 +23,13 @@
 --
 
 CREATE TABLE IF NOT EXISTS `itc-grades-tool_grades` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `grade` float(2,1) NOT NULL,
   `comment` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7;
 
 --
 -- Dumping data for table `itc-grades-tool_grades`

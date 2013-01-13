@@ -85,24 +85,36 @@ class database {
     }
 
     /* Einfacher SQL Select */
-    public function selectRows( $table, $rows="*", $whereField=NULL, $whereInput=NULL ) {
+    public function selectRows( $table, $rows="*", $whereField=NULL, $whereInput=NULL) {
         //if($rows != "*") $rows = "`". $rows . "`";
         $sql = "SELECT ".$rows." FROM `".$table."` ";
         if( !is_null( $whereField ) && !is_null( $whereInput ) ) {
-            $sql .= "WHERE `".$whereField."` = '".$this->escapeString( $whereInput )."'";
+            if( !is_array($whereField) ) {
+                $sql .= "WHERE `".$whereField."` = '".$this->escapeString( $whereInput )."'";
+
+            // Mehrere WHERE-Conditions
+            } else {
+                $whereLength = count($whereField);
+                if( !is_array($whereInput) || ( count($whereInput) != $whereLength) ) { die("Invalid WHERE Syntax."); }
+                for( $i=0; $i < $whereLength; $i++ ){
+                    $keyword = ($i == 0) ? "WHERE" : " AND";
+                    $sql .= $keyword." `".$whereField[$i]."` = '".$this->escapeString( $whereInput[$i] )."'";
+                }
+            }
         }
 
         if(!$result = $this->query($sql)) {
             //die("Invalid Query");
             die("Invalid Query:" .$sql);
         }
+        echo $sql."       "; // TEST
         return $result;
     }
 
     /* Einfacher SQL Insert */
     public function insertRow($table, $values, $rows=NULL) {
         $sql = "INSERT INTO `".$table."` ";
-        if(!is_null($rows)) {
+        if( !is_null($rows) ) {
             $sql .= "(". $rows .") ";
         }
         for( $i=0; $i < count( $values ); $i++ ) {
@@ -111,8 +123,8 @@ class database {
         $sql .= "VALUES (". implode(', ', $values). ")";
 
         if(!$result = $this->query($sql)) {
-            die("Invalid Query");
-            //die("Invalid Query:" .$sql);
+            //die("Invalid Query");
+            die("Invalid Query:" .$sql);
         }
         return $result;
     }

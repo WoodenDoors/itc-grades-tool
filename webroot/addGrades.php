@@ -15,18 +15,14 @@ if (!$login) {
     $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
 } else {
 
-    $username = $handler->getUsername();
-    $vorname = $handler->getVorname();
-    $nachname = $handler->getNachname();
-    $email = $handler->getEmail();
-    $UserID = $handler->getUserID($username);
+    $semester = $handler->getSemester();
 
 // Submit
 //------------------------------------------------------------------------------------------------------------------
     if( isset( $_POST['submit'] ) ) {
-        $course = $_POST['course'];
-        $course = $handler->getCourseID($course);
-        $handler->validateGrades($UserID['ID'], $_POST['grade'], $course['course_id']);
+
+        $valid = $handler->validateGrades($_POST['grade'], $_POST['course']);
+        $content .= ($valid) ? "VALID" : "INVALID";
     }
 //------------------------------------------------------------------------------------------------------------------
     // TODO Select für Semester, welches bei Änderung des Feldes sofort die Seite neuläd (mit geändertem Paramter)
@@ -35,7 +31,8 @@ if (!$login) {
 
     $all_grades='';
     foreach($courses as $course) {
-        $all_grades .= '<option value="'.$course['abbreviation'].'">'.$course['course'].'</option>\n';
+        $all_grades .= '<option value="'.$course['abbreviation'].'">'.$course['course'].'</option>
+        ';
     }
 
 // Template

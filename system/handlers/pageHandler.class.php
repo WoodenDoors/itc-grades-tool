@@ -31,7 +31,7 @@ class pageHandler {
     const ERR_WRONG_OLD_PW = "Das eingegebene Passwort ist nicht richtig.";
 
     protected $db;
-    private $result;
+    private $user;
 
     function __construct() {
         $config = new dbconfig();
@@ -55,57 +55,57 @@ class pageHandler {
                 return false;
             }
             // wenn Username und Passwort gültig: $result verfügbar machen
-            $this->result = $result[0];
+            $this->user = $result[0];
             return true;
         }
         return false;
     }
 
     public function getUsername() {
-        if(isset($this->result)) {
-            return $this->result['username'];
+        if(isset($this->user)) {
+            return $this->user['username'];
         }
         return false;
     }
 
     public function getVorname() {
-        if(isset($this->result)) {
-            return $this->result['vorname'];
+        if(isset($this->user)) {
+            return $this->user['vorname'];
         }
         return false;
     }
 
     public function getNachname() {
-        if(isset($this->result)) {
-            return $this->result['nachname'];
+        if(isset($this->user)) {
+            return $this->user['nachname'];
         }
         return false;
     }
 
     public function getEmail() {
-        if(isset($this->result)) {
-            return $this->result['email'];
+        if(isset($this->user)) {
+            return $this->user['email'];
         }
         return false;
     }
 
     public function getID() {
-        if(isset($this->result)) {
-            return $this->result['ID'];
+        if(isset($this->user)) {
+            return $this->user['ID'];
         }
         return false;
     }
 
     public function getPW() {
-        if(isset($this->result)) {
-            return $this->result['pass'];
+        if(isset($this->user)) {
+            return $this->user['pass'];
         }
         return false;
     }
 
     public function getSemester() {
-        if(isset($this->result)) {
-            return $this->result['semester'];
+        if(isset($this->user)) {
+            return $this->user['semester'];
         }
         return false;
     }

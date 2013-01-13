@@ -38,6 +38,11 @@ $(document).ready(function(){
         showRotator();
     });
 
+    $("select#semester").change(function(){
+        window.location.href = "addGrades.php?semester=" + $("select#semester").val();
+        showRotator();
+    });
+
 
     function showRotator(){
         rotator.css({visibility: "visible", opacity: "1", display: "block"});

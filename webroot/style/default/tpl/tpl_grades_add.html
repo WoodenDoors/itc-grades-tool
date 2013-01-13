@@ -1,5 +1,10 @@
 <form action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
     <fieldset id="hinzufuegen">
+        <label for="semester">Semester:</label>
+        <select name="semester" id="semester">
+            {ALL_SEMESTERS}
+        </select>
+
         <label for="course">Fach:</label>
         <select name="course" id="course">
             {ALL_GRADES}

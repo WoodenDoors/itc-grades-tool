@@ -13,8 +13,17 @@ if (!$login){
 } else{
 //------------------------------------------------------------------------------------------------------------------
     $content .= "PROJECTS!";
-    $projects = $handler->getAllProjects();
 
+    // this is just a test so far
+    // TODO make functions or something for each case
+    switch($_GET['page']) {
+        case "view": $content .= "view"; break;
+        case "delete": $content .= "delete"; break;
+        case "add": $content .= "add"; break;
+        default: $content .= "default";
+    }
+
+    $projects = $handler->getAllProjects();
 
     // TODO das soll natürlich später nicht mehr so hässlich mit Tabellen aussehen, das ist nur ein Test
 
@@ -24,9 +33,8 @@ if (!$login){
             <th>Projekt</th>
             <th>Kurs</th>
             <th>Teilnehmer</th>
-            <th>Text</th>
+            <th>Name</th>
             <th>Note</th>
-            <th></th>
             <th></th>
         </tr>';
 
@@ -35,12 +43,11 @@ if (!$login){
         $grade = ($project['grade'] == 0.0) ? "nicht bewertet" : $project['grade'];
         $content .= "<tr>
                 <td>" .$prNr. "</td>
-                <td>" .$project['course'] ."</td>
-                <td>" .$project['participants'] ."</td>
-                <td>" .$project['text'] ."</td>
-                <td>" .$grade .'</td>
-                <td><a href="#">view</a></td>
-                <td><a href="#">X</a></td>
+                <td>" .$project['course']. "</td>
+                <td>" .$project['participants']. "</td>
+                <td>" .$project['name']. "</td>
+                <td>" .$grade. '</td>
+                <td><a href="projects.php?page=view&id=' .$project['ID']. '">view</a></td>
             </tr>';
         $prNr++;
     }

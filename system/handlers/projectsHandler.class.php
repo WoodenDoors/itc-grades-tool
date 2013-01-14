@@ -24,14 +24,40 @@ class projectsHandler  extends pageHandler {
         $query = $this->db->selectRows(parent::DB_TABLE_PROJECTS, '*', 'ID', $projectID);
         $project = $this->db->fetchAssoc($query);
 
+        $query = $this->db->selectRows(parent::DB_TABLE_COURSES, '*', 'ID', $project[0]['course_id']);
+        $course = $this->db->fetchAssoc($query);
+
+        $party = $this->getParty($project[0]['ID']);
+
         $result = [
-            'course' => 'GDI41', // TODO query course name
-            'participants' => 'Einzelprojekt', // TODO query other participants
+            'ID' => $project[0]['ID'],
+            'course' => $course[0]['abbreviation'],
+            'participants' => $party,
             'name' => $project[0]['name'],
             'text' => $project[0]['text'],
             'grade' => $project[0]['grade']
         ];
         return $result;
+    }
+
+    private function getParty($projectID) {
+        $query = $this->db->selectRows(parent::DB_TABLE_PROJECT_PARTY, '*', 'project_id', $projectID);
+        if( $this->db->countRows($query) == 1) {
+            return "Einzelprojekt";
+        }
+        $party = $this->db->fetchAssoc($query);
+
+        $party_string = '';
+        $i=0;
+        foreach($party as $person) {
+            $query = $this->db->selectRows(parent::DB_TABLE_USERS, '*', 'ID', $person['user_id']);
+            $user = $this->db->fetchAssoc($query);
+
+            if( $i>0 ) $party_string .= ', ';
+            $party_string .= $user[0]['username'];
+            $i++;
+        }
+        return $party_string;
     }
 
     function getAllProjects() {

@@ -30,7 +30,7 @@ function viewAll($handler, $page, &$content) {
                 <td>' .$project['participants']. '</td>
                 <td>' .$project['name']. '</td>
                 <td>' .$grade. '</td>
-                <td><a href="projects.php?page=show&id=' .$project['ID']. '">more</a></td>
+                <td><a href="projects.php?page=show&id=' .$project['ID']. '">Details</a></td>
             </tr>';
         $prNr++;
     }

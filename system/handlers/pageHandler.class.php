@@ -30,7 +30,8 @@ class pageHandler {
     const ERR_PW_NOT_EQUAL = "Die eingegebenen Passwörter stimmen nicht überein.";
     const ERR_WRONG_OLD_PW = "Das eingegebene Passwort ist nicht richtig.";
 
-    const ERR_GRADES_WRONG_SYNTAX = "Die Eingegebene Note liegt nicht zwischen 1.0 und 5.0";
+    const ERR_GRADES_WRONG_SYNTAX = "Keine Note eingegeben.";
+    const ERR_GRADES_WRONG_RANGE = "Die Eingegebene Note liegt nicht zwischen 1.0 und 5.0";
     const ERR_GRADE_ALREADY_EXISTS = "Für dieses Fach ist bereits eine Note eingetragen.";
     const ERR_GRADES_NIL = "Die eingegebene Note ist ungültig.";
     const ERR_GRADE_KOMMA = "Bitte Notenwerte mit Punkt angeben.";

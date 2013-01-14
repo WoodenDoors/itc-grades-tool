@@ -15,15 +15,20 @@ class addGradesHandler extends pageHandler {
         $courseID = $this->getCourseID($pCourse);
 
         //Note mit Komma eingetragen
-        for ($i=0;$i<strlen($pGrade);$i++){
+      /*  for ($i=0;$i<strlen($pGrade);$i++){
             if($pGrade[$i]==','){
                 return parent::ERR_GRADE_KOMMA;
             }
+        }*/
+        if (preg_match('/^[0-9]{1}[,]{1}[0-9]{1}$/',$pGrade)){
+            $pGrade[1]='.';
         }
-
+        if (!preg_match('/^[0-9]{1}[.]{1}[0-9]{1}$/',$pGrade)){
+            return parent::ERR_GRADES_WRONG_SYNTAX;
+        }
         // Note zwischen 1.0 und 5.0
         if( ( $pGrade<1.0 ) || ( $pGrade>5.0 ) ){
-            return parent::ERR_GRADES_WRONG_SYNTAX;
+            return parent::ERR_GRADES_WRONG_RANGE;
         }
 
         // Note darf nur bestimmte Werte

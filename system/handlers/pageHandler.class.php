@@ -179,31 +179,34 @@ class pageHandler {
     }
 
     //Prüfung, ob die Note syntaktisch richtig ist
-    protected function checkGradesFormat($pGrade){
+    protected function checkGradeFormat(&$pGrade, $allowNullNull=false){
 
         //Bei korrekter EIngabe mit Komma wird das durch einen Punkt ersetzt
-        if (preg_match('/^[0-9]{1}[,]{1}[0-9]{1}$/',$pGrade)){
+        if (preg_match('/^[0-9]{1}[,]{1}[0-9]{1}$/', $pGrade)){
             $pGrade[1]='.';
         }
 
-
-        if (!preg_match('/^[0-9]{1}[.]{1}[0-9]{1}$/',$pGrade)){
-            return parent::ERR_GRADES_WRONG_SYNTAX;
+        if (!preg_match('/^[0-9]{1}[.]{1}[0-9]{1}$/', $pGrade)){
+            return self::ERR_GRADES_WRONG_SYNTAX;
         }
-        // Note zwischen 1.0 und 5.0
+
+        // Vorzeitig true wenn 0.0 (und 0.0 erlaubt)
+        if($allowNullNull===true && $pGrade == 0.0) {
+            return true;
+        }
+
+        // Note zwischen 1.0 und 5.0 - Prüfung erfolgt nur wenn 0.0 nicht erlaubt ist
         if( ( $pGrade<1.0 ) || ( $pGrade>5.0 ) ){
-            return parent::ERR_GRADES_WRONG_RANGE;
+            return self::ERR_GRADES_WRONG_RANGE;
         }
 
         // Note darf nur bestimmte Werte
         $validGrades = [ 1.0, 1.3, 1.7, 2, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 5.0 ];
         // Quellen: https://www-sec.uni-regensburg.de/pnz/index.html.de || http://www.uni-passau.de/4937.html || http://de.wikipedia.org/wiki/Schulnote#Hochschule
-        if (in_array($pGrade,$validGrades)){
-            return true;
+        if ( !in_array($pGrade, $validGrades) ){
+            return self::ERR_GRADES_NIL;
         }
-        else{
-                return parent::ERR_GRADES_NIL;
-            }
+        return true;
     }
 
 }

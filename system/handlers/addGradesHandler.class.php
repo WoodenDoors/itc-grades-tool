@@ -14,28 +14,25 @@ class addGradesHandler extends pageHandler {
     function validateGrades($pGrade, $pCourse){
         $courseID = $this->getCourseID($pCourse);
 
-        if(parent::checkGradesFormat($pGrade)){
-
-            //Überprüfung, ob Datensatz vorhanden
-            // TODO: Lieber nur eine Warnung bzw. ein "Wirklich ändern?" anzeigen
-            $query = $this->db->selectRows(
-                parent::DB_TABLE_GRADES, '*',
-                ['user_id', 'course_id'],
-                [$this->getID(), $courseID]
-            );
-            if($this->db->hasRows($query)){
-                return parent::ERR_GRADE_ALREADY_EXISTS;
-            } else {
-
-                //Einfügen nur, wenn für das Fach noch keine Note des Nutzers eingetragen ist
-                $this->submitGrades($pGrade, $courseID);
-                return true;
-            }
+        $error = $this->checkGradeFormat($grade);
+        if($error !== true) {
+            return $error;
         }
 
+        //Überprüfung, ob Datensatz vorhanden
+        // TODO: Lieber nur eine Warnung bzw. ein "Wirklich ändern?" anzeigen
+        $query = $this->db->selectRows(
+            parent::DB_TABLE_GRADES, '*',
+            ['user_id', 'course_id'],
+            [$this->getID(), $courseID]
+        );
 
+        if($this->db->hasRows($query)){
+            return parent::ERR_GRADE_ALREADY_EXISTS;
+        }
 
-
+        //Einfügen nur, wenn für das Fach noch keine Note des Nutzers eingetragen ist
+        return $this->submitGrades($pGrade, $courseID);
     }
 
     private function submitGrades($grade, $courseID){
@@ -44,6 +41,7 @@ class addGradesHandler extends pageHandler {
             [$this->getID(), $courseID, $grade ],
             'user_id, course_id, grade'
         );
+        return true;
     }
 
 }

@@ -50,6 +50,7 @@ function show($handler, $page, &$content, $projectID) {
         $content .= $page->loadAdditionalTemplate(
             "project_show",
             [
+                "PROJECT_ID" => $project['ID'],
                 "COURSE_NAME" => $project['course'],
                 "PROJECT_NAME" => $project['name'],
                 "PROJECT_GRADE" => $project['grade'],
@@ -103,7 +104,7 @@ if (!$login){
 } else{
 //------------------------------------------------------------------------------------------------------------------
 
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['submitAdd'])) {
         $submit = $handler->addProject($_POST['pName'], $_POST['pText'], $_POST['course']);
         if ($submit === true) {
             $content .= $page->buildResultMessage(
@@ -114,7 +115,17 @@ if (!$login){
             $content .= $page->buildResultMessage("errorMsg", $submit);
         }
     }
-
+    if(isset($_POST['submitShow'])) {
+        $submit = $handler->editProject($_POST['pID'], $_POST['grade'], $_POST['pName'], $_POST['pText']);
+        if ($submit === true) {
+            $content .= $page->buildResultMessage(
+                "successMsg",
+                "Projekt '".$_POST['pName']."' erfolgreich geändert."
+            );
+        } else {
+            $content .= $page->buildResultMessage("errorMsg", $submit);
+        }
+    }
 //------------------------------------------------------------------------------------------------------------------
     $subPage = ( !isset($_GET['page']) ) ? "viewAll" : $_GET['page'];
     switch( $subPage ) {

@@ -35,8 +35,21 @@ class projectsHandler  extends pageHandler {
         return true;
     }
 
-    function editProjectText($id) {
-        /// TODO
+    function editProject($id, $grade, $name, $text) {
+        $error = $this->checkGradeFormat($grade, true);
+        if($error !== true) {
+            return $error;
+        }
+        $this->db->updateRow(
+            parent::DB_TABLE_PROJECTS,
+            $id,
+            [
+                "grade" => $grade,
+                "name" => $name,
+                "text" => $text,
+            ]
+        );
+        return true;
     }
 
     function getOneProject($projectID) {

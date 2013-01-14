@@ -16,13 +16,6 @@ class addGradesHandler extends pageHandler {
         return $this->db->fetchAssoc($query)[0]['ID'];
     }
 
-    function getCourses($semester=NULL){
-        if($semester==NULL) $semester = $this->getSemester();
-
-        $query = $this->db->selectRows(parent::DB_TABLE_COURSES, 'abbreviation, course', 'semester', $semester);
-        return $this->db->fetchAssoc($query);
-    }
-
     function validateGrades($pGrade, $pCourse){
         $courseID = $this->getCourseID($pCourse);
 

@@ -15,7 +15,7 @@ if (!$login) {
     $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
 } else {
     $semester = $handler->getSemester();
-    $display_semester = (isset($_GET["semester"]))
+    $display_semester = (isset($_GET["semester"]) && ($_GET['semester'] <= $semester))
         ? $_GET["semester"]
         : $semester;
 

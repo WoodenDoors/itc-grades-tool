@@ -124,6 +124,14 @@ class pageHandler {
         echo "</pre>";
     }
 
+    // Ausgelagert aus addGrades, da öfter nötig
+    public function getCourses($semester=NULL){
+        if($semester==NULL) $semester = $this->getSemester();
+
+        $query = $this->db->selectRows(self::DB_TABLE_COURSES, 'abbreviation, course', 'semester', $semester);
+        return $this->db->fetchAssoc($query);
+    }
+
     // Immer wenn wir UserInput als html ausgeben
     protected function sanitizeOutput($string) {
         return htmlspecialchars($string);

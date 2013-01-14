@@ -53,7 +53,8 @@ class projectsHandler  extends pageHandler {
 
         $result = [
             'ID' => $project[0]['ID'],
-            'course' => $course[0]['abbreviation'],
+            'course_abbreviation' => $course[0]['abbreviation'],
+            'course' => $course[0]['course'],
             'participants' => $party,
             'name' => $project[0]['name'],
             'text' => $project[0]['text'],

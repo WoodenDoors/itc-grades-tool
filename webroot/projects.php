@@ -26,7 +26,7 @@ function viewAll($handler, $page, &$content) {
         $grade = ($project['grade'] == 0.0) ? "nicht bewertet" : $project['grade'];
         $content .= "<tr>
                 <td>" .$prNr. "</td>
-                <td>" .$project['course']. "</td>
+                <td>" .$project['course_abbreviation']. "</td>
                 <td>" .$project['participants']. "</td>
                 <td>" .$project['name']. "</td>
                 <td>" .$grade. '</td>
@@ -45,10 +45,19 @@ function show($handler, $page, &$content, $projectID) {
         $content .= "Projekt existiert nicht.";
     } else {
 
-        $content .= $project['course']. " - " .$project['participants']. " - <strong>"
-            .$project['name']. "</strong><br/>";
+        //$content .= '<div name="pText" id="pText" contenteditable="true">' .$project['text']. "</div>";
 
-        $content .= '<div contenteditable="true">' .$project['text']. "</div>";
+        $content .= $page->loadAdditionalTemplate(
+            "project_show",
+            [
+                "COURSE_NAME" => $project['course'],
+                "PROJECT_NAME" => $project['name'],
+                "PROJECT_GRADE" => $project['grade'],
+                "PROJECT_TEXT" => $project['text'],
+                "REQUEST_URI" => $_SERVER['REQUEST_URI']
+            ]
+        );
+
     }
 
 }

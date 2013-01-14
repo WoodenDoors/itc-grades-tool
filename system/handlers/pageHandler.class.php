@@ -135,6 +135,17 @@ class pageHandler {
         return $this->db->fetchAssoc($query);
     }
 
+    // Nimmt sowohl Kürzel als auch ID als Parameter
+    public function getCourseName($abbreviationOrID){
+        if(is_numeric($abbreviationOrID)) {
+            $searchField = 'ID';
+        } else {
+            $searchField = 'abbreviation';
+        }
+        $query = $this->db->selectRows(self::DB_TABLE_COURSES, 'course', $searchField, $abbreviationOrID);
+        return $this->db->fetchAssoc($query)[0]['course'];
+    }
+
     protected function getCourseID($pCourse){
         $query = $this->db->selectRows(self::DB_TABLE_COURSES, 'ID', 'abbreviation', $pCourse);
         return $this->db->fetchAssoc($query)[0]['ID'];

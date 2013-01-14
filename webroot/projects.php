@@ -95,9 +95,18 @@ if (!$login){
 //------------------------------------------------------------------------------------------------------------------
 
     if(isset($_POST['submit'])) {
-        $handler->addProject($_POST['pName'], $_POST['pText'], $_POST['course']);
+        $submit = $handler->addProject($_POST['pName'], $_POST['pText'], $_POST['course']);
+        if ($submit === true) {
+            $content .= $page->buildResultMessage(
+                "successMsg",
+                "Projekt '".$_POST['pName']."' erfolgreich hinzugefügt."
+            );
+        } else {
+            $content .= $page->buildResultMessage("errorMsg", $submit);
+        }
     }
 
+//------------------------------------------------------------------------------------------------------------------
     $subPage = ( !isset($_GET['page']) ) ? "viewAll" : $_GET['page'];
     switch( $subPage ) {
         case "show":

@@ -32,6 +32,8 @@ class pageHandler {
 
     const ERR_GRADES_WRONG_SYNTAX = "Die Eingegebene Note liegt nicht zwischen 1.0 und 5.0";
     const ERR_GRADE_ALREADY_EXISTS = "Für dieses Fach ist bereits eine Note eingetragen.";
+    const ERR_GRADES_NIL = "Die eingegebene Note ist ungültig.";
+    const ERR_GRADE_KOMMA = "Bitte Notenwerte mit Punkt angeben.";
 
     protected $db;
     private $user;

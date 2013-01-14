@@ -5,7 +5,7 @@
  *
  * @author mwegmann
  */
-require_once('../system/db/database.class.php');
+require_once(__DIR__.'/../db/database.class.php');
 
 class pageHandler {
     // tables

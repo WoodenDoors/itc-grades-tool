@@ -9,9 +9,7 @@ require_once 'stringparser_bbcode.class.php';
 require_once 'template.class.php';
 require_once '../system/handlers/pageHandler.class.php';
 
-
-class page
-{
+class page {
     private $template;
     private $style = "default";
     private $home_link = "index.php";
@@ -39,7 +37,7 @@ class page
         $this->config = simplexml_load_file('style/' . $this->style . '/config.xml');
         $this->template = new Template();
         $this->template->readin("style/" . $this->style . "/tpl/tpl_overall" . $_GET['PageMode'] . ".html");
-        $pageHandler = new pageHandler();
+        $pageHandler = new pageHandler(); // TODO Redundanz mit Handlern beseitigen
 
         //Stylesheets einfügen
         foreach ($this->config->css as $csssheet) {

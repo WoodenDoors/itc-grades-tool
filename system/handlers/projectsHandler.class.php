@@ -12,8 +12,30 @@ class projectsHandler  extends pageHandler {
 
     function __destruct() { }
 
-    function addProject() {
-        // TODO
+    private function addProject($name, $text, $course, $grade=NULL, $party=NULL){
+        $courseID = $this->getCourseID($course);
+
+        if( $grade==NULL ) $grade = 0.0;
+        $party = [ [ 'ID' => $this->getID() ] ]; // TODO use forwarded party data
+        $this->submitProject($name, $text,  $courseID, $grade, $party);
+    }
+
+    private function getCourseID($abbreviation){
+        $query = $this->db->selectRows(parent::DB_TABLE_COURSES, 'ID', 'abbreviation', $abbreviation);
+        return $this->db->fetchAssoc($query)[0]['ID'];
+    }
+
+    private function submitProject($name, $text, $courseID, $grade, $party) {
+        $this->db->insertRow(
+            parent::DB_TABLE_PROJECTS,
+            [$courseID, $grade, $name, $text],
+            ['course_id', 'grade', 'name', 'text']
+        );
+        $projectID = $this->db->getInsertID();
+
+        foreach($party as $person) {
+            $this->db->insertRow(parent::DB_TABLE_PROJECT_PARTY, [ $projectID, $person['ID'] ]);
+        }
     }
 
     function editProjectText($id) {

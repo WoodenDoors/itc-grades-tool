@@ -23,7 +23,6 @@ class addGradesHandler extends pageHandler {
         return $this->db->fetchAssoc($query);
     }
 
-
     function validateGrades($pGrade, $pCourse){
         $courseID = $this->getCourseID($pCourse);
 

@@ -149,6 +149,9 @@ class database {
         }
     }
 
+    public function getInsertID() {
+        return $this->connection->insert_id;
+    }
 
     /* Prüft ob Reihen überhaupt vorhanden */
     public function hasRows($result) {

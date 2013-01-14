@@ -29,6 +29,7 @@ class projectsHandler  extends pageHandler {
         );
         $projectID = $this->db->getInsertID();
 
+        //TODO: Andere Nutzer zum Projekt hinzufügen
         foreach($party as $person) {
             $this->db->insertRow(parent::DB_TABLE_PROJECT_PARTY, [ $projectID, $person['ID'] ]);
         }

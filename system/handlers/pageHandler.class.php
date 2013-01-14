@@ -132,6 +132,11 @@ class pageHandler {
         return $this->db->fetchAssoc($query);
     }
 
+    protected function getCourseID($pCourse){
+        $query = $this->db->selectRows(self::DB_TABLE_COURSES, 'ID', 'abbreviation', $pCourse);
+        return $this->db->fetchAssoc($query)[0]['ID'];
+    }
+
     // Immer wenn wir UserInput als html ausgeben
     protected function sanitizeOutput($string) {
         return htmlspecialchars($string);

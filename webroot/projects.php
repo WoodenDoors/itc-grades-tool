@@ -93,10 +93,11 @@ if (!$login){
     $content .= $page->buildResultMessage("errorMsg", "Sie sind nicht eingeloggt! Bitte einloggen.");
 } else{
 //------------------------------------------------------------------------------------------------------------------
-    $content .= "PROJECTS!<br/>";
 
-    // this is just a test so far
-    // TODO make functions or something for each case
+    if(isset($_POST['submit'])) {
+        $handler->addProject($_POST['pName'], $_POST['pText'], $_POST['course']);
+    }
+
     $subPage = ( !isset($_GET['page']) ) ? "viewAll" : $_GET['page'];
     switch( $subPage ) {
         case "show":

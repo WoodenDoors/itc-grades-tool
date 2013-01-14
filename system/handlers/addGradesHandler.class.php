@@ -11,11 +11,6 @@ class addGradesHandler extends pageHandler {
         parent::__construct();
     }
 
-    function getCourseID($pCourse){
-        $query = $this->db->selectRows(parent::DB_TABLE_COURSES, 'ID', 'abbreviation', $pCourse);
-        return $this->db->fetchAssoc($query)[0]['ID'];
-    }
-
     function validateGrades($pGrade, $pCourse){
         $courseID = $this->getCourseID($pCourse);
 
@@ -28,6 +23,9 @@ class addGradesHandler extends pageHandler {
         $validGrades = [ 1.0, 1.3, 1.7, 2, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 5.0 ];
         // Quellen: https://www-sec.uni-regensburg.de/pnz/index.html.de || http://www.uni-passau.de/4937.html || http://de.wikipedia.org/wiki/Schulnote#Hochschule
         // TODO: Prüfung
+        if (in_array($pGrade,$validGrades)){
+
+        }
 
         //Überprüfung, ob Datensatz vorhanden
         // TODO: Lieber nur eine Warnung bzw. ein "Wirklich ändern?" anzeigen

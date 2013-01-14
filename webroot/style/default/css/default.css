@@ -230,3 +230,15 @@ table.gradesView th {
 table.gradesView td {
 
 }
+
+
+table.projectTable {
+    width: 90%;
+    padding-top: 10px;
+}
+table.projectTable th {
+    text-align: left;
+}
+table.projectTable td {
+    padding-bottom: 10px;
+}

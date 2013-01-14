@@ -10,7 +10,7 @@ function viewAll($handler, $page, &$content) {
 
     // TODO das soll natürlich später nicht mehr so hässlich mit Tabellen aussehen, das ist nur ein Test
     $content .= '<a href="'.$_SERVER['REQUEST_URI'].'?page=add">Hinzufügen</a>';
-    $content .= '<table>';
+    $content .= '<table class="projectTable">';
     $content .= '
         <tr>
             <th>Projekt</th>
@@ -24,12 +24,12 @@ function viewAll($handler, $page, &$content) {
     $prNr=1;
     foreach($projects as $project) {
         $grade = ($project['grade'] == 0.0) ? "nicht bewertet" : $project['grade'];
-        $content .= "<tr>
-                <td>" .$prNr. "</td>
-                <td>" .$project['course_abbreviation']. "</td>
-                <td>" .$project['participants']. "</td>
-                <td>" .$project['name']. "</td>
-                <td>" .$grade. '</td>
+        $content .= '<tr>
+                <td>' .$prNr. '</td>
+                <td title="' .$project['course']. '">' .$project['course_abbreviation']. '</td>
+                <td>' .$project['participants']. '</td>
+                <td>' .$project['name']. '</td>
+                <td>' .$grade. '</td>
                 <td><a href="projects.php?page=show&id=' .$project['ID']. '">more</a></td>
             </tr>';
         $prNr++;

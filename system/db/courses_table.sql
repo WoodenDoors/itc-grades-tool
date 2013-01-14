@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `itc-grades-tool_courses` (
 --
 
 INSERT INTO `itc-grades-tool_courses` (`ID`, `abbreviation`, `course`, `credits`, `semester`) VALUES
-(1, 'GDI1', 'Grundlagen der Infromatik 1', 5, 1),
-(2, 'GDI2', 'Grundlagen der Infromatik 2', 5, 1),
+(1, 'GDI1', 'Grundlagen der Informatik 1', 5, 1),
+(2, 'GDI2', 'Grundlagen der Informatik 2', 5, 1),
 (3, 'P1', 'Programmierung 1', 7, 1),
 (4, 'MCI', 'Mensch-Computer-Interaktion', 5, 1),
 (5, 'FG1', 'Formale Grundlagen 1', 4, 1),
@@ -43,7 +43,7 @@ INSERT INTO `itc-grades-tool_courses` (`ID`, `abbreviation`, `course`, `credits`
 (18, 'RN', 'Rechnernetze', 5, 3),
 (19, 'PI1', 'Praktikum in der Industrie 1', 5, 3),
 (20, 'ST2', 'Softwaretechnik 2', 6, 4),
-(21, 'SSO', 'Standard-software', 5, 4),
+(21, 'SSO', 'Standard-Software', 5, 4),
 (22, 'C', 'Componentware', 5, 4),
 (23, 'B', 'Betriebssysteme', 5, 4),
 (24, 'PI2', 'Praktikum in der Industrie 2', 10, 4),

@@ -44,6 +44,9 @@ class projectsHandler  extends pageHandler {
 
     function getOneProject($projectID) {
         $query = $this->db->selectRows(parent::DB_TABLE_PROJECTS, '*', 'ID', $projectID);
+        if( !$this->db->hasRows($query) ) {
+            return false;
+        }
         $project = $this->db->fetchAssoc($query);
 
         $query = $this->db->selectRows(parent::DB_TABLE_COURSES, '*', 'ID', $project[0]['course_id']);
@@ -91,7 +94,9 @@ class projectsHandler  extends pageHandler {
 
         foreach($projectIDs as $projectID) {
             $project = $this->getOneProject($projectID['project_id']);
-            $result[] = $project;
+            if($project !== false) {
+                $result[] = $project;
+            }
         }
         return $result;
     }

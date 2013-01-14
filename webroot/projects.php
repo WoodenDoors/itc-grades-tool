@@ -5,10 +5,11 @@ $handler = new projectsHandler();
 $login = $handler->checkIfLogin();
 //------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------
-function view($handler, &$content) {
+function viewAll($handler, $page, &$content) {
     $projects = $handler->getAllProjects();
 
     // TODO das soll natürlich später nicht mehr so hässlich mit Tabellen aussehen, das ist nur ein Test
+    $content .= '<a href="'.$_SERVER['REQUEST_URI'].'?page=add">Hinzufügen</a>';
     $content .= '<table>';
     $content .= '
         <tr>
@@ -29,36 +30,59 @@ function view($handler, &$content) {
                 <td>" .$project['participants']. "</td>
                 <td>" .$project['name']. "</td>
                 <td>" .$grade. '</td>
-                <td><a href="projects.php?page=edit&id=' .$project['ID']. '">more</a></td>
+                <td><a href="projects.php?page=show&id=' .$project['ID']. '">more</a></td>
             </tr>';
         $prNr++;
     }
 
     $content .= '</table>';
 }
+//------------------------------------------------------------------------------------------------------------------
 
-function edit() {
+function show($handler, $page, &$content, $projectID) {
+    $project = $handler->getOneProject($projectID);
+    if($project === false) {
+        $content .= "Projekt existiert nicht.";
+    } else {
 
-}
+        $content .= $project['course']. " - " .$project['participants']. " - <strong>"
+            .$project['name']. "</strong><br/>";
 
-function add($handler, &$content) {
-    $content .= '<form action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';
-
-    $content .= '<fieldset id="addProject">
-            <label for="semester">Semester:</label>
-            <select name="semester" id="semester">
-            </select>
-            <label for="course">Fach:</label>
-            <select name="course" id="course">
-                {ALL_GRADES}
-            </select><br/>
-            <label for="grade">Note:</label>
-            <input name="grade" id="grade"/><br/>
-            <button class="button fancyBtn" id="name" name="submit">Absenden</button>
-        </fieldset>
-    </form>';
+        $content .= '<div contenteditable="true">' .$project['text']. "</div>";
+    }
 
 }
+
+//------------------------------------------------------------------------------------------------------------------
+function add($handler, $page, &$content) {
+    $semester = $handler->getSemester();
+    $display_semester = (isset($_GET["semester"]) && ($_GET['semester'] <= $semester))
+        ? $_GET["semester"]
+        : $semester;
+
+    $semester_string = "";
+    for($i=1; $i<=$semester; $i++){
+        $selected = ($display_semester == $i) ? ' selected="selected"' : '';
+        $semester_string .= '<option value="' . $i . '"'.$selected.'>' . $i . '. Semester</option>';
+    }
+
+    $courses = $handler->getCourses($display_semester);
+    $all_grades = '';
+    foreach ($courses as $course) {
+        $all_grades .= '<option value="' . $course['abbreviation'] . '">' . $course['course'] . '</option>
+        ';
+    }
+
+    $content .= $page->loadAdditionalTemplate(
+        "project_add",
+        [
+            "ALL_GRADES" => $all_grades,
+            "ALL_SEMESTERS" => $semester_string,
+            "REQUEST_URI" => $_SERVER['REQUEST_URI']
+        ]
+    );
+}
+//------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------
 
 //neue Seite
@@ -69,23 +93,24 @@ if (!$login){
     $content .= $page->buildResultMessage("errorMsg", "Sie sind nicht eingeloggt! Bitte einloggen.");
 } else{
 //------------------------------------------------------------------------------------------------------------------
-    $content .= "PROJECTS!";
+    $content .= "PROJECTS!<br/>";
 
     // this is just a test so far
     // TODO make functions or something for each case
-    $subPage = ( !isset($_GET['page']) ) ? "view" : $_GET['page'];
+    $subPage = ( !isset($_GET['page']) ) ? "viewAll" : $_GET['page'];
     switch( $subPage ) {
-        case "edit":
-            $content .= "delete";
+        case "show":
+            show($handler, $page, $content, $_GET['id']);
             break;
         case "add":
-            $content .= "add";
+            add($handler, $page, $content);
+            viewAll($handler, $page, $content);
             break;
         case "view":
-        default: $content .= "default";
+        default:
+            // TODO: vielleicht standartmäßig "add" dazuladen und beim klick via jquery runterfahren?
+            viewAll($handler, $page, $content);
     }
-
-    view($handler, $content);
 
 }
 //------------------------------------------------------------------------------------------------------------------

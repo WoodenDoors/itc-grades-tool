@@ -38,6 +38,14 @@
         </navelement>
         <navelement>
             <id></id>
+            <title>Projekte</title>
+            <url>projects.php</url>
+            <icon></icon>
+            <desc>Projekte und Gruppenarbeiten</desc>
+            <login>true</login>
+        </navelement>
+        <navelement>
+            <id></id>
             <title>Über das Projekt</title>
             <url>about.php</url>
             <icon>icon-info </icon>

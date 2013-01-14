@@ -8,23 +8,11 @@ $login = $handler->checkIfLogin();
 function viewAll($handler, $page, &$content) {
     $projects = $handler->getAllProjects();
 
-    // TODO das soll natürlich später nicht mehr so hässlich mit Tabellen aussehen, das ist nur ein Test
-    $content .= '<a href="'.$_SERVER['REQUEST_URI'].'?page=add">Hinzufügen</a>';
-    $content .= '<table class="projectTable">';
-    $content .= '
-        <tr>
-            <th>Projekt</th>
-            <th>Kurs</th>
-            <th>Teilnehmer</th>
-            <th>Name</th>
-            <th>Note</th>
-            <th></th>
-        </tr>';
-
     $prNr=1;
+    $projects_string='';
     foreach($projects as $project) {
         $grade = ($project['grade'] == 0.0) ? "nicht bewertet" : $project['grade'];
-        $content .= '<tr>
+        $projects_string .= '<tr>
                 <td>' .$prNr. '</td>
                 <td title="' .$project['course']. '">' .$project['course_abbreviation']. '</td>
                 <td>' .$project['participants']. '</td>
@@ -35,7 +23,13 @@ function viewAll($handler, $page, &$content) {
         $prNr++;
     }
 
-    $content .= '</table>';
+    $content .= $page->loadAdditionalTemplate(
+        "projects_view",
+        [
+            "PROJECTS_DATA" => $projects_string,
+            "REQUEST_URI" => $_SERVER['REQUEST_URI']
+        ]
+    );
 }
 //------------------------------------------------------------------------------------------------------------------
 

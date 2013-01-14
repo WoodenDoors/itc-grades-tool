@@ -14,27 +14,8 @@ class addGradesHandler extends pageHandler {
     function validateGrades($pGrade, $pCourse){
         $courseID = $this->getCourseID($pCourse);
 
-        //Note mit Komma eingetragen
-      /*  for ($i=0;$i<strlen($pGrade);$i++){
-            if($pGrade[$i]==','){
-                return parent::ERR_GRADE_KOMMA;
-            }
-        }*/
-        if (preg_match('/^[0-9]{1}[,]{1}[0-9]{1}$/',$pGrade)){
-            $pGrade[1]='.';
-        }
-        if (!preg_match('/^[0-9]{1}[.]{1}[0-9]{1}$/',$pGrade)){
-            return parent::ERR_GRADES_WRONG_SYNTAX;
-        }
-        // Note zwischen 1.0 und 5.0
-        if( ( $pGrade<1.0 ) || ( $pGrade>5.0 ) ){
-            return parent::ERR_GRADES_WRONG_RANGE;
-        }
+        if(parent::checkGradesFormat($pGrade)){
 
-        // Note darf nur bestimmte Werte
-        $validGrades = [ 1.0, 1.3, 1.7, 2, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 5.0 ];
-        // Quellen: https://www-sec.uni-regensburg.de/pnz/index.html.de || http://www.uni-passau.de/4937.html || http://de.wikipedia.org/wiki/Schulnote#Hochschule
-        if (in_array($pGrade,$validGrades)){
             //Überprüfung, ob Datensatz vorhanden
             // TODO: Lieber nur eine Warnung bzw. ein "Wirklich ändern?" anzeigen
             $query = $this->db->selectRows(
@@ -51,9 +32,7 @@ class addGradesHandler extends pageHandler {
                 return true;
             }
         }
-        else{
-            return parent::ERR_GRADES_NIL;
-        }
+
 
 
 

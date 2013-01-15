@@ -9,6 +9,18 @@ $content .='
     <p>Ein Projekt der Erstsemester-Studenten des IT-Center Dortmund im Ramen der Veranstaltung GDI1.</p>
     <p><strong>Team:</strong>
     Sebastian Zier, Marius Rüter, Michael Stein und Mathias Wegmann</p>
+    <h2>Credits</h2>
+    <p>Folgende externe Projekte wurden zum erstellen dieses Projektes benutzt:</p>
+    <pre>
+Stringparser:
+Christian Seiler <spam@christian-seiler.de>
+
+Template:
+Patrick Canterino <patrick@patshaping.de>
+
+bootmetro:
+Marcello Palmitessa
+    </pre>
 ';
 
 // Ausgabe

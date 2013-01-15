@@ -5,7 +5,6 @@
  * @author Marius Rüter
  */
 require_once 'stringparser.class.php';
-require_once 'stringparser_bbcode.class.php';
 require_once 'template.class.php';
 require_once '../system/handlers/pageHandler.class.php';
 

@@ -40,7 +40,7 @@
             <id></id>
             <title>Projekte</title>
             <url>projects.php</url>
-            <icon></icon>
+            <icon>icon-code</icon>
             <desc>Projekte und Gruppenarbeiten</desc>
             <login>true</login>
         </navelement>

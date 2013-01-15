@@ -142,12 +142,12 @@ class pageHandler {
             $searchField = 'abbreviation';
         }
         $query = $this->db->selectRows(self::DB_TABLE_COURSES, 'course', $searchField, $abbreviationOrID);
-        return $this->db->fetchAssoc($query)[0]['course'];
+        return $this->db->fetchAssoc($query);
     }
 
     protected function getCourseID($pCourse){
         $query = $this->db->selectRows(self::DB_TABLE_COURSES, 'ID', 'abbreviation', $pCourse);
-        return $this->db->fetchAssoc($query)[0]['ID'];
+        return $this->db->fetchAssoc($query);
     }
 
     // Immer wenn wir UserInput als html ausgeben

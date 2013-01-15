@@ -43,13 +43,11 @@ class page {
         foreach ($this->config->css as $csssheet) {
             $this->template->fillin("STYLESHEET", '<link rel="stylesheet" type="text/css" href="style/' . $this->style . '/css/' . $csssheet . '">' . "\n{STYLESHEET}");
         }
-        $this->template->fillin("STYLESHEET", '');
 
         //JavaScript einfügen
         foreach ($this->config->js as $jsfile) {
             $this->template->fillin("JAVASCRIPT", '<script src="style/' . $this->style . '/js/' . $jsfile . '" type="text/javascript"></script>' . "\n{JAVASCRIPT}");
         }
-        $this->template->fillin("JAVASCRIPT", '');
 
         $this->template->fillin("TITLE", "ITC-Grades-Tool");
         $this->template->fillin("ROTATOR", '<img src="style/' . $this->style . '/img/loader.gif"/>');
@@ -101,6 +99,14 @@ class page {
     function set_body_content($value)
     {
         $this->template->fillin("CONTENT", $value);
+    }
+
+    function addjs($jsPath) {
+        $this->template->fillin("JAVASCRIPT", '<script src="'.$jsPath.'"></script>' . "\n{JAVASCRIPT}");
+    }
+
+    function addcss($cssPath) {
+        $this->template->fillin("STYLESHEET", '<link rel="stylesheet" type="text/css" href="'.$cssPath.'">' . "\n{STYLESHEET}");
     }
 
     function set_userControl_content($login = false, $username = NULL, $firstname = NULL, $lastname = NULL)
@@ -158,6 +164,8 @@ class page {
 
     function get_page()
     {
+        $this->template->fillin("STYLESHEET", '');
+        $this->template->fillin("JAVASCRIPT", '');
         return $this->template->get_template();
     }
 

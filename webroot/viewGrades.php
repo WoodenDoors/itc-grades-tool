@@ -5,25 +5,33 @@ $handler = new viewGradesHandler();
 $login = $handler->checkIfLogin();
 
 //neue Seite
+//------------------------------------------------------------------------------------------------------------------
 $page = new page();
 $content = '';
 if (!$login){
-    $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
+    $content .= $page->buildResultMessage("errorMsg", "Sie sind nicht eingeloggt! Bitte einloggen.");
 } else{
-    $username = $handler->getUsername();
-    $vorname = $handler->getVorname();
-    $nachname = $handler->getNachname();
-    $email = $handler->getEmail();
-
-    if(!$handler->hasGrades($username)){
-        $content .= '<span class="msg errorMsg">Keine Noten eingetragen!</span>';
+//------------------------------------------------------------------------------------------------------------------
+    if(!$handler->hasGrades()){
+        $content .= $page->buildResultMessage("errorMsg", "Keine Noten eingetragen!");
     } else {
-        $content .= '<table name="view">
-               <tr><th>Kürzel</th><th>Note</th></tr>';
-        //getGrades
-        $handler->getGrades($username,$content);
-        $content.='</table>';
+        $results = $handler->getGrades();
+
+        $content .= '<table name="view">';
+        $content .= '<tr><th>Kürzel</th><th>Note</th></tr>';
+
+        $semester=0;
+        foreach($results as $result) {
+            if( $result['semester'] > $semester ) {
+                $semester++;
+                $content .= "<tr><td>$semester. Semester</td></tr>";
+            }
+            $content .= "<tr><td>".$result['abbreviation']."<td><td>".$result['grade']."</td></tr>";
+        }
+        $content .= '</table>';
     }
+
+//------------------------------------------------------------------------------------------------------------------
 $page->set_body_content($content);
 echo $page->get_page();
 }

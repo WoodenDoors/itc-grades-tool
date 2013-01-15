@@ -1,23 +1,52 @@
-<form action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';
+<form class="form-horizontal" action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    ';
     <fieldset id="registration">
         <legend>Registrierung</legend>
-        <label for="username">Nutzername:</label>
-        <input name="username" id="username" type="text" size="30" maxlength="30" required autofocus />
+        <div class="control-group">
+            <label class="control-label" for="username">Nutzername:</label>
 
-        <label for="vorname">Vorname:</label>
-        <input name="vorname" id="vorname" type="text" size="30" maxlength="30" />
+            <div class="controls">
+                <input name="username" id="username" type="text" size="30" maxlength="30" required autofocus/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="vorname">Vorname:</label>
 
-        <label for="nachname">Nachname:</label>
-        <input name="nachname" id="nachname" type="text" size="30" maxlength="30" />
+            <div class="controls">
+                <input name="vorname" id="vorname" type="text" size="30" maxlength="30"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="nachname">Nachname:</label>
 
-        <label for="email">Email Adresse:</label>
-        <input name="email" id="email" type="email" size="30" maxlength="40" required />
+            <div class="controls">
+                <input name="nachname" id="nachname" type="text" size="30" maxlength="30"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="email">Email Adresse:</label>
 
-        <label for="pass">Password:</label>
-        <input name="pass" id="pass" type="password" size="30" maxlength="50" required />
+            <div class="controls">
+                <input name="email" id="email" type="email" size="30" maxlength="40" required/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="pass">Password:</label>
 
-        <span class="hint">Alle mit * markierten Felder sind Pflichtangaben</span>
-        <div style="clear:both"></div>
-        <button name="submit" class="button fancyBtn" id="submit">Abschicken</button>
+            <div class="controls">
+                <input name="pass" id="pass" type="password" size="30" maxlength="50" required/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <span class="help-block">Alle mit * markierten Felder sind Pflichtangaben</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button name="submit" class="btn btn-primary" id="submit">Abschicken</button>
+            </div>
+        </div>
     </fieldset>
 </form>';

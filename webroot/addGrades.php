@@ -13,34 +13,54 @@ $login = $handler->checkIfLogin();
 $content = '';
 if (!$login) {
     $content .= '<span class="msg errorMsg">Sie sind nicht eingeloggt! Bitte einloggen.</span>';
-
 } else {
-    $username = $handler->getUsername();
-    $vorname = $handler->getVorname();
-    $nachname = $handler->getNachname();
-    $email = $handler->getEmail();
-    $UserID = $handler->getUserID($username);
+    $semester = $handler->getSemester();
+    $display_semester = (isset($_GET["semester"]) && ($_GET['semester'] <= $semester))
+        ? $_GET["semester"]
+        : $semester;
 
-    // TODO über Template einbinden:
-    $content .= '<form action="'.$_SERVER['REQUEST_URI'].'" method="post" enctype="multipart/form-data" accept-charset="UTF-8">';
-    $content .=
-         '<fieldset id="hinzufuegen">
-            <label for="course">Fach:</label>
-            <select name="course" id="course">
-                <option value="MCI">MCI</option>
-                <option value="Prog1">Programmierung 1</option>
-            </select><br/>
-            <label for="grade">Note:</label>
-            <input name="grade" id="grade" value="1.0"/><br/>
-            <button class="button fancyBtn" id="name" name="submit">Absenden</button>
-         </fieldset>
-    </form>';
+// Submit
+//------------------------------------------------------------------------------------------------------------------
+    if (isset($_POST['submit'])) {
+        $valid = $handler->validateGrades($_POST['grade'], $_POST['course']);
 
-    if( isset( $_POST['submit'] ) ) {
-        $course = $_POST['course'];
-        $course = $handler->getCourseID($course);
-        $handler->validateGrades($UserID['ID'],$_POST['grade'], $course['CourseID']);
+        if ($valid === true) {
+            $content .= $page->buildResultMessage(
+                "successMsg",
+                "Note " . $_POST['grade'] . " für den Kurs " . $_POST['course'] . " hinzugefügt."
+            );
+        } else {
+            $content .= $page->buildResultMessage("errorMsg", $valid);
+        }
     }
+//------------------------------------------------------------------------------------------------------------------
+    // DONE Select für Semester, welches bei Änderung des Feldes sofort die Seite neuläd (mit geändertem Paramter)
+    // getCourses nimmt als optionalen Parameter das Semester
+    // Alle Semester von 1 - $semester dürfen angezeigt werden
+
+    $semester_string = "";
+    for($i=1; $i<=$semester; $i++){
+        $selected = ($display_semester == $i) ? ' selected="selected"' : '';
+        $semester_string .= '<option value="' . $i . '"'.$selected.'>' . $i . '. Semester</option>';
+    }
+
+    $courses = $handler->getCourses($display_semester);
+    $all_grades = '';
+    foreach ($courses as $course) {
+        $all_grades .= '<option value="' . $course['abbreviation'] . '">' . $course['course'] . '</option>
+        ';
+    }
+
+// Template
+//------------------------------------------------------------------------------------------------------------------
+    $content .= $page->loadAdditionalTemplate(
+        "grades_add",
+        [
+            "ALL_GRADES" => $all_grades,
+            "ALL_SEMESTERS" => $semester_string,
+            "REQUEST_URI" => $_SERVER['REQUEST_URI']
+        ]
+    );
 }
 $page->set_body_content($content);
 echo $page->get_page();

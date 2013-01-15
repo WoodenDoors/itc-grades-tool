@@ -10,34 +10,34 @@ class viewGradesHandler extends pageHandler{
         parent::__construct();
     }
     
-    function hasGrades($pUser){
-        $UserID = parent::getUserID($pUser);
-
-        $query = $this->db->selectRows(parent::DB_TABLE_GRADES, '*', 'UserID', $UserID);
+    function hasGrades(){
+        $query = $this->db->selectRows(parent::DB_TABLE_GRADES, '*', 'user_id', $this->getID());
         if ($this->db->hasRows($query)){
             return true;
         }
         else return false;
     }
     
-   function getGrades($pUser, &$pString){
-        $pUser = parent::getUserID($pUser);
-
-
-        $query = $this->db->selectRows(parent::DB_TABLE_GRADES,'*','UserID',$pUser);
+   function getGrades(){
+        $query = $this->db->selectRows(parent::DB_TABLE_GRADES, '*', 'user_id', $this->getID());
         $noOfRows = $this->db->countRows($query);
-        $query = $this->db->fetchAssoc($query);
-        print_r($query);
-        
+        $grades = $this->db->fetchAssoc($query);
+
         //Fächer werden mit Kürzel ausgelesen
         for($i=0; $i<$noOfRows; $i++){
-            $course= $this->db->selectRows(
-                    'itc-grades-tool_courses','Abbrevation','CourseID', $query[$i]['CourseID']);
-            $course= $this->db->fetchAssoc($course);
-            $pString.= "<tr><td>$course<td>
-                        <td>".$query['grade'][$i]."</td></tr>";
+            $query = $this->db->selectRows( parent::DB_TABLE_COURSES, '*', 'ID', $grades[$i]['course_id'] );
+            $course = $this->db->fetchAssoc($query);
+
+            // Ergebnis in Ausgabearray speichern
+            $result[] = [
+                'semester' => $course[0]['semester'],
+                'abbreviation' => $course[0]['abbreviation'],
+                'course' => $course[0]['course'],
+                'credits' => $course[0]['credits'],
+                'grade' => $grades[$i]['grade']
+            ];
         }
-            
+       return $result;
     }
 }
 ?>

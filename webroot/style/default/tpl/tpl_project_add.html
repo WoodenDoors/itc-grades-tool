@@ -1,0 +1,18 @@
+<form action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    <fieldset id="addProject">
+        <legend>Ein Projekt hinzufügen</legend>
+        <label for="pSemester">Semester:</label>
+        <select name="pSemester" id="pSemester">
+            {ALL_SEMESTERS}
+        </select>
+        <label for="course">Fach:</label>
+        <select name="course" id="course">
+            {ALL_GRADES}
+        </select><br/>
+        <label for="pName">Projekt Name:</label>
+        <input name="pName" id="pName"/><br/>
+        <label for="pText">Projekt Beschreibung:</label>
+        <textarea name="pText" id="pText"></textarea>
+        <button class="button fancyBtn" id="submitAdd" name="submitAdd">Absenden</button>
+    </fieldset>
+</form>

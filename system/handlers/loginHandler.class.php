@@ -29,13 +29,11 @@ class loginHandler extends pageHandler {
                 return parent::ERR_INVALID_LOGIN;
             }
         }
-
         $result = $this->db->fetchAssoc($query);
-        if(md5($pass) != $result['pass']) {
+        if(md5($pass) != $result[0]['pass']) {
             return parent::ERR_INVALID_PASS;
         }
-
-        return $this->login($result); // send to login function
+        return $this->login($result[0]); // send to login function
     }
 
     private function login($result) {
@@ -46,5 +44,4 @@ class loginHandler extends pageHandler {
         return false; // everything ok
     }
 }
-
 ?>

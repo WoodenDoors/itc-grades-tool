@@ -180,7 +180,8 @@ form label {
 }
 
 form input,
-form select {
+form select,
+form textarea {
     font-size: 1.2em;
     width: 250px;
     margin: 10px 0 10px 0;
@@ -194,6 +195,11 @@ form input {
 form select {
     height: 35px;
     padding: 5px;
+}
+
+form textarea {
+    width: 260px;
+    height: 100px;
 }
 
 form span.hint {
@@ -223,4 +229,16 @@ table.gradesView th {
 }
 table.gradesView td {
 
+}
+
+
+table.projectTable {
+    width: 90%;
+    padding-top: 10px;
+}
+table.projectTable th {
+    text-align: left;
+}
+table.projectTable td {
+    padding-bottom: 10px;
 }

@@ -1,6 +1,9 @@
 <?php
 /**
  * DB Verbindung und Query Befehle etc.
+ * Wenn irgendwas nicht funktioniert einfach die "die("Invalid Query:" .$sql)" einschalten
+ * weil zu faul für debug-Modus
+ * Auf Produktion sollen die aber wieder raus
  *
  * @author mwegmann
  */
@@ -82,11 +85,22 @@ class database {
     }
 
     /* Einfacher SQL Select */
-    public function selectRows( $table, $rows="*", $whereField=NULL, $whereInput=NULL ) {
-        if($rows != "*") $rows = "`". $rows . "`";
+    public function selectRows( $table, $rows="*", $whereField=NULL, $whereInput=NULL) {
+        //if($rows != "*") $rows = "`". $rows . "`";
         $sql = "SELECT ".$rows." FROM `".$table."` ";
         if( !is_null( $whereField ) && !is_null( $whereInput ) ) {
-            $sql .= "WHERE `".$whereField."` = '".$this->escapeString( $whereInput )."'";
+            if( !is_array($whereField) ) {
+                $sql .= "WHERE `".$whereField."` = '".$this->escapeString( $whereInput )."'";
+
+            // Mehrere WHERE-Conditions
+            } else {
+                $whereLength = count($whereField);
+                if( !is_array($whereInput) || ( count($whereInput) != $whereLength) ) { die("Invalid WHERE Syntax."); }
+                for( $i=0; $i < $whereLength; $i++ ){
+                    $keyword = ($i == 0) ? "WHERE" : " AND";
+                    $sql .= $keyword." `".$whereField[$i]."` = '".$this->escapeString( $whereInput[$i] )."'";
+                }
+            }
         }
 
         if(!$result = $this->query($sql)) {
@@ -99,7 +113,7 @@ class database {
     /* Einfacher SQL Insert */
     public function insertRow($table, $values, $rows=NULL) {
         $sql = "INSERT INTO `".$table."` ";
-        if(!is_null($rows)) {
+        if( !is_null($rows) ) {
             $sql .= "(". $rows .") ";
         }
         for( $i=0; $i < count( $values ); $i++ ) {
@@ -108,8 +122,8 @@ class database {
         $sql .= "VALUES (". implode(', ', $values). ")";
 
         if(!$result = $this->query($sql)) {
-            die("Invalid Query");
-            //die("Invalid Query:" .$sql);
+            //die("Invalid Query");
+            die("Invalid Query:" .$sql);
         }
         return $result;
     }
@@ -135,6 +149,9 @@ class database {
         }
     }
 
+    public function getInsertID() {
+        return $this->connection->insert_id;
+    }
 
     /* Prüft ob Reihen überhaupt vorhanden */
     public function hasRows($result) {
@@ -161,7 +178,10 @@ class database {
     /* Assoziativer Arrray mit Ergebnissen */
     public function fetchAssoc($result) {
         try {
-            return $result->fetch_assoc();
+            while($row = $result->fetch_assoc()) {
+                $array[] = $row;
+            }
+            return $array;
         } catch (exception $e) {
             die($this->connection->error());
         }

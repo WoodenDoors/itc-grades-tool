@@ -1,0 +1,16 @@
+<a href="projects.php">Zurück zur Übersicht</a>
+
+<form action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    <fieldset id="showProject">
+        <legend>{COURSE_NAME} Projekt</legend>
+        <div></div>
+        <label for="pName">Projekt Name:</label>
+        <input name="pName" id="pName" value="{PROJECT_NAME}"/>
+        <label for="grade">Note:</label>
+        <input name="grade" id="grade" value="{PROJECT_GRADE}"/><br/>
+        <label for="pText">Projekt Beschreibung:</label>
+        <textarea name="pText" id="pText">{PROJECT_TEXT}</textarea>
+        <input type="hidden" name="pID" value="{PROJECT_ID}"/>
+        <button class="button fancyBtn" id="submitShow" name="submitShow">Absenden</button>
+    </fieldset>
+</form>

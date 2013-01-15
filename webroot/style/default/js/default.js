@@ -38,6 +38,15 @@ $(document).ready(function(){
         showRotator();
     });
 
+    $("select#semester").change(function(){
+        window.location.href = "addGrades.php?semester=" + $("select#semester").val();
+        showRotator();
+    });
+
+    $("select#pSemester").change(function(){
+        window.location.href = "projects.php?page=add&semester=" + $("select#pSemester").val();
+        showRotator();
+    });
 
     function showRotator(){
         rotator.css({visibility: "visible", opacity: "1", display: "block"});

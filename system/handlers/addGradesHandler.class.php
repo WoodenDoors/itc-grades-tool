@@ -14,7 +14,7 @@ class addGradesHandler extends pageHandler {
     function validateGrades($pGrade, $pCourse){
         $courseID = $this->getCourseID($pCourse);
 
-        $error = $this->checkGradeFormat($grade);
+        $error = $this->checkGradeFormat($pGrade);
         if($error !== true) {
             return $error;
         }

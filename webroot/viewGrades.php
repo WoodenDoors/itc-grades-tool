@@ -63,8 +63,6 @@ if (!$login){
         $content .= "<tr><td>Avg:</td><td>".round($gradeAverageSem,2)."</td></tr>";
         $content .= "<tr><td>Gesamt :</td><td>".round($gradeAverageAll,2)."</td></tr>";
         $content .= '</table>';
-
-        $content .= '<button id="generateGraph">Generate</button>';
     }
 
 //------------------------------------------------------------------------------------------------------------------

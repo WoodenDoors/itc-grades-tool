@@ -53,5 +53,7 @@ $(document).ready(function(){
         return $.getJSON('ajax/grades.json.php');
     }
 
-    setTimeout(loadGradesGraph(), 10000);
+    setTimeout(function() {
+        loadGradesGraph();
+    }, 5000);
 });

@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `itc-grades-tool_users` (
   `semester` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `email` (`email`,`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=0 ;
 
 --
 -- Daten für Tabelle `itc-grades-tool_users`

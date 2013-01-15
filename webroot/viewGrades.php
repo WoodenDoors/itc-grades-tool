@@ -7,6 +7,13 @@ $login = $handler->checkIfLogin();
 //neue Seite
 //------------------------------------------------------------------------------------------------------------------
 $page = new page();
+$page->addcss('jquery.jqplot.min.css');
+$page->addjs('js/jquery.jqplot.min.js');
+$page->addjs('js/jqplot.categoryAxisRenderer.min.js');
+$page->addjs('js/jqplot.categoryAxisRenderer.min.js');
+$page->addjs('js/jqplot.barRenderer.min.js');
+$page->addjs('js/graphs.js');
+
 $content = '';
 if (!$login){
     $content .= $page->buildResultMessage("errorMsg", "Sie sind nicht eingeloggt! Bitte einloggen.");
@@ -16,6 +23,8 @@ if (!$login){
         $content .= $page->buildResultMessage("errorMsg", "Keine Noten eingetragen!");
     } else {
         $results = $handler->getGrades();
+
+        $content .= '<div id="gradesGraph"></div>';
 
         $content .= '<table name="view">';
         $content .= '<tr><th>Kürzel</th><th>Note</th></tr>';
@@ -54,6 +63,8 @@ if (!$login){
         $content .= "<tr><td>Avg:</td><td>".round($gradeAverageSem,2)."</td></tr>";
         $content .= "<tr><td>Gesamt :</td><td>".round($gradeAverageAll,2)."</td></tr>";
         $content .= '</table>';
+
+        $content .= '<button id="generateGraph">Generate</button>';
     }
 
 //------------------------------------------------------------------------------------------------------------------

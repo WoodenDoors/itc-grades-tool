@@ -231,7 +231,6 @@ table.gradesView td {
 
 }
 
-
 table.projectTable {
     width: 90%;
     padding-top: 10px;
@@ -241,4 +240,10 @@ table.projectTable th {
 }
 table.projectTable td {
     padding-bottom: 10px;
+}
+
+#gradesGraph {
+    width: 500px;
+    height: 300px;
+    float: right;
 }

@@ -7,7 +7,8 @@ if (!$handler->checkIfLogin()) { die("Kein Zugriff."); }
 $set = $handler->getGrades();
 foreach($set as $item) {
     $result[] = [
-        $item['abbreviation'] => $item['grade']
+        "Abbr" => $item['abbreviation'],
+         "Grade" => $item['grade']
     ];
 }
 echo json_encode($result);

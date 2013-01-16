@@ -35,7 +35,7 @@ if (!$login){
         $gradeAverageAll = 0;
         $gradeNoSem = 0;
         $gradeNoAll = 0;
-        $sumCredits = 0;
+        $sumCreditsAll = 0;
         $sumCreditsSem = 0;
         $firstLoop = true;
         foreach($results as $result) {

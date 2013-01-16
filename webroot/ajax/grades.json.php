@@ -17,7 +17,7 @@ function grades_output($handler) {
 
 function credits_output($handler) {
     // TODO ADD THIS
-    return "";
+    return [ 'a' => 'b'];
 }
 
 

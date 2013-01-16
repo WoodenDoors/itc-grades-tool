@@ -5,9 +5,6 @@
  */
 $(document).ready(function(){
 
-    // rotator just for the heck of it for now
-    // TODO -- might have to disable (doesn't spin in FF and possibly other)
-
     var rotator = $("div#rotator");
     hideRotator();
 

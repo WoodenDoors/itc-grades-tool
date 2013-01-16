@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `itc-grades-tool_users` (
 --
 
 INSERT INTO `itc-grades-tool_users` (`ID`, `vorname`, `nachname`, `email`, `pass`, `username`, `semester`) VALUES
-(1, 'Mathias', 'Wegmann', 'm.wegmann@host.com', '912ec803b2ce49e4a541068d495ab570', 'Mattes', 1),
+(1, 'Mathias', 'Wegmann', 'm.wegmann@host.com', '912ec803b2ce49e4a541068d495ab570', 'Mathes', 1),
 (2, 'Sebastian', 'Zier', 'zier.seb@host.com', '912ec803b2ce49e4a541068d495ab570', 'Sebi', 2),
 (3, 'Marius', 'Rüter', 'marius.rueter@host.com', '912ec803b2ce49e4a541068d495ab570', 'Kreisverkehr', 3);
 

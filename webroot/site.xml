@@ -28,14 +28,14 @@
             <desc>Noten eintragen, bearbeiten</desc>
             <login>true</login>
         </navelement>
-        <navelement>
+<!--        <navelement>
             <id></id>
             <title>Grafen</title>
             <url>#</url>
             <icon>icon-stats-up</icon>
             <desc>Grafische Übersicht der Noten, tendenzen usw.</desc>
             <login>true</login>
-        </navelement>
+        </navelement>-->
         <navelement>
             <id></id>
             <title>Projekte</title>

@@ -17,13 +17,17 @@ $(document).ready(function(){
                 ticks.push(entry['Abbr']);
             });
 
-            $('#gradesGraph').css("height", (dataSlices.length*40)); // Dynamische Höhe
+            var graphHeight = dataSlices.length*40;
+            if(graphHeight > 500) graphHeight = 500;
+
+            $('#gradesGraph').css("height", graphHeight); // Dynamische Höhe
 
             $('#gradesGraph').jqplot([dataSlices], {
                     title: {
                         text: 'Noten',
                         fontSize: 16
                     },
+                    animate: true,
                     seriesDefaults:{
                         renderer: $.jqplot.BarRenderer,
                         pointLabels: { show: true },

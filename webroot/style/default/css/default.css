@@ -44,6 +44,7 @@ header {
     border-bottom: 1px solid #999;
     margin-bottom: 10px;
     padding-bottom: 20px;
+    z-index: 100;
 }
 header h1 { 
     margin: 0 0 0 20px; 
@@ -248,12 +249,16 @@ table.projectTable td {
     float: right;
 }
 
-#view th {
+#gradesView th {
     text-align: left;
 }
-#view td {
+#gradesView td {
     padding: 3px;
 }
-#view tr td:first-child {
+#gradesView tr td:first-child {
     font-weight: bold;
+}
+
+tr.semesterName td {
+
 }

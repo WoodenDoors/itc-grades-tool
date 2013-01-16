@@ -110,7 +110,7 @@ class pageHandler {
 
     public function getSemester() {
         if(isset($this->user)) {
-            if($this->user['semester'] > 0 && $this->user['semester'] < 6)
+            if($this->user['semester'] > 0 && $this->user['semester'] <= 6)
                 $semester = $this->user['semester'];
             else
                 $semester = 1;

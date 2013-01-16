@@ -20,7 +20,6 @@ class addGradesHandler extends pageHandler {
         }
 
         //Überprüfung, ob Datensatz vorhanden
-        // TODO: Lieber nur eine Warnung bzw. ein "Wirklich ändern?" anzeigen
         $query = $this->db->selectRows(
             parent::DB_TABLE_GRADES, '*',
             ['user_id', 'course_id'],

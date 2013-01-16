@@ -12,6 +12,20 @@ function viewAll($handler, $page, &$content) {
     $projects_string='';
     foreach($projects as $project) {
         $grade = ($project['grade'] == 0.0) ? "nicht bewertet" : $project['grade'];
+        $projects_string .= $page->loadAdditionalTemplate(
+            'projects_view_line',
+            [
+                "PRNR" => $prNr,
+                "COURSE" => $project['course'],
+                "COURSE_ABBREVIATION" => $project["course_abbreviation"],
+                "PARTICIPANTS" => $project['participants'],
+                "NAME" => $project['name'],
+                "GRADE" => $grade,
+                "ID" => $project['ID']
+            ]
+        );
+
+        /*
         $projects_string .= '<tr>
                 <td>' .$prNr. '</td>
                 <td title="' .$project['course']. '">' .$project['course_abbreviation']. '</td>
@@ -19,7 +33,7 @@ function viewAll($handler, $page, &$content) {
                 <td>' .$project['name']. '</td>
                 <td>' .$grade. '</td>
                 <td><a href="projects.php?page=show&id=' .$project['ID']. '">Details</a></td>
-            </tr>';
+            </tr>';*/
         $prNr++;
     }
 

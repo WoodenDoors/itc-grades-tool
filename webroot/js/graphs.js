@@ -21,9 +21,12 @@ $(document).ready(function(){
                     seriesDefaults:{
                         renderer: $.jqplot.BarRenderer,
                         pointLabels: { show: true },
+                        xaxis: 'x2axis',
                         rendererOptions: {
                             shadow: false,
-                            barDirection: 'horizontal'
+                            barDirection: 'horizontal',
+                            barPadding: 3,
+                            barMargin: 4
                         }
                     },
                     grid: {
@@ -35,9 +38,18 @@ $(document).ready(function(){
                         yaxis:{
                             renderer: $.jqplot.CategoryAxisRenderer,
                             ticks: ticks,
-                            tickOptions: { shadow: false }
+                            showTickMarks: false,
+                            tickOptions: {
+                                shadow: false,
+                                showGridline: false
+                            }
                         },
                         xaxis: {
+                            tickOptions: {
+                                showGridline: false
+                            }
+                        },
+                        x2axis: {
                             max: 1.0,
                             min: 5.0,
                             numberTicks: 5,
@@ -61,5 +73,5 @@ $(document).ready(function(){
 
     setTimeout(function() {
         loadGradesGraph();
-    }, 1000);
+    }, 500);
 });

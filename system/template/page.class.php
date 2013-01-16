@@ -93,7 +93,7 @@ class page {
         $this->template->fillin("PAGE_TITLE", $this->page_title);
         $this->template->fillin("PAGE_SETTINGS", $this->loadAdditionalTemplate(
             "style_change", [
-                "STYLES" => '<option>Bitte Design Ausw&auml;hlen</option><option value="default">Standart</option><option value="metro">Metro</option> '
+                "STYLES" => '<option>Design Auswahl:</option><option value="default">Standart</option><option value="metro">Metro</option> '
             ]
         ));
 

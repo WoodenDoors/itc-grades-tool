@@ -12,14 +12,14 @@ $content .='
     <h2>Credits</h2>
     <p>Folgende externe Projekte wurden zum erstellen dieses Projektes benutzt:</p>
     <pre>
-Stringparser:
-Christian Seiler <spam@christian-seiler.de>
+<a href="http://www.christian-seiler.de/projekte/php/bbcode/doc/phpdoc/earthli/stringparser/_stringparser.class.php.html">Stringparser:
+Christian Seiler</a>
 
-Template:
-Patrick Canterino <patrick@patshaping.de>
+<a href="http://patshaping.de/projekte/template-class/index.htm">Template:
+Patrick Canterino</a>
 
-bootmetro:
-Marcello Palmitessa
+<a href="http://aozora.github.com/bootmetro/index.html">bootmetro:
+Marcello Palmitessa</a>
     </pre>
 ';
 

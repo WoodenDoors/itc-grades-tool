@@ -8,6 +8,11 @@ $login = $handler->checkIfLogin();
 function viewAll($handler, $page, &$content) {
     $projects = $handler->getAllProjects();
 
+    if($projects !== true) {
+        $content .= $page->buildResultMessage("errorMsg", $projects);
+        //return;
+    }
+
     $prNr=1;
     $projects_string='';
     foreach($projects as $project) {

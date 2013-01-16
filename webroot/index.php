@@ -9,7 +9,7 @@ $page = new page();
 $content = $page->loadAdditionalTemplate(
     "hero_unit", [
         "HEADING" => "ITC Grades Tool",
-        "DESCRIPTION" => "Das! Tool der Notenübersicht.",
+        "DESCRIPTION" => "Das perfekte Tool für die Notenübersicht am ITC. Hier kann der aktuelle Fortschritt nachvollzogen werden indem man einfach seine Noten eingibt und zu jeder Zeit einen überblick über seinen aktuellen Stand hat.",
         "LINK" => "about.php"
 ]);
 

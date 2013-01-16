@@ -16,8 +16,19 @@ function grades_output($handler) {
 }
 
 function credits_output($handler) {
-    // TODO ADD THIS
-    return [ 'a' => 'b'];
+    $set = $handler->getGrades();
+    foreach($set as $item) {
+        if($item['grade'] <= 4) {
+            $result[] = [
+                "Abbr" => $item['abbreviation'],
+                "Credits" => $item['credits']
+            ];
+        }
+    }
+    if( !isset($result) ) {
+        return 'Keine Daten';
+    }
+    return $result;
 }
 
 

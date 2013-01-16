@@ -8,10 +8,10 @@ $login = $handler->checkIfLogin();
 //neue Seite
 //------------------------------------------------------------------------------------------------------------------
 $page = new page();
-$page->addcss('jquery.jqplot.min.css');
+$page->addcss('css/jquery.jqplot.min.css');
 $page->addjs('js/jquery.jqplot.min.js');
 $page->addjs('js/jqplot.categoryAxisRenderer.min.js');
-$page->addjs('js/jqplot.categoryAxisRenderer.min.js');
+$page->addjs('js/jqplot.donutRenderer.min.js');
 $page->addjs('js/jqplot.barRenderer.min.js');
 $page->addjs('js/graphs.js');
 

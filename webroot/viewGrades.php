@@ -52,7 +52,7 @@ if (!$login){
                     $sumCreditsSem = 0;
                     $gradeNoSem = 0;
                 }
-                $semester++;
+                $semester = $result['semester'];
                 $content .= '<tr class="gradesSemesterName"><td>'.$semester.'. Semester</td><td></td></tr>';
             }
             $gradeAverageSem += $result['grade'];

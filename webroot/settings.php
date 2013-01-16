@@ -12,7 +12,8 @@ if (isset($_POST['nameSettingsSubmit'])) {
         $_POST['username'],
         $_POST['vorname'],
         $_POST['nachname'],
-        $_POST['email']
+        $_POST['email'],
+        $_POST['semester']
     );
 }
 
@@ -74,6 +75,7 @@ if (!$login) {
                 "SETTINGS_VORNAME" => $handler->getVorname(),
                 "SETTINGS_NACHNAME" => $handler->getNachname(),
                 "SETTINGS_EMAIL" => $handler->getEmail(),
+                "SETTINGS_SEMESTER" => $handler->getSemester(),
                 "REQUEST_URI" => $_SERVER['REQUEST_URI']
             ]
         );

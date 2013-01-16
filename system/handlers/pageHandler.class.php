@@ -180,7 +180,11 @@ class pageHandler {
 
     //Prüfung, ob die Note syntaktisch richtig ist
     protected function checkGradeFormat(&$pGrade, $allowNullNull=false){
-
+        //Bei Eingabe einer einzelnen Ziffer wird die Note als x.0 behandelt
+        if (preg_match('/^[0-9]{1}$/', $pGrade)){
+            $pGrade.=".0";
+        }
+        
         //Bei korrekter EIngabe mit Komma wird das durch einen Punkt ersetzt
         if (preg_match('/^[0-9]{1}[,]{1}[0-9]{1}$/', $pGrade)){
             $pGrade[1]='.';

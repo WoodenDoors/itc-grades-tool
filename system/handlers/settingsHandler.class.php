@@ -14,7 +14,7 @@ class settingsHandler extends pageHandler {
 
     function __destruct() { }
 
-    public function validateNameSettings($username, $vorname, $nachname, $email) {
+    public function validateNameSettings($username, $vorname, $nachname, $email, $semester) {
 
         // Benötigte Felder auf leer prüfen
         if(!$this->checkIfEmpty( [$username, $email] )) {
@@ -48,7 +48,7 @@ class settingsHandler extends pageHandler {
         }
 
         // an Datenbank
-        return $this->submitNameSettings( [$username, $vorname, $nachname, $email] );
+        return $this->submitNameSettings( [$username, $vorname, $nachname, $email, $semester] );
     }
 
     public function validatePwSettings($oldPw, $newPw, $newPw2) {
@@ -86,6 +86,7 @@ class settingsHandler extends pageHandler {
                 "vorname" => $dataArray[1],
                 "nachname" => $dataArray[2],
                 "email" => $dataArray[3],
+                "semester" => $dataArray[4]
             ]
         );
         return false;

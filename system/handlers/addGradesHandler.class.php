@@ -11,7 +11,7 @@ class addGradesHandler extends pageHandler {
         parent::__construct();
     }
 
-    function validateGrades($pGrade, $pCourse){
+    function validateGrades($pGrade, $pCourse, $pEdit){
         $courseID = $this->getCourseID($pCourse);
 
         $error = $this->checkGradeFormat($pGrade);
@@ -27,7 +27,7 @@ class addGradesHandler extends pageHandler {
             [$this->getID(), $courseID]
         );
 
-        if($this->db->hasRows($query)){
+        if($this->db->hasRows($query)&&!$pEdit){
             return parent::ERR_GRADE_ALREADY_EXISTS;
         }
 

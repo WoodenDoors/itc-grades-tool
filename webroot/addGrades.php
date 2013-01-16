@@ -22,7 +22,7 @@ if (!$login) {
 // Submit
 //------------------------------------------------------------------------------------------------------------------
     if (isset($_POST['submit'])) {
-        $valid = $handler->validateGrades($_POST['grade'], $_POST['course']);
+        $valid = $handler->validateGrades($_POST['grade'], $_POST['course'],$_POST['edit']);
 
         if ($valid === true) {
             $content .= $page->buildResultMessage(

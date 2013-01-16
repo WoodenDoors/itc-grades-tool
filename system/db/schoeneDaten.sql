@@ -180,6 +180,7 @@ INSERT INTO `itc-grades-tool_users` (`ID`, `vorname`, `nachname`, `email`, `pass
 (1, 'Mathias', 'Wegmann', 'm.wegmann@host.com', '912ec803b2ce49e4a541068d495ab570', 'Mattes', 1),
 (2, 'Sebastian', 'Zier', 'zier.seb@host.com', '912ec803b2ce49e4a541068d495ab570', 'Sebi', 2),
 (3, 'Marius', 'Rüter', 'marius.rueter@host.com', '912ec803b2ce49e4a541068d495ab570', 'Kreisverkehr', 3);
+(4, 'Michael', 'Stein', 'michael.stein@host.com', '912ec803b2ce49e4a541068d495ab570', 'Micha', 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

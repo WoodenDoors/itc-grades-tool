@@ -63,7 +63,7 @@ $(document).ready(function(){
                 }
             );
         })
-            .error(function(ignore) {  })
+            .error(function(ignore) { alert("Deine Mamma!");  })
 
         hideRotator();
     };

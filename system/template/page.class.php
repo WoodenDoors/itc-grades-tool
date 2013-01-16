@@ -51,6 +51,7 @@ class page {
         $this->template->fillin("TITLE", "ITC-Grades-Tool");
         $this->template->fillin("ROTATOR", '<img src="style/' . $this->style . '/img/loader.gif"/>');
         $this->template->fillin("HOME_LINK", $this->home_link);
+        $this->template->fillin('REFERER', $_SERVER["HTTP_REFERER"]);
 
 
         $main_tpl = new Template();

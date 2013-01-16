@@ -8,8 +8,8 @@ $login = $handler->checkIfLogin();
 function viewAll($handler, $page, &$content) {
     $projects = $handler->getAllProjects();
 
-    if($projects !== true) {
-        $content .= $page->buildResultMessage("errorMsg", $projects);
+    if($projects === false) {
+        $content .= $page->buildResultMessage("errorMsg", "Keine Projekte vorhanden.");
         //return;
     }
 

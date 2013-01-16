@@ -100,7 +100,7 @@ class projectsHandler  extends pageHandler {
     function getAllProjects() {
         $query = $this->db->selectRows(parent::DB_TABLE_PROJECT_PARTY, 'project_id', 'user_id', $this->getID());
         if( !$this->db->hasRows($query) ) {
-            return "Keine Projekte vorhanden."; // TODO Error Msg ergänzen
+            return false; // TODO Error Msg ergänzen
         }
         $projectIDs = $this->db->fetchAssoc($query);
 

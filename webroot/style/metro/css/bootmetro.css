@@ -2540,6 +2540,7 @@ button.close {
   *display: inline;
   padding: 4px 12px;
   margin-bottom: 0;
+  margin: 2px;
   *margin-left: .3em;
   font-size: 14px;
   line-height: 20px;

@@ -1,20 +1,5 @@
-<form class="form-horizontal" action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
-    <fieldset>
-        <legend>Login</legend>
-        <div class="control-group">
-            <label class="control-label" for="login">Nutzername oder Email:</label>
-
-            <div class="controls">
-                <input name="login" id="login" type="text" size="30" maxlength="30" required autofocus/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="pass">Passwort:</label>
-
-            <div class="controls">
-                <input name="pass" id="pass" type="password" size="30" maxlength="50" required/>
-            </div>
-        </div><div class="form-actions">
-        <button name="submit" class="btn btn-primary" id="submit">Login</button></div>
-    </fieldset>
+<form class="form-inline" action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+                <input name="login" id="login" type="text" size="30" maxlength="30" placeholder="Nutzername" required autofocus/>
+                <input name="pass" id="pass" type="password" size="30" maxlength="50" placeholder="Passwort" required/>
+        <button name="submit" class="btn btn-primary" id="submit">Login</button>
 </form>

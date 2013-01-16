@@ -22,12 +22,14 @@ if (!$login) {
 // Submit
 //------------------------------------------------------------------------------------------------------------------
     if (isset($_POST['submit'])) {
-        $valid = $handler->validateGrades($_POST['grade'], $_POST['course'],$_POST['edit']);
+        $edit = (isset($_POST['edit'])) ? true : false;
+        $valid = $handler->validateGrades($_POST['grade'], $_POST['course'], $edit);
 
         if ($valid === true) {
+            $updateText = ($edit) ? "geändert" : "hinzugefügt";
             $content .= $page->buildResultMessage(
                 "successMsg",
-                "Note " . $_POST['grade'] . " für den Kurs " . $_POST['course'] . " hinzugefügt."
+                "Note " . $_POST['grade'] . " für den Kurs " . $_POST['course'] . " $updateText."
             );
         } else {
             $content .= $page->buildResultMessage("errorMsg", $valid);

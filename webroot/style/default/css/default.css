@@ -180,7 +180,7 @@ form label {
     text-align: right;
 }
 
-form input,
+form input:not([type=checkbox]),
 form select,
 form textarea {
     font-size: 1.2em;
@@ -191,6 +191,10 @@ form textarea {
 form input {
     height: 25px;
     padding: 2px 5px 2px 5px;
+}
+
+form input[type=checkbox] {
+    margin: 10px 0 10px 0;
 }
 
 form select {

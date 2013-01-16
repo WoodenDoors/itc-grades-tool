@@ -17,13 +17,17 @@ $(document).ready(function(){
                 ticks.push(entry['Abbr']);
             });
 
+            dataSlices.reverse();
+            ticks.reverse();
+
             var graphHeight = dataSlices.length*40;
-            if(graphHeight > 500) graphHeight = 500;
+            var contentHeight =  $('#content').height();
+            if(graphHeight > contentHeight) graphHeight = contentHeight-10;
 
             $('#gradesGraph').css("height", graphHeight); // Dynamische Höhe
 
             $('#gradesGraph').jqplot([dataSlices], {
-                    seriesColors: [ "#FFD429", "#FFDA47", "#fada5b", "#FFE169" ],
+                    seriesColors: ["#fada5b", "#FFE169" ],
                     title: {
                         text: 'Noten',
                         fontSize: 16

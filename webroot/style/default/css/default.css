@@ -250,7 +250,7 @@ table.projectTable td {
 }
 
 #gradesView {
-    margin: 0; padding: 0;
+    font-size: 0.9em;
 }
 
 #gradesView th {
@@ -264,23 +264,32 @@ table.projectTable td {
     font-weight: bold; padding-left: 5px;
 }
 
-tr.gradesSemesterName td {
+#gradesView tr.gradesSemesterName td {
     margin-top: 10px;
 }
 
-tr.gradesSemesterName td:first-child {
+#gradesView tr.gradesSemesterName td:first-child {
     background-color: #FFE169;
     border: 1px dashed #aaa;
     padding: 5px;
 }
 
-tr.gradesAverage td:first-child {
+#gradesView tr.gradesAverage td:first-child,
+#gradesView tr.gradesTotalAverage td:first-child,
+#gradesView tr.gradesTotal td:first-child {
     padding-bottom: 10px;
-    font-weight: normal;
+    font-weight: 100;
+    padding: 5px;
 }
 
-tr.gradesAverage td:nth-child(2) {
+#gradesView tr.gradesAverage td:nth-child(2),
+#gradesView tr.gradesTotalAverage td:nth-child(2),
+#gradesView tr.gradesTotal td:nth-child(2){
     background-color: #fff;
     border-radius: 10px;
-    margin: 2px;
+    padding: 5px;
+}
+
+#gradesView tr.gradesTotal {
+    padding-top: 10px;
 }

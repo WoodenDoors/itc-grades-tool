@@ -16,8 +16,14 @@ $(document).ready(function(){
                 dataSlices.push(entry['Grade']);
                 ticks.push(entry['Abbr']);
             });
+
+            $('#gradesGraph').css("height", (dataSlices.length*40)); // Dynamische Höhe
+
             $('#gradesGraph').jqplot([dataSlices], {
-                    title:'Noten',
+                    title: {
+                        text: 'Noten',
+                        fontSize: 16
+                    },
                     seriesDefaults:{
                         renderer: $.jqplot.BarRenderer,
                         pointLabels: { show: true },
@@ -25,7 +31,6 @@ $(document).ready(function(){
                         rendererOptions: {
                             shadow: false,
                             barDirection: 'horizontal',
-                            barPadding: 3,
                             barMargin: 4
                         }
                     },
@@ -40,13 +45,16 @@ $(document).ready(function(){
                             ticks: ticks,
                             showTickMarks: false,
                             tickOptions: {
+                                showMark: false,
                                 shadow: false,
                                 showGridline: false
                             }
                         },
                         xaxis: {
                             tickOptions: {
-                                showGridline: false
+                                showGridline: false,
+                                showMark: false,
+                                shadow: false
                             }
                         },
                         x2axis: {
@@ -56,7 +64,8 @@ $(document).ready(function(){
                             tickOptions: {
                                 showGridline: false,
                                 showMark: false,
-                                shadow: false
+                                shadow: false,
+                                formatString: "%.1f"
                             }
                         }
                     }

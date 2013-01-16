@@ -49,7 +49,7 @@ if (!$login){
                     $gradeNoSem=0;
                 }
                 $semester++;
-                $content .= "<tr><td>$semester. Semester</td></tr>";
+                $content .= "<tr><td>$semester. Semester</td><td></td></tr>";
             }
             $gradeAverageSem += $result['grade'];
             $gradeAverageAll += $result['grade'];

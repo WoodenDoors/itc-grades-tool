@@ -243,7 +243,17 @@ table.projectTable td {
 }
 
 #gradesGraph {
-    width: 500px;
+    width: 400px;
     height: 300px;
     float: right;
+}
+
+#view th {
+    text-align: left;
+}
+#view td {
+    padding: 3px;
+}
+#view tr td:first-child {
+    font-weight: bold;
 }

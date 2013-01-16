@@ -1,16 +1,19 @@
-<a href="projects.php">Zurück zur Übersicht</a>
-
-<form action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+<form class="form-horizontal" action="{REQUEST_URI}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
     <fieldset id="showProject">
         <legend>{COURSE_NAME} Projekt</legend>
-        <div></div>
-        <label for="pName">Projekt Name:</label>
-        <input name="pName" id="pName" value="{PROJECT_NAME}"/>
-        <label for="grade">Note:</label>
-        <input name="grade" id="grade" value="{PROJECT_GRADE}"/><br/>
-        <label for="pText">Projekt Beschreibung:</label>
-        <textarea name="pText" id="pText">{PROJECT_TEXT}</textarea>
+        <div class="control-group">
+            <label class="control-label" for="pName">Projekt Name:</label><div class="controls">
+            <input name="pName" id="pName" value="{PROJECT_NAME}"/></div></div>
+        <div class="control-group">
+            <label class="control-label" for="grade">Note:</label><div class="controls">
+            <input name="grade" id="grade" value="{PROJECT_GRADE}"/></div></div>
+        <div class="control-group">
+            <label class="control-label" for="pText">Projekt Beschreibung:</label><div class="controls">
+            <textarea name="pText" id="pText">{PROJECT_TEXT}</textarea></div></div>
         <input type="hidden" name="pID" value="{PROJECT_ID}"/>
-        <button class="button fancyBtn" id="submitShow" name="submitShow">Absenden</button>
+
+        <div class="form-actions">
+            <button class="button fancyBtn" id="submitShow" name="submitShow">Absenden</button>
+        </div>
     </fieldset>
 </form>

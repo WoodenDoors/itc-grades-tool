@@ -16,7 +16,7 @@ class projectsHandler  extends pageHandler {
         $courseID = $this->getCourseID($course);
 
         if( $grade==NULL ) $grade = 0.0;
-        $party = [ [ 'ID' => $this->getID() ] ]; // TODO use forwarded party data
+        $party = [ [ 'ID' => $this->getID() ] ];
 
         return $this->submitProject($name, $text,  $courseID, $grade, $party);
     }
@@ -100,7 +100,7 @@ class projectsHandler  extends pageHandler {
     function getAllProjects() {
         $query = $this->db->selectRows(parent::DB_TABLE_PROJECT_PARTY, 'project_id', 'user_id', $this->getID());
         if( !$this->db->hasRows($query) ) {
-            return false; // TODO Error Msg ergänzen
+            return false;
         }
         $projectIDs = $this->db->fetchAssoc($query);
 

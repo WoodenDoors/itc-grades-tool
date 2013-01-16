@@ -1,8 +1,6 @@
 <?php
 /**
  * Config für Datenbank
- * TODO: Ist das so sinvoll mit den Daten hier?
- * Vielleicht aus eigenener Datei einlesen, sodoass jeder andere Werte haben kann
  *
  * @author mwegmann
  */

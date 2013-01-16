@@ -289,11 +289,17 @@ table.projectTable td {
 #gradesView tr.gradesAverage td:nth-child(2),
 #gradesView tr.gradesTotalAverage td:nth-child(2),
 #gradesView tr.gradesTotal td:nth-child(2){
-    background-color: #fff;
+    background-color: #FFF7D9;
+    border: 1px dashed #aaa;
     border-radius: 10px;
     padding: 5px;
 }
 
-#gradesView tr.gradesTotal {
-    padding-top: 10px;
+#gradesView tr.gradesTotal td:last-child {
+    background-color: #FFF3C4;
+}
+
+select#style {
+    float: right;
+    margin-right: 25px;
 }

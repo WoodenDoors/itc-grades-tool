@@ -4,21 +4,20 @@
  Description: default script
  */
 
-var rotator = $("div#rotator");
-
-var showRotator = function(){
-    rotator.css({visibility: "visible", opacity: "1", display: "block"});
-}
-
-var hideRotator = function(){
-    rotator.fadeTo("fast", 0);
-}
+var rotator;
+var showRotator;
+var hideRotator;
 
 $(document).ready(function(){
+    rotator = $("div#rotator");
 
-    // rotator just for the heck of it for now
-    // TODO -- might have to disable (doesn't spin in FF and possibly other)
-    hideRotator();
+    showRotator = function(){
+        rotator.css({visibility: "visible", opacity: "1", display: "block"});
+    }
+
+     hideRotator = function(){
+        rotator.fadeTo("fast", 0);
+    }
 
     // Pflichtfelder mit * markieren
     $("form input[required]")
@@ -55,12 +54,5 @@ $(document).ready(function(){
         showRotator();
     });
 
-    function showRotator(){
-        rotator.css({visibility: "visible", opacity: "1", display: "block"});
-    }
-
-    function hideRotator(){
-        rotator.fadeTo("fast", 0);
-    }
-
+    hideRotator();
 });

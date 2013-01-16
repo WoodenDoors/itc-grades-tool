@@ -175,6 +175,7 @@ CREATE TABLE IF NOT EXISTS `itc-grades-tool_users` (
 --
 -- Daten für Tabelle `itc-grades-tool_users`
 --
+-- Passwörter: asdf
 
 INSERT INTO `itc-grades-tool_users` (`ID`, `vorname`, `nachname`, `email`, `pass`, `username`, `semester`) VALUES
 (1, 'Mathias', 'Wegmann', 'm.wegmann@host.com', '912ec803b2ce49e4a541068d495ab570', 'Mathes', 1),

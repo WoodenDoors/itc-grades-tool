@@ -37,7 +37,16 @@ class viewGradesHandler extends pageHandler{
                 'grade' => $grades[$i]['grade']
             ];
         }
+       $this->sortBySemester($result);
        return $result;
+    }
+
+    private function sortBySemester(&$array) {
+        foreach ($array as $key => $row) {
+            $semester[$key]  = $row['semester'];
+            $abbreviation[$key] = $row['abbreviation'];
+        }
+        array_multisort($semester, SORT_ASC, $abbreviation, SORT_ASC, $array);
     }
 }
 ?>

@@ -21,7 +21,7 @@ $(document).ready(function(){
             dataSlices.reverse();
             ticks.reverse();
 
-            var graphHeight = dataSlices.length*40;
+            var graphHeight = 50+dataSlices.length*40;
             var contentHeight =  $('#content').height();
             if(graphHeight > contentHeight) graphHeight = contentHeight-10;
 

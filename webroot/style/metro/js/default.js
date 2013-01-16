@@ -43,6 +43,11 @@ $(document).ready(function(){
         showRotator();
     });
 
+    $("select#style").change(function(){
+        window.location.href = "?style=" + $("select#style").val();
+        showRotator();
+    });
+
 
     function showRotator(){
         rotator.css({visibility: "visible", opacity: "1", display: "block"});

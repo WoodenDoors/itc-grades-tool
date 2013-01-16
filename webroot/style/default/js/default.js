@@ -49,6 +49,11 @@ $(document).ready(function(){
         showRotator();
     });
 
+    $("select#style").change(function(){
+        window.location.href = "?style=" + $("select#style").val();
+        showRotator();
+    });
+
     $("select#pSemester").change(function(){
         window.location.href = "projects.php?page=add&semester=" + $("select#pSemester").val();
         showRotator();

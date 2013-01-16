@@ -154,7 +154,6 @@ if (!$login){
             break;
         case "view":
         default:
-            // TODO: vielleicht standardmäßig "add" dazuladen und beim klick via jquery runterfahren?
             viewAll($handler, $page, $content);
     }
 

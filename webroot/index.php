@@ -9,7 +9,7 @@ $page = new page();
 $content = $page->loadAdditionalTemplate(
     "hero_unit", [
         "HEADING" => "ITC Grades Tool",
-        "DESCRIPTION" => "Das! Tool der Notenübersicht.",
+        "DESCRIPTION" => "Das perfekte Tool für die Notenübersicht am ITC. Hier kann der aktuelle Fortschritt nachvollzogen werden indem man einfach seine Noten eingibt und zu jeder Zeit einen Überblick über seinen aktuellen Stand hat.",
         "LINK" => "about.php"
 ]);
 
@@ -24,8 +24,6 @@ $content = $page->loadAdditionalTemplate(
                 Aliquam egestas rutrum neque, sed dapibus nisi blandit ac. Fusce at nulla nulla. Nulla facilisi. Aliquam mattis malesuada augue, nec commodo nulla cursus porttitor. Nulla vel nisi purus, id dictum quam. Proin sit amet elit a nunc venenatis commodo nec in justo. Aenean nibh purus, pellentesque nec fringilla sit amet, luctus ut felis. Nullam accumsan felis ut elit feugiat sit amet pretium justo congue.
                 </p>';*/
 
-
-// TODO Auslagern / Vereinfachen / PageWrapper bauen
 $page->set_body_content($content);
 echo $page->get_page();
 ?>

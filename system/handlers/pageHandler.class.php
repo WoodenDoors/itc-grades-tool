@@ -33,7 +33,7 @@ class pageHandler {
     const ERR_GRADES_WRONG_SYNTAX = "Falsche Syntax der Note.";
     const ERR_GRADES_WRONG_RANGE = "Die Eingegebene Note liegt nicht zwischen 1.0 und 5.0";
     const ERR_GRADE_ALREADY_EXISTS = "Für dieses Fach ist bereits eine Note eingetragen.";
-    const ERR_GRADES_NIL = "Die eingegebene Note ist ungültig.";
+    const ERR_GRADES_NIL = "Die eingegebene Note ist ungültig. Gültige Abstufungen sind .0, .3 und .7.";
 
     protected $db;
     private $user;

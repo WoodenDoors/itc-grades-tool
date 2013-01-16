@@ -53,14 +53,14 @@ if (!$login){
                     $gradeNoSem = 0;
                 }
                 $semester = $result['semester'];
-                $content .= '<tr class="gradesSemesterName"><td>'.$semester.'. Semester</td><td></td></tr>';
+                $content .= '<tr class="gradesSemesterName"><td>'.$semester.'. Semester</td><td></td><td></td></tr>';
             }
             $gradeAverageSem += $result['grade'];
             $gradeAverageAll += $result['grade'];
             $sumCreditsSem += $result['credits'];
             $sumCreditsAll += $result['credits'];
             $content .= '<tr><td title="'.$result['course'].'">'.$result['abbreviation'].'</td>';
-            $content .= '<td class="userGrade">'.$result['grade'].'</td><td>'.$result['credits'].'</td></tr>';
+            $content .= '<td class="userGrade">'.$result['grade'].'</td><td class="courseCredits">'.$result['credits'].'</td></tr>';
             $gradeNoSem++;
             $gradeNoAll++;
         }
@@ -68,6 +68,7 @@ if (!$login){
         $gradeAverageSem = round($gradeAverageSem/$gradeNoSem, 2);
         $gradeAverageAll = round($gradeAverageAll/$gradeNoAll, 2);
         $content .= '<tr class="gradesTotalAverage"><td>Durchschnitt:</td><td>' .$gradeAverageSem. '</td><td>'.$sumCreditsSem.'</td></tr>';
+        $content .= '<tr class="tableLine"><td></td><td></td><td></tr>';
         $content .= '<tr class="gradesTotal"><td>Gesamt :</td><td>' .$gradeAverageAll. '</td><td>'.$sumCreditsAll.'</tr>';
         $content .= '</table>';
     }

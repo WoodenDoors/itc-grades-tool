@@ -253,29 +253,39 @@ table.projectTable td {
     float: right;
 }
 
-#gradesView {
+table#gradesView {
+    width: 300px;
     font-size: 0.9em;
+    border-spacing: 0;
 }
 
 #gradesView th {
     text-align: left;
 }
+
 #gradesView td {
-    padding: 2px;
-    margin: 0;
+    padding: 5px;
 }
 #gradesView tr td:first-child {
-    font-weight: bold; padding-left: 5px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+#gradesView tr.gradesSemesterName {
+    height: 30px;
+    background-color: #FFE169;
+    background: -moz-linear-gradient(top, #FFD269 0%, #fee87d 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFD269), color-stop(100%,#fee87d)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #FFD269 0%,#fee87d 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #FFD269 0%,#fee87d 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #FFD269 0%,#fee87d 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #FFD269 0%,#fee87d 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFD269', endColorstr='#fee87d',GradientType=0 ); /* IE6-9 */
 }
 
 #gradesView tr.gradesSemesterName td {
-    margin-top: 10px;
-}
-
-#gradesView tr.gradesSemesterName td:first-child {
-    background-color: #FFE169;
-    border: 1px dashed #aaa;
-    padding: 5px;
+    border-top: 10px solid #eee;
+    border-bottom: 1px dotted #aaa;
 }
 
 #gradesView tr.gradesAverage td:first-child,
@@ -283,28 +293,42 @@ table.projectTable td {
 #gradesView tr.gradesTotal td:first-child {
     padding-bottom: 10px;
     font-weight: 100;
-    padding: 5px;
 }
-#gradesView td.userGrade {
-    padding: 5px;
+#gradesView td.userGrade,
+#gradesView td.courseCredits {
     border-radius: 10px;
+    text-align: center;
+    border: 1px dashed #fff;
 }
 
-#gradesView tr.gradesAverage td:last-child ,
-#gradesView tr.gradesTotalAverage td:last-child ,
-#gradesView tr.gradesTotal td:last-child {
+#gradesView tr.gradesAverage  td:nth-child(2),
+#gradesView tr.gradesTotalAverage  td:nth-child(2),
+#gradesView tr.gradesTotal td:nth-child(2),
+#gradesView tr.gradesAverage td:last-child,
+#gradesView tr.gradesTotalAverage td:last-child,
+#gradesView tr.gradesTotal td:last-child{
     background-color: #FFF7D9;
     border: 1px dashed #aaa;
     border-radius: 10px;
+    text-align: center;
 }
 
+#gradesView tr.gradesTotal td:nth-child(2),
 #gradesView tr.gradesTotal td:last-child {
     background-color: #FFF3C4;
 }
 
+#gradesView tr.selectedCourse td:nth-child(2),
 #gradesView tr.selectedCourse td:last-child {
     background-color: #FFDFC4;
-    border: 1px dashed #ccc;
+    border-color: #ccc;
+}
+
+#gradesView tr.tableLine {
+    height: 10px;
+}
+
+#gradesView tr.tableLine td {
 }
 
 select#style {

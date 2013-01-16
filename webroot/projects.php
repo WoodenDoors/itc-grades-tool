@@ -13,8 +13,8 @@ function viewAll($handler, $page, &$content) {
         //return;
     }
 
-    $prNr=1;
-    $projects_string='';
+    $prNr = 1;
+    $projects_string = '';
     foreach($projects as $project) {
         $grade = ($project['grade'] == 0.0) ? "nicht bewertet" : $project['grade'];
         $projects_string .= $page->loadAdditionalTemplate(

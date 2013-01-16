@@ -55,7 +55,7 @@ if (!$login){
             $gradeAverageSem += $result['grade'];
             $gradeAverageAll += $result['grade'];
             $content .= '<tr><td title="'.$result['course'].'">'.$result['abbreviation'].'</td>';
-            $content .= '<td>'.$result['grade'].'</td></tr>';
+            $content .= '<td class="userGrade">'.$result['grade'].'</td></tr>';
             $gradeNoSem++;
             $gradeNoAll++;
         }

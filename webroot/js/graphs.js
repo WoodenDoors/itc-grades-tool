@@ -3,15 +3,16 @@
  Author     : mwegmann
  Description:
  */
-
+var dataSlices;
+var ticks;
 $(document).ready(function(){
     var loadGradesGraph = function(){
         showRotator();
 
         json = jsonCallGrades();
         json.success(function(data) {
-            var dataSlices = [];
-            var ticks = [];
+            dataSlices = [];
+            ticks = [];
             $.each(data, function (entryindex, entry) {
                 dataSlices.push(entry['Grade']);
                 ticks.push(entry['Abbr']);
@@ -136,4 +137,14 @@ $(document).ready(function(){
     setTimeout(function() {
         loadGradesGraph();
     }, 500);
+
+    $('#gradesGraph').bind('jqplotDataClick',
+        function (ev, seriesIndex, pointIndex, data) {
+            console.log(data);
+            console.log(ticks[data[data[1]-1]]);
+            $('#gradesView tr.selectedCourse').removeClass("selectedCourse");
+            $('#gradesView').find("td:contains("+ticks[data[1]-1]+")").parent().addClass("selectedCourse");
+            //.html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+        }
+    );
 });

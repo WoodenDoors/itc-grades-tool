@@ -43,25 +43,26 @@ if (!$login){
                 }
                 //Am Ende jedes Semesters wird der Durschnitt ausgegeben und zurückgesetzt
                 else{
-                    $gradeAverageSem = $gradeAverageSem/$gradeNoSem;
-                    $content .= "<tr><td>Avg:</td><td>".round($gradeAverageSem,2)."</td></tr>";
+                    $gradeAverageSem = round($gradeAverageSem/$gradeNoSem, 2);
+                    $content .= '<tr class="gradesAverage"><td>Durchschnitt:</td><td>'.$gradeAverageSem.'</td></tr>';
                     $gradeAverageSem = 0;
                     $gradeNoSem = 0;
                 }
                 $semester++;
-                $content .= '<tr class="semesterName"><td>'.$semester.'. Semester</td><td></td></tr>';
+                $content .= '<tr class="gradesSemesterName"><td>'.$semester.'. Semester</td><td></td></tr>';
             }
             $gradeAverageSem += $result['grade'];
             $gradeAverageAll += $result['grade'];
-            $content .= "<tr><td>".$result['abbreviation']."</td><td>".$result['grade']."</td></tr>";
+            $content .= '<tr><td title="'.$result['course'].'">'.$result['abbreviation'].'</td>';
+            $content .= '<td>'.$result['grade'].'</td></tr>';
             $gradeNoSem++;
             $gradeNoAll++;
         }
         //Für das letzte Semester wird nach der Schleife der Schnitt berechnet
-        $gradeAverageSem = $gradeAverageSem/$gradeNoSem;
-        $gradeAverageAll = $gradeAverageAll/$gradeNoAll;
-        $content .= "<tr><td>Avg:</td><td>".round($gradeAverageSem,2)."</td></tr>";
-        $content .= "<tr><td>Gesamt :</td><td>".round($gradeAverageAll,2)."</td></tr>";
+        $gradeAverageSem = round($gradeAverageSem/$gradeNoSem, 2);
+        $gradeAverageAll = round($gradeAverageAll/$gradeNoAll, 2);
+        $content .= '<tr class="gradesTotalAverage"><td>Durchschnitt:</td><td>' .$gradeAverageSem. '</td></tr>';
+        $content .= '<tr class="gradesTotal"><td>Gesamt :</td><td>' .$gradeAverageAll. '</td></tr>';
         $content .= '</table>';
     }
 

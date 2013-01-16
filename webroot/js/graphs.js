@@ -23,6 +23,7 @@ $(document).ready(function(){
             $('#gradesGraph').css("height", graphHeight); // Dynamische Höhe
 
             $('#gradesGraph').jqplot([dataSlices], {
+                    seriesColors: [ "#FFD429", "#FFDA47", "#fada5b", "#FFE169" ],
                     title: {
                         text: 'Noten',
                         fontSize: 16
@@ -33,6 +34,7 @@ $(document).ready(function(){
                         pointLabels: { show: true },
                         xaxis: 'x2axis',
                         rendererOptions: {
+                            varyBarColor : true,
                             shadow: false,
                             barDirection: 'horizontal',
                             barMargin: 4

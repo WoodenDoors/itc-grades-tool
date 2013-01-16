@@ -249,16 +249,38 @@ table.projectTable td {
     float: right;
 }
 
+#gradesView {
+    margin: 0; padding: 0;
+}
+
 #gradesView th {
     text-align: left;
 }
 #gradesView td {
-    padding: 3px;
+    padding: 2px;
+    margin: 0;
 }
 #gradesView tr td:first-child {
-    font-weight: bold;
+    font-weight: bold; padding-left: 5px;
 }
 
-tr.semesterName td {
+tr.gradesSemesterName td {
+    margin-top: 10px;
+}
 
+tr.gradesSemesterName td:first-child {
+    background-color: #FFE169;
+    border: 1px dashed #aaa;
+    padding: 5px;
+}
+
+tr.gradesAverage td:first-child {
+    padding-bottom: 10px;
+    font-weight: normal;
+}
+
+tr.gradesAverage td:nth-child(2) {
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 2px;
 }

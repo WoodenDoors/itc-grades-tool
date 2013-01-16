@@ -130,6 +130,9 @@ if (!$login){
             add($handler, $page, $content);
             viewAll($handler, $page, $content);
             break;
+        case "addstrip":
+            add($handler, $page, $content);
+            break;
         case "view":
         default:
             // TODO: vielleicht standartmäßig "add" dazuladen und beim klick via jquery runterfahren?

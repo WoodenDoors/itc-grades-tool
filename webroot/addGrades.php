@@ -22,6 +22,7 @@ if (!$login) {
 // Submit
 //------------------------------------------------------------------------------------------------------------------
     if (isset($_POST['submit'])) {
+        $edit = (isset($_POST['edit'])) ? $_POST['edit'] : false;
         $valid = $handler->validateGrades($_POST['grade'], $_POST['course'],$_POST['edit']);
 
         if ($valid === true) {

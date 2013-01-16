@@ -26,6 +26,11 @@ $(document).ready(function(){
                             barDirection: 'horizontal'
                         }
                     },
+                    grid: {
+                        borderWidth: 0,
+                        background: 'transparent',
+                        shadow: false
+                    },
                     axes:{
                         yaxis:{
                             renderer: $.jqplot.CategoryAxisRenderer,
@@ -35,6 +40,7 @@ $(document).ready(function(){
                         xaxis: {
                             max: 1.0,
                             min: 5.0,
+                            numberTicks: 5,
                             tickOptions: {
                                 showGridline: false,
                                 showMark: false,
@@ -55,5 +61,5 @@ $(document).ready(function(){
 
     setTimeout(function() {
         loadGradesGraph();
-    }, 5000);
+    }, 1000);
 });

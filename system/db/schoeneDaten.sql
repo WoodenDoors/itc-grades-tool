@@ -131,8 +131,9 @@ CREATE TABLE IF NOT EXISTS `itc-grades-tool_projects` (
 
 INSERT INTO `itc-grades-tool_projects` (`ID`, `course_id`, `grade`, `name`, `text`) VALUES
 (1, 1, 1.3, 'ITC-Grades-Tool', 'Erstellen einer Website in PHP'),
-(2, 5, 0.0, 'PDF-Tool', 'PDF-Tool machen');
-
+(2, 5, 0.0, 'PDF-Tool', 'PDF-Tool machen'),
+(3, 9, 0.0, 'Roboter bauen', 'laufen und töten'),
+(4, 11, 2.0, 'Lernprogramm', 'Java Lernprogramm');
 -- --------------------------------------------------------
 
 --
@@ -152,7 +153,11 @@ INSERT INTO `itc-grades-tool_project_participants` (`project_id`, `user_id`) VAL
 (1, 1),
 (1, 2),
 (1, 3),
-(2, 1);
+(2, 1),
+(3, 2),
+(4, 2),
+(4, 1),
+(4, 3);
 
 -- --------------------------------------------------------
 

@@ -20,6 +20,10 @@ Patrick Canterino</a>
 
 <a href="http://aozora.github.com/bootmetro/index.html">bootmetro:
 Marcello Palmitessa</a>
+
+<a href="http://jquery.com/">jQuery</a>
+
+<a href="http://www.jqplot.com">jqPlot</a>
     </pre>
 ';
 

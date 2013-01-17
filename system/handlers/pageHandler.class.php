@@ -29,6 +29,7 @@ class pageHandler {
     const ERR_PW_TOO_SHORT = "Ihr Passwort muss mindestens 4 Zeichen lang sein.";
     const ERR_PW_NOT_EQUAL = "Die eingegebenen Passwörter stimmen nicht überein.";
     const ERR_WRONG_OLD_PW = "Das eingegebene Passwort ist nicht richtig.";
+    const ERR_INVALID_SEMESTER = "Das eingegebene Semester muss zwischen 1 und 6 liegen";
 
     const ERR_GRADES_WRONG_SYNTAX = "Falsche Syntax der Note.";
     const ERR_GRADES_WRONG_RANGE = "Die Eingegebene Note liegt nicht zwischen 1.0 und 5.0";

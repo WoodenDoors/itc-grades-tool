@@ -43,6 +43,9 @@ class settingsHandler extends pageHandler {
         }
 
         // TODO semester prüfen
+        if($semester > 6 || $semester < 1) {
+            return parent::ERR_INVALID_SEMESTER;
+        }
 
         // Gültige Email-Adresse prüfen
         if(!filter_var( $email, FILTER_VALIDATE_EMAIL )) {

@@ -22,7 +22,7 @@ class page {
         $this->validateconfig();
         if (!isset($_GET['PageMode'])) $_GET['PageMode'] = "";
         if (isset($_COOKIE['style'])) $this->style = $_COOKIE['style'];
-        if (isset($_GET['style'])) {
+        if (isset($_GET['style']) && file_exists('style/' . $_GET['style'] . '/config.xml')) {
             setcookie('style', $_GET['style']);
             $this->style = $_GET['style'];
         }

@@ -42,6 +42,8 @@ class settingsHandler extends pageHandler {
             }
         }
 
+        // TODO semester prüfen
+
         // Gültige Email-Adresse prüfen
         if(!filter_var( $email, FILTER_VALIDATE_EMAIL )) {
             return parent::ERR_EMAIL_INVALID;

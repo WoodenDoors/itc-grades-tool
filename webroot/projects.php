@@ -2,8 +2,9 @@
 require_once('../system/handlers/projectsHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new projectsHandler();
-$page = new page(true, $handler);
 $login = $handler->getLogin();
+$page = new page(true, $handler);
+
 //------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------
 function viewAll($handler, $page, &$content) {
@@ -11,6 +12,7 @@ function viewAll($handler, $page, &$content) {
 
     if($projects === false) {
         $content .= $page->buildResultMessage("errorMsg", "Keine Projekte vorhanden.");
+        $projects = [];
         //return;
     }
 

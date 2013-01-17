@@ -119,7 +119,13 @@ $(document).ready(function(){
     $('#gradesGraph').bind('jqplotDataClick',
         function (ev, seriesIndex, pointIndex, data) {
             $('#gradesView tr.selectedCourse').removeClass("selectedCourse");
-            $('#gradesView').find("td:contains("+ticks[data[1]-1]+")").parent().addClass("selectedCourse");
+
+            gradesViewAbbr = $('#gradesView').find("td:contains("+ticks[data[1]-1]+")");
+            if(stylesheet == "metro") {
+                gradesViewAbbr = $('#gradesView').find("td[title="+ticks[data[1]-1]+"]");
+            }
+
+            gradesViewAbbr.parent().addClass("selectedCourse");
             //.html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
         }
     );

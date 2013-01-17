@@ -7,3 +7,9 @@
 #gradesView {
     width: 400px;
 }
+
+
+#gradesView tr.selectedCourse td:nth-child(2),
+#gradesView tr.selectedCourse td:last-child {
+
+}

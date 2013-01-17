@@ -5,31 +5,42 @@
  */
 var dataSlices;
 var ticks;
+var stylesheet="default";
+
 $(document).ready(function(){
     var loadGradesGraph = function(){
         showRotator();
 
         json = jsonCallGrades();
         json.success(function(data) {
-            console.log("Success.");
+
+            // PARSE DATA
             dataSlices = [];
             ticks = [];
             $.each(data, function (entryindex, entry) {
                 dataSlices.push(entry['Grade']);
                 ticks.push(entry['Abbr']);
             });
-
             dataSlices.reverse();
             ticks.reverse();
 
-            var graphHeight = 50+dataSlices.length*40;
-            var contentHeight =  $('#content').height();
-            if(graphHeight > contentHeight) graphHeight = contentHeight-10;
+            // STYLE
+            var contentContainer = $("#content");
+            var graphColors = ["#fada5b", "#FFE169" ];
+            if(stylesheet == "metro") {
+                contentContainer = $(".container.metro");
+                graphColors = ["#2d89f0", "#4F1ACB" ];
+            }
 
+            // HEIGHT CALC
+            var graphHeight = 50+dataSlices.length*40;
+            var contentHeight =  contentContainer.height();
+            if(graphHeight > contentHeight) graphHeight = contentHeight-10;
             $('#gradesGraph').css("height", graphHeight); // Dynamische Höhe
 
+            // PLOT GRAPH
             $('#gradesGraph').jqplot([dataSlices], {
-                    seriesColors: ["#fada5b", "#FFE169" ],
+                    seriesColors: graphColors,
                     title: {
                         text: 'Noten',
                         fontSize: 16
@@ -96,6 +107,10 @@ $(document).ready(function(){
     var jsonCallCredits = function(){
         return $.getJSON('ajax/grades.json.php?type=credits');
     }
+
+    $.get('ajax/getStyle.php').complete(function(data) {
+        stylesheet = data.responseText;
+    });
 
     setTimeout(function() {
         loadGradesGraph();

@@ -50,11 +50,12 @@ class registerHandler extends pageHandler {
     
     private function submitInput($dataArray) {
         $dataArray[4] = md5($dataArray[4]); // Passwort in md5() wandeln
+        $dataArray[] = 1; // Semester
 
         $this->db->insertRow(
             parent::DB_TABLE_USERS,
             $dataArray,
-            "username, vorname, nachname, email, pass"
+            "username, vorname, nachname, email, pass, semester"
         );
         return false;
     }

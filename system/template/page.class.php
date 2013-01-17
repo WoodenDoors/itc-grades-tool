@@ -80,6 +80,7 @@ class page {
                 $nav_entry->fillin("NAVURL", $navelement->url);
                 $nav_entry->fillin("NAVTITLE", " " . $navelement->title);
                 $nav_entry->fillin("ICON", $navelement->icon);
+                $nav_entry->fillin("TOOLTIP", $navelement->desc);
                 if (preg_match('/\S*' . str_replace("/", "\/", $navelement->url) . '\S*/i', $_SERVER['SCRIPT_FILENAME'])) {
                     $nav_entry->fillin('ACTIVE', ' class="active"');
                     $this->page_title = $navelement->title;

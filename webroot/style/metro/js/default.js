@@ -3,10 +3,15 @@
  Author     : mwegmann
  Description: default script
  */
+
+var showRotator;
+var hideRotator;
+
 $(document).ready(function(){
 
-    var rotator = $("div#rotator");
-    hideRotator();
+    // No rotator with this style
+    showRotator = function(){ }
+    hideRotator = function(){ }
 
     // Stand-alone Buttons
     $("button#settings").click(function(){
@@ -39,14 +44,4 @@ $(document).ready(function(){
         window.location.href = "?style=" + $("select#style").val();
         showRotator();
     });
-
-
-    function showRotator(){
-        rotator.css({visibility: "visible", opacity: "1", display: "block"});
-    }
-
-    function hideRotator(){
-        rotator.fadeTo("fast", 0);
-    }
-
 });

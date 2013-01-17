@@ -25,11 +25,6 @@ if (!$login){
     } else {
         $results = $handler->getGrades();
 
-        $content .= '<div id="gradesGraph"></div>';
-
-        $content .= '<table id="gradesView" class="table table-striped">';
-        $content .= '<thead><tr><th>Kürzel</th><th>Note</th><th>Credits</th></tr></thead><tbody>';
-
         $semester = 0;
         $gradeAverageSem = 0;
         $gradeAverageAll = 0;
@@ -38,6 +33,7 @@ if (!$login){
         $sumCreditsAll = 0;
         $sumCreditsSem = 0;
         $firstLoop = true;
+        $gradesData = "";
         foreach($results as $result) {
             if( $result['semester'] > $semester ) {
                 //Für das erste Semester wird der Teil übersprungen
@@ -47,30 +43,54 @@ if (!$login){
                 //Am Ende jedes Semesters wird der Durschnitt ausgegeben und zurückgesetzt
                 else{
                     $gradeAverageSem = round($gradeAverageSem/$gradeNoSem, 2);
-                    $content .= '<tr class="gradesAverage"><td>Durchschnitt:</td><td>'.$gradeAverageSem.'</td><td>'.$sumCreditsSem.'</tr>';
+                    $gradesData .= $page->loadAdditionalTemplate(
+                        "grades_view_Average", [
+                            "gradeAverageSem" => $gradeAverageSem,
+                            "sumCreditsSem" => $sumCreditsSem
+                        ]
+                    );
                     $gradeAverageSem = 0;
                     $sumCreditsSem = 0;
                     $gradeNoSem = 0;
                 }
                 $semester = $result['semester'];
-                $content .= '<tr class="gradesSemesterName"><td><label class="label label-info">'.$semester.'. Semester</label></td><td></td><td></td></tr>';
+                $gradesData .= $page->loadAdditionalTemplate(
+                    "grades_view_subTitle", [
+                        "SUBTITLE" => $semester.'. Semester'
+                    ]
+                );
             }
             $gradeAverageSem += $result['grade'];
             $gradeAverageAll += $result['grade'];
             $sumCreditsSem += $result['credits'];
             $sumCreditsAll += $result['credits'];
-            $content .= '<tr><td title="'.$result['course'].'">'.$result['abbreviation'].'</td>';
-            $content .= '<td class="userGrade">'.$result['grade'].'</td><td class="courseCredits">'.$result['credits'].'</td></tr>';
+            $gradesData .= $page->loadAdditionalTemplate(
+                "grades_view_singleGrade", [
+                    "COURSE" => $result['course'],
+                    "ABBREVIATION" => $result['abbreviation'],
+                    "GRADE" => $result['grade'],
+                    "CREDITS" => $result['credits']
+                ]
+            );
             $gradeNoSem++;
             $gradeNoAll++;
         }
         //Für das letzte Semester wird nach der Schleife der Schnitt berechnet
         $gradeAverageSem = round($gradeAverageSem/$gradeNoSem, 2);
         $gradeAverageAll = round($gradeAverageAll/$gradeNoAll, 2);
-        $content .= '<tr class="gradesTotalAverage"><td><label class="label label-inverse">Durchschnitt:</label></td><td>' .$gradeAverageSem. '</td><td>'.$sumCreditsSem.'</td></tr>';
-        $content .= '<tr class="tableLine"><td></td><td></td><td></tr>';
-        $content .= '<tr class="gradesTotal"><td><label class="label label-success">Gesamt :</label></td><td>' .$gradeAverageAll. '</td><td>'.$sumCreditsAll.'</tr>';
-        $content .= '</tbody></table>';
+        $gradesData .= $page->loadAdditionalTemplate(
+            "grades_view_TotalAverage", [
+                "gradeAverageSem" => $gradeAverageSem,
+                "sumCreditsSem" => $sumCreditsSem,
+                "gradeAverageAll" => $gradeAverageAll,
+                "sumCreditsAll" => $sumCreditsAll
+            ]
+        );
+        $content .= $page->loadAdditionalTemplate(
+            "grades_view", [
+                "TBODY" => $gradesData
+        ]);
+
     }
 
 //------------------------------------------------------------------------------------------------------------------

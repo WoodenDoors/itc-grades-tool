@@ -35,6 +35,8 @@ if (!$login){
         $firstLoop = true;
         $gradesData = "";
         foreach($results as $result) {
+            $courseCredits = ($result['grade'] > 4) ? 0 : $result['credits'];
+
             if( $result['semester'] > $semester ) {
                 //Für das erste Semester wird der Teil übersprungen
                 if($firstLoop){
@@ -42,6 +44,7 @@ if (!$login){
                 }
                 //Am Ende jedes Semesters wird der Durschnitt ausgegeben und zurückgesetzt
                 else{
+
                     $gradeAverageSem = round($gradeAverageSem/$gradeNoSem, 2);
                     $gradesData .= $page->loadAdditionalTemplate(
                         "grades_view_Average", [
@@ -62,14 +65,14 @@ if (!$login){
             }
             $gradeAverageSem += $result['grade'];
             $gradeAverageAll += $result['grade'];
-            $sumCreditsSem += $result['credits'];
-            $sumCreditsAll += $result['credits'];
+            $sumCreditsSem += $courseCredits;
+            $sumCreditsAll += $courseCredits;
             $gradesData .= $page->loadAdditionalTemplate(
                 "grades_view_singleGrade", [
                     "COURSE" => $result['course'],
                     "ABBREVIATION" => $result['abbreviation'],
                     "GRADE" => $result['grade'],
-                    "CREDITS" => $result['credits']
+                    "CREDITS" => $courseCredits
                 ]
             );
             $gradeNoSem++;

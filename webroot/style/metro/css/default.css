@@ -10,6 +10,8 @@
 
 
 #gradesView tr.selectedCourse td:nth-child(2),
-#gradesView tr.selectedCourse td:last-child {
-
+#gradesView tr.selectedCourse td {
+    background-color: #f5f5f5;
+    border-top: 1px solid #00bff2;
+    border-bottom: 1px solid #00bff2;
 }

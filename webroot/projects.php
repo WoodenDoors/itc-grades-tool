@@ -2,7 +2,8 @@
 require_once('../system/handlers/projectsHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new projectsHandler();
-$login = $handler->checkIfLogin();
+$page = new page(true, $handler);
+$login = $handler->getLogin();
 //------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------
 function viewAll($handler, $page, &$content) {
@@ -108,9 +109,6 @@ function add($handler, $page, &$content) {
 //------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------
 
-//neue Seite
-//------------------------------------------------------------------------------------------------------------------
-$page = new page();
 $content = '';
 if (!$login){
     $content .= $page->buildResultMessage("errorMsg", "Sie sind nicht eingeloggt! Bitte einloggen.");

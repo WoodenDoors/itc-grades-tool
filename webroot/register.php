@@ -2,7 +2,8 @@
 require_once('../system/handlers/registerHandler.class.php');
 require_once('../system/template/page.class.php');
 $handler = new registerHandler();
-$handler->checkIfLogin();
+$page = new page(true, $handler);
+$login = $handler->getLogin();
 
 // Abgeschicktes Formular validieren
 //------------------------------------------------------------------------------------------------------------------
@@ -16,11 +17,6 @@ if(isset( $_POST['submit'] )) {
         $_POST['pass']
     );
 }
-
-// neue Seite
-//------------------------------------------------------------------------------------------------------------------
-$page = new page();
-$login = $handler->checkIfLogin();
 
 // Diverse Prüfungen
 //------------------------------------------------------------------------------------------------------------------

@@ -36,12 +36,15 @@ class pageHandler {
     const ERR_GRADES_NIL = "Die eingegebene Note ist ungültig. Gültige Abstufungen sind .0, .3 und .7.";
 
     protected $db;
+    private $login;
     private $user;
 
     function __construct() {
         $config = new dbconfig();
         $this->db = new database($config);
         $this->db->openConnection();
+
+        $this->login = $this->checkIfLogin();
     }
 
     public function checkIfLogin() {
@@ -66,6 +69,7 @@ class pageHandler {
         return false;
     }
 
+    // Anm.: getter >könnten< auch auf $this->login prüfen
     public function getUsername() {
         if(isset($this->user)) {
             return $this->user['username'];
@@ -117,6 +121,10 @@ class pageHandler {
             return $semester;
         }
         return false;
+    }
+
+    public function getLogin() {
+        return $this->login;
     }
 
     // Zum einfacheren Testen zwischendurch

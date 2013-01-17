@@ -2,7 +2,8 @@
 require_once('../system/handlers/settingsHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new settingsHandler();
-$handler->checkIfLogin(); // in Konstruktor?
+$page = new page(true, $handler);
+$login = $handler->getLogin();
 
 // Form 1 (IDs) übermittelt
 //------------------------------------------------------------------------------------------------------------------
@@ -26,11 +27,6 @@ if (isset($_POST['pwSettingsSubmit'])) {
         $_POST['passNeu2']
     );
 }
-
-// neue Seite
-//------------------------------------------------------------------------------------------------------------------
-$page = new page();
-$login = $handler->checkIfLogin();
 
 // Seiten-Inhalt zusammen bauen
 //------------------------------------------------------------------------------------------------------------------

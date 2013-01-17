@@ -17,7 +17,7 @@ class page {
     private $page_settings;
 
     // setup page on default
-    function __construct($constructPage = TRUE)
+    function __construct($constructPage = TRUE, &$pageHandler=NULL)
     {
         $this->validateconfig();
         if (!isset($_GET['PageMode'])) $_GET['PageMode'] = "";
@@ -27,16 +27,20 @@ class page {
             $this->style = $_GET['style'];
         }
         if ($constructPage) {
-            $this->setup_page();
+            $this->setup_page($pageHandler);
         }
     }
 
-    function setup_page()
+    function setup_page(&$pageHandler=NULL)
     {
         $this->config = simplexml_load_file('style/' . $this->style . '/config.xml');
         $this->template = new Template();
         $this->template->readin("style/" . $this->style . "/tpl/tpl_overall" . $_GET['PageMode'] . ".html");
-        $pageHandler = new pageHandler(); // TODO Redundanz mit Handlern beseitigen
+
+        if($pageHandler === NULL) {
+            $pageHandler = new pageHandler(); // TODO Redundanz mit Handlern beseitigen
+        }
+        $login = $pageHandler->getLogin();
 
         //Stylesheets einfügen
         foreach ($this->config->css as $csssheet) {
@@ -66,7 +70,7 @@ class page {
         $site = simplexml_load_file("site.xml");
         foreach ($site->nav->navelement as $navelement) {
             $showElement = false;
-            if ($navelement->login == "true" && $pageHandler->checkIfLogin()) {
+            if ($navelement->login == "true" && $login) {
                 $showElement = true;
             } elseif ($navelement->login == "false") {
                 $showElement = true;
@@ -102,7 +106,7 @@ class page {
 
         $this->template->fillin("DIALOGS", file_get_contents("style/" . $this->style . "/tpl/tpl_dialogs.html"));
 
-        $this->set_userControl_content($pageHandler->checkIfLogin(), $pageHandler->getUsername(), $pageHandler->getVorname(), $pageHandler->getNachname());
+        $this->set_userControl_content($login, $pageHandler->getUsername(), $pageHandler->getVorname(), $pageHandler->getNachname());
 
     }
 

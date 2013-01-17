@@ -2,19 +2,15 @@
 require_once('../system/handlers/loginHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new loginHandler();
-$handler->checkIfLogin();
+$page = new page(true, $handler);
+$login = $handler->getLogin();
 
 // Formular übermittelt
 //------------------------------------------------------------------------------------------------------------------
-$result_msg=NULL;
-if(isset( $_POST['submit'] )) {
+$result_msg = NULL;
+if( isset( $_POST['submit'] ) ) {
     $result_msg = $handler->validateInput( $_POST['login'], $_POST['pass'] );
 }
-
-// neue Seite
-//------------------------------------------------------------------------------------------------------------------
-$page = new page();
-$login = $handler->checkIfLogin(); // Schon eingelogt?
 
 // Diverse Prüfungen
 //------------------------------------------------------------------------------------------------------------------

@@ -2,12 +2,8 @@
 require_once('../system/handlers/addGradesHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new addGradesHandler();
-$login = $handler->checkIfLogin();
-
-// neue Seite
-//------------------------------------------------------------------------------------------------------------------
-$page = new page();
-$login = $handler->checkIfLogin();
+$page = new page(true, $handler);
+$login = $handler->getLogin();
 
 //------------------------------------------------------------------------------------------------------------------
 $content = '';

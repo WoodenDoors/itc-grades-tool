@@ -2,12 +2,11 @@
 require_once('../system/handlers/viewGradesHandler.class.php');
 require_once '../system/template/page.class.php';
 $handler = new viewGradesHandler();
-$login = $handler->checkIfLogin();
-
+$page = new page(true, $handler);
+$login = $handler->getLogin();
 
 //neue Seite
 //------------------------------------------------------------------------------------------------------------------
-$page = new page();
 $page->addcss('css/jquery.jqplot.min.css');
 $page->addjs('js/jquery.jqplot.min.js');
 $page->addjs('js/jqplot.categoryAxisRenderer.min.js');

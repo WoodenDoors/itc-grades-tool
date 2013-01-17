@@ -27,8 +27,8 @@ if (!$login){
 
         $content .= '<div id="gradesGraph"></div>';
 
-        $content .= '<table id="gradesView">';
-        $content .= '<tr><th>Kürzel</th><th>Note</th><th>Credits</th></tr>';
+        $content .= '<table id="gradesView" class="table table-striped">';
+        $content .= '<thead><tr><th>Kürzel</th><th>Note</th><th>Credits</th></tr></thead><tbody>';
 
         $semester = 0;
         $gradeAverageSem = 0;
@@ -53,7 +53,7 @@ if (!$login){
                     $gradeNoSem = 0;
                 }
                 $semester = $result['semester'];
-                $content .= '<tr class="gradesSemesterName"><td>'.$semester.'. Semester</td><td></td><td></td></tr>';
+                $content .= '<tr class="gradesSemesterName"><td><label class="label label-info">'.$semester.'. Semester</label></td><td></td><td></td></tr>';
             }
             $gradeAverageSem += $result['grade'];
             $gradeAverageAll += $result['grade'];
@@ -67,10 +67,10 @@ if (!$login){
         //Für das letzte Semester wird nach der Schleife der Schnitt berechnet
         $gradeAverageSem = round($gradeAverageSem/$gradeNoSem, 2);
         $gradeAverageAll = round($gradeAverageAll/$gradeNoAll, 2);
-        $content .= '<tr class="gradesTotalAverage"><td>Durchschnitt:</td><td>' .$gradeAverageSem. '</td><td>'.$sumCreditsSem.'</td></tr>';
+        $content .= '<tr class="gradesTotalAverage"><td><label class="label label-inverse">Durchschnitt:</label></td><td>' .$gradeAverageSem. '</td><td>'.$sumCreditsSem.'</td></tr>';
         $content .= '<tr class="tableLine"><td></td><td></td><td></tr>';
-        $content .= '<tr class="gradesTotal"><td>Gesamt :</td><td>' .$gradeAverageAll. '</td><td>'.$sumCreditsAll.'</tr>';
-        $content .= '</table>';
+        $content .= '<tr class="gradesTotal"><td><label class="label label-success">Gesamt :</label></td><td>' .$gradeAverageAll. '</td><td>'.$sumCreditsAll.'</tr>';
+        $content .= '</tbody></table>';
     }
 
 //------------------------------------------------------------------------------------------------------------------

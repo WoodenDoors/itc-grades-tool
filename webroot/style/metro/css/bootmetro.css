@@ -3250,14 +3250,16 @@ input[type="submit"].btn.btn-mini {
   line-height: 20px;
 }
 
-.alert-success {
+.alert-success,
+.successMsg {
   color: #ffffff;
   background-color: #01a31c;
   border-color: #018a01;
 }
 
 .alert-danger,
-.alert-error {
+.alert-error,
+.errorMsg {
   color: #ffffff;
   background-color: #bc1c48;
   border-color: #af1a5c;

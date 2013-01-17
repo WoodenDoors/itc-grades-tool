@@ -1,4 +1,4 @@
-/* Messages */
+/* Messages *//*
 .msg {
     display:block;
     padding: 10px;
@@ -6,7 +6,7 @@
     border-radius: 5px;
 }
 .errorMsg { background-color: #FF593B; }
-.successMsg { background-color: #B0FF3B; }
+.successMsg { background-color: #B0FF3B; }*/
 
 #gradesGraph {
     width: 400px;

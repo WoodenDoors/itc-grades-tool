@@ -11,6 +11,7 @@ $(document).ready(function(){
 
         json = jsonCallGrades();
         json.success(function(data) {
+            console.log("Success.");
             dataSlices = [];
             ticks = [];
             $.each(data, function (entryindex, entry) {
@@ -88,11 +89,11 @@ $(document).ready(function(){
         hideRotator();
     };
 
-    var jsonCallGrades = function(type){
+    var jsonCallGrades = function(){
         return $.getJSON('ajax/grades.json.php');
     }
 
-    var jsonCallCredits = function(type){
+    var jsonCallCredits = function(){
         return $.getJSON('ajax/grades.json.php?type=credits');
     }
 

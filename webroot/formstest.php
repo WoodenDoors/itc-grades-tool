@@ -22,6 +22,7 @@ $formarr = [
         [
             "ELEMENT" => "fieldset",
             "TITLE" => "Test",
+            "ID" => "loginFieldset",
             "SUBELEMENTS" => [
                 [
                     "ELEMENT" => "input",

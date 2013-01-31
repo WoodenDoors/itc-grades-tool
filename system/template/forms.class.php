@@ -44,6 +44,7 @@ class Form
     private function createFieldset($args) {
         $this->form->fillin("CONTENT", file_get_contents($this->tplPath."tpl_form_fieldset.html")."{NEXTCONTENT}");
         $this->form->fillin("TITLE", $args["TITLE"]);
+        $this->form->fillin("ID", $args["ID"]);
         foreach($args["SUBELEMENTS"] as $elementArgs) {
             $this->createSubElement($elementArgs);
         }

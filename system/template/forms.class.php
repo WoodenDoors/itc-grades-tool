@@ -15,6 +15,17 @@ class Form
     private $tplPath;
     private $form;
     private $page;
+
+    /**
+     * Konstruktor
+     *
+     * Konstruktor benötigt ein page-Objekt zu Designunterscheidung. Die Formaction wird automatisch auf die ausgeführe PHP-Datei gesetzt.
+     * Get-Parameter können in dem FormArray angegeben werden.
+     *
+     * @param   page    Benötigt für Designunterscheidung
+     *
+     * @see     createForm(), getForm()
+     */
     function __construct($pPage)
     {
         $this->page = $pPage;
@@ -25,6 +36,15 @@ class Form
         $this->form->fillin("ACTION", $_SERVER["SCRIPT_NAME"]."{ARGS}");
     }
 
+    /**
+     * Erstellt das Formular anhand des übergebenen Arrays.
+     *
+     * Das Formular wird entsprechend dem übergebenen Array erstellt und intern gespeichert.
+     * Für das ausgeben des Arrays steht eine eigene Methode bereit.
+     *
+     * @param   Array Übergebenes Array. Struktur siehe formtest.php
+     * @see     getForm()
+     */
     function createForm($args) {
         $this->form->fillin("METHOD", $args["METHOD"]);
 
@@ -82,6 +102,10 @@ class Form
         }
     }
 
+    /**
+     * Holt das fertige Formular als String
+     * @return String   Das fertige Formular
+     */
     function getForm() {
         return $this->form->get_template();
     }

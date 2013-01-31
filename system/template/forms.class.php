@@ -14,9 +14,11 @@ class Form
 {
     private $tplPath;
     private $form;
-    function __construct($pTplPath = "style/metro/tpl/forms/")
+    private $page;
+    function __construct($pPage)
     {
-        $this->tplPath = $pTplPath;
+        $this->page = $pPage;
+        $this->tplPath = 'style/'.$this->page->get_style().'/tpl/forms/';
 
         $this->form = new Template();
         $this->form->readin($this->tplPath."tpl_form_head.html");

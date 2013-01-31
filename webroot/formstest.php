@@ -7,7 +7,10 @@
  * To change this template use File | Settings | File Templates.
  */
 
+require_once '../system/template/page.class.php';
 require_once '../system/template/forms.class.php';
+
+$page = new page();
 
 $formarr = [
     "METHOD" => "POST",
@@ -54,8 +57,9 @@ $formarr = [
     ]
 ];
 
-$form = new Form();
+$form = new Form($page);
 $form->createForm($formarr);
-echo $form->getForm();
+$page->set_body_content($form->getForm());
+echo $page->get_page();
 
-print_r($formarr);
+//print_r($formarr);

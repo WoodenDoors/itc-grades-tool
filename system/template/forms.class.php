@@ -29,11 +29,11 @@ class Form
     function __construct($pPage)
     {
         $this->page = $pPage;
-        $this->tplPath = 'style/'.$this->page->get_style().'/tpl/forms/';
+        $this->tplPath = 'style/' . $this->page->get_style() . '/tpl/forms/';
 
         $this->form = new Template();
-        $this->form->readin($this->tplPath."tpl_form_head.html");
-        $this->form->fillin("ACTION", $_SERVER["SCRIPT_NAME"]."{ARGS}");
+        $this->form->readin($this->tplPath . "tpl_form_head.html");
+        $this->form->fillin("ACTION", $_SERVER["SCRIPT_NAME"] . "{ARGS}");
     }
 
     /**
@@ -45,52 +45,76 @@ class Form
      * @param   Array Übergebenes Array. Struktur siehe formtest.php
      * @see     getForm()
      */
-    function createForm($args) {
+    function createForm($args)
+    {
         $this->form->fillin("METHOD", $args["METHOD"]);
 
         //Parameter der URL zusammenfügen
-        foreach($args["GETARGS"] as $getargsType => $getargsValue) {
+        foreach ($args["GETARGS"] as $getargsType => $getargsValue) {
             $getargs[] = $getargsType . '=' . $getargsValue;
         }
-        $this->form->fillin("ARGS", "?".implode("&", $getargs));
+        $this->form->fillin("ARGS", "?" . implode("&", $getargs));
 
         //Form zusammenstellen
-        foreach($args["ELEMENTS"] as $elementArgs) {
+        foreach ($args["ELEMENTS"] as $elementArgs) {
             $this->createSubElement($elementArgs);
         }
         $this->form->fillin("CONTENT", "");
     }
 
-    private function createFieldset($args) {
-        $this->form->fillin("CONTENT", file_get_contents($this->tplPath."tpl_form_fieldset.html")."{NEXTCONTENT}");
-        $this->form->fillin("TITLE", $args["TITLE"]);
-        $this->form->fillin("ID", $args["ID"]);
-        foreach($args["SUBELEMENTS"] as $elementArgs) {
-            $this->createSubElement($elementArgs);
-        }
-        $this->form->fillin("CONTENT", "");
-        $this->form->fillin("NEXTCONTENT", "{CONTENT}");
-    }
-
-    private function createFormActions($args) {
-        $this->form->fillin("CONTENT", file_get_contents($this->tplPath."tpl_form_formactions.html")."{NEXTCONTENT}");
-        foreach($args["SUBELEMENTS"] as $elementArgs) {
+    private function createFieldset($args)
+    {
+        $this->loadFile("fieldset", true);
+        $this->fillinArgs($args, [
+            "TITLE",
+            "ID"
+        ]);
+        foreach ($args["SUBELEMENTS"] as $elementArgs) {
             $this->createSubElement($elementArgs);
         }
         $this->form->fillin("CONTENT", "");
         $this->form->fillin("NEXTCONTENT", "{CONTENT}");
     }
 
-    private function createElement($args) {
-        $this->form->fillin("CONTENT", file_get_contents($this->tplPath.'tpl_form_'.$args["ELEMENT"].'.html')."{CONTENT}");
-        $this->form->fillin("TYPE", $args["TYPE"]);
-        $this->form->fillin("NAME", $args["NAME"]);
-        $this->form->fillin("LABEL", $args["LABEL"]);
-        $this->form->fillin("PLACEHOLDER", $args["PLACEHOLDER"]);
+    private function createFormActions($args)
+    {
+        $this->loadFile("formactions", true);
+        foreach ($args["SUBELEMENTS"] as $elementArgs) {
+            $this->createSubElement($elementArgs);
+        }
+        $this->form->fillin("CONTENT", "");
+        $this->form->fillin("NEXTCONTENT", "{CONTENT}");
     }
 
-    private function createSubElement($args) {
-        switch($args["ELEMENT"]) {
+    private function createElement($args)
+    {
+        $this->loadFile($args["ELEMENT"]);
+        $this->fillinArgs($args, [
+            "TYPE",
+            "NAME",
+            "LABEL",
+            "PLACEHOLDER",
+            "VALUE"
+        ]);
+        $this->processBools($args);
+    }
+
+    private function processBools($args)
+    {
+        $bools = ["REQUIRED" => "required", "AUTOFOCUS" => "autofocus"];
+        foreach($bools as $bool => $tag) {
+            if (isset($args[$bool])) {
+                if ($args[$bool]) {
+                    $this->form->fillin("EXT", " " . $tag . "{EXT}");
+                }
+            }
+        }
+        $this->form->fillin("EXT", "");
+    }
+
+    private function createSubElement($args)
+    {
+        switch ($args["ELEMENT"]) {
             case "fieldset":
                 $this->createFieldset($args);
                 break;
@@ -102,11 +126,32 @@ class Form
         }
     }
 
+    private function loadFile($type, $subelements = false)
+    {
+        if ($subelements) {
+            $this->form->fillin("CONTENT", file_get_contents($this->tplPath . 'tpl_form_' . $type . '.html') . "{NEXTCONTENT}");
+        } else {
+            $this->form->fillin("CONTENT", file_get_contents($this->tplPath . 'tpl_form_' . $type . '.html') . "{CONTENT}");
+        }
+    }
+
+    private function fillinArgs($args, $keys)
+    {
+        foreach($keys as $key) {
+            if(isset($args[$key])){
+                $this->form->fillin($key, $args[$key]);
+            } else {
+                $this->form->fillin($key, "");
+            }
+        }
+    }
+
     /**
      * Holt das fertige Formular als String
      * @return String   Das fertige Formular
      */
-    function getForm() {
+    function getForm()
+    {
         return $this->form->get_template();
     }
 

@@ -31,27 +31,39 @@ $formarr = [
                     "LABEL" => "Benutzername:",
                     "PLACEHOLDER" => "Benutzername",
                     "REQUIRED" => true,
+                    "AUTOFOCUS" => true,
+                    "VALUE" => "",
                 ],
                 [
                     "ELEMENT" => "input",
-                    "TYPE" => "text",
+                    "TYPE" => "password",
                     "NAME" => "pass",
                     "LABEL" => "Passwort:",
                     "PLACEHOLDER" => "Passwort",
                     "REQUIRED" => true,
-                ]
-            ]
-        ],
-        [
-            "ELEMENT" => "formactions",
-            "SUBELEMENTS" => [
+                    "VALUE" => "",
+                ],
                 [
-                    "ELEMENT" => "button",
-                    "TYPE" => "submit",
-                    "NAME" => "loginSubmit",
-                    "LABEL" => "Login",
-                    "PLACEHOLDER" => "",
-                    "REQUIRED" => null,
+                    "ELEMENT" => "input",
+                    "TYPE" => "text",
+                    "NAME" => "crap",
+                    "LABEL" => "Müll:",
+                    "PLACEHOLDER" => "Müllabfuhr",
+                    "REQUIRED" => false,
+                    "VALUE" => "Dies ist nur ein dummie.",
+                ],
+                [
+                    "ELEMENT" => "formactions",
+                    "SUBELEMENTS" => [
+                        [
+                            "ELEMENT" => "button",
+                            "TYPE" => "submit",
+                            "NAME" => "loginSubmit",
+                            "LABEL" => "Login",
+                            "PLACEHOLDER" => "",
+                            "REQUIRED" => null,
+                        ]
+                    ]
                 ]
             ]
         ]

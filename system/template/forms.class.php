@@ -67,7 +67,8 @@ class Form
         $this->loadFile("fieldset", true);
         $this->fillinArgs($args, [
             "TITLE",
-            "ID"
+            "ID",
+            "CLASS"
         ]);
         foreach ($args["SUBELEMENTS"] as $elementArgs) {
             $this->createSubElement($elementArgs);

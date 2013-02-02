@@ -23,6 +23,7 @@ $formarr = [
             "ELEMENT" => "fieldset",
             "TITLE" => "Test",
             "ID" => "loginFieldset",
+            "CLASS" => "form-horizontal",
             "SUBELEMENTS" => [
                 [
                     "ELEMENT" => "input",
@@ -32,7 +33,6 @@ $formarr = [
                     "PLACEHOLDER" => "Benutzername",
                     "REQUIRED" => true,
                     "AUTOFOCUS" => true,
-                    "VALUE" => "",
                 ],
                 [
                     "ELEMENT" => "input",
@@ -41,16 +41,6 @@ $formarr = [
                     "LABEL" => "Passwort:",
                     "PLACEHOLDER" => "Passwort",
                     "REQUIRED" => true,
-                    "VALUE" => "",
-                ],
-                [
-                    "ELEMENT" => "input",
-                    "TYPE" => "text",
-                    "NAME" => "crap",
-                    "LABEL" => "Müll:",
-                    "PLACEHOLDER" => "Müllabfuhr",
-                    "REQUIRED" => false,
-                    "VALUE" => "Dies ist nur ein dummie.",
                 ],
                 [
                     "ELEMENT" => "formactions",

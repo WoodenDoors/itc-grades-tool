@@ -8,6 +8,6 @@
       </xs:choice>
     </xs:complexType>
   </xs:element>
-  <xs:element name="js"/>
+  <xs:element name="js" type="xs:string"/>
   <xs:element name="css" type="xs:string"/>
 </xs:schema>

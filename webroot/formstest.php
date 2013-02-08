@@ -10,8 +10,6 @@
 require_once '../system/template/page.class.php';
 require_once '../system/template/forms.class.php';
 
-$page = new page();
-
 $formarr = [
     "METHOD" => "POST",
     "GETARGS" => [
@@ -60,6 +58,7 @@ $formarr = [
     ]
 ];
 
+$page = new page();
 $form = new Form($page);
 $form->createForm($formarr);
 $page->set_body_content($form->getForm());
